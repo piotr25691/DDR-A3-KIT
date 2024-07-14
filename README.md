@@ -1,19 +1,19 @@
-# DDR A3 THEME
+# DDR A3 simulation kit
+Based on Inori's DDR A20 Theme modification: https://github.com/Curilang/DDR-A3-THEME
 
-Edit from Inori's DDR A20 Theme.
 
-## IMPORTANT NOTES
+## Important Notes
 
-🚫 DON'T REPRODUCE IN PUBLIC PLACES OR PUBLIC ARCADES
+🚫 - DON'T USE IN PUBLIC PLACES AND/OR PUBLIC ARCADES
 
-🚫 NOT FOR MONETARY PURPOSES
+🚫 - DON'T MAKE MONEY OFF OF IT
 
-🚫 Not for the purpose of insulting another person/company/project
+🚫 - DON'T INSULT KONAMI WITH IT
 
-# CURRENT SUPPORTED STEPMANIA BUILDS
+## Supported StepMania builds
 
-• [5.1.0-new*](https://drive.google.com/file/d/1Uk4kIocAp7Aj4LNpzuhehO7qW6XyjAQl/view?usp=share_link) / [ITGMania](https://www.itgmania.com/)
+- [5.1.0-new*](https://drive.google.com/file/d/1Uk4kIocAp7Aj4LNpzuhehO7qW6XyjAQl/view?usp=share_link)
+- [ITGMania](https://www.itgmania.com/)
+- [OutFox](https://projectoutfox.com/)
 
-• [OutFox](https://projectoutfox.com/)
-
-*Build date: 2023-04-12
+<sub><sup>*Build date: 2023-04-12</sub></sup>
