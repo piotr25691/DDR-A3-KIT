@@ -18,7 +18,7 @@ return Def.ActorFrame{
 			end,
 		},
 		Def.Sprite{
-			Texture=Language().."txt.png",
+			Texture="jp_txt.png",
 			InitCommand=function(s) s:diffusealpha(0) end,
 			OnCommand=function(s) 
 				s:zoomy(0):sleep(0.6):diffusealpha(1)
