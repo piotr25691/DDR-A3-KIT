@@ -1,6 +1,6 @@
 local screenname = Var "LoadingScreen"
-local paseli = 57300
-local paseliPrice = 240
+local paseli = 78742 -- 500 USD
+local paseliPrice = 157 -- 1 USD
 local function PaseliText_P1()
 	--Text of "EXTRA PASELI : XX"
 	local text = LoadFont("Common Normal") .. {
@@ -107,7 +107,14 @@ local function CreditsText()
 			self:settext(s)
 		end;
 		UpdateVisibleCommand=function(self)
-@@ -34,20 +118,20 @@ local function CreditsText()
+			local screen = SCREENMAN:GetTopScreen();
+			local bShow = true;
+			if screen then
+				local sClass = screen:GetName();
+				bShow = THEME:GetMetric( sClass, "ShowCreditDisplay" );
+			end;
+
+			self:visible( bShow );
 		end;
 		CoinInsertedMessageCommand=cmd(stoptweening;playcommand,"Refresh");
 		RefreshCreditTextMessageCommand=cmd(stoptweening;playcommand,"Refresh");
@@ -128,7 +135,33 @@ local function CoinsText()
 			if coinsPerCredit > 1 then
 				s=s..remainder..'/'..coinsPerCredit
 			else
-@@ -81,25 +165,29 @@ local function CoinsText()
+				s=''
+			end
+
+			if GAMESTATE:GetCoinMode() == 'CoinMode_Pay' then
+				self:visible(true);
+			else
+				self:visible(false);
+			end
+
+			self:settext(s)
+		end;
+		UpdateVisibleCommand=function(self)
+			local screen = SCREENMAN:GetTopScreen();
+			local bShow = true;
+			if screen then
+				local sClass = screen:GetName();
+				bShow = THEME:GetMetric( sClass, "ShowCreditDisplay" );
+			end;
+
+			self:visible( bShow );
+		end;
+		CoinInsertedMessageCommand=cmd(stoptweening;playcommand,"Refresh");
+		RefreshCreditTextMessageCommand=cmd(stoptweening;playcommand,"Refresh");
+		PlayerJoinedMessageCommand=cmd(stoptweening;playcommand,"Refresh");
+		ScreenChangedMessageCommand=cmd(stoptweening;playcommand,"Refresh");
+	};
+	return text;
 end;
 
 local function NetworkText()
@@ -158,7 +191,20 @@ local function NetworkText()
 			end;
 		end;
 		UpdateVisibleCommand=function(self)
-@@ -120,37 +208,16 @@ local function NetworkText()
+			local screen = SCREENMAN:GetTopScreen();
+			local bShow = true;
+			if screen then
+				local sClass = screen:GetName();
+				bShow = THEME:GetMetric( sClass, "ShowCreditDisplay" );
+			end
+
+			self:visible( bShow );
+		end;
+		CoinInsertedMessageCommand=cmd(stoptweening;playcommand,"Refresh");
+		RefreshCreditTextMessageCommand=cmd(stoptweening;playcommand,"Refresh");
+		PlayerJoinedMessageCommand=cmd(stoptweening;playcommand,"Refresh");
+		ScreenChangedMessageCommand=cmd(stoptweening;playcommand,"Refresh");
+	};
 	return text;
 end;
 
