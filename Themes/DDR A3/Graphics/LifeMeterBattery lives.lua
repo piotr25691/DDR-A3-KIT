@@ -4,7 +4,7 @@ return Def.ActorFrame{
 	-- RISKY 
 	LoadActor(THEME:GetPathB("ScreenGameplay","decorations/lifeframe/stream/danger"))..{
 		InitCommand=function(self)
-			self:texcoordvelocity(-0.6,0)
+			self:texcoordvelocity(-4,0)
 			self:zoomto(296,20)
 		end;
 	};
