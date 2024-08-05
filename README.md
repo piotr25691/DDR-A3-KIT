@@ -16,4 +16,9 @@ Based on Inori's DDR A20 Theme modification: https://github.com/Curilang/DDR-A3-
 - [ITGMania](https://www.itgmania.com/)
 - [OutFox](https://projectoutfox.com/)
 
+## Caveats
+- Needs several restarts to boot without crashing.
+- Announcer may quit talking at some point.
+- Encore Extra Stage is not operational, and will crash the game.
+
 <sub><sup>*Build date: 2023-04-12</sub></sup>
