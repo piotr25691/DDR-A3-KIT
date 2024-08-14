@@ -1,6 +1,7 @@
 # DDR A3 simulation kit
 Based on Inori's DDR A20 Theme modification: https://github.com/Curilang/DDR-A3-THEME
 
+Modified to more closely match the arcade data of DDR A3.
 
 ## Important Notes
 
