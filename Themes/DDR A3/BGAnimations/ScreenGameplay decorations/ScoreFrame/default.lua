@@ -54,6 +54,8 @@ for _,pn in pairs(GAMESTATE:GetEnabledPlayers()) do
 					InitCommand=function(s) s:zoom(0.72):maxwidth(180):y(IsReverse(pn) and -1 or 3):diffuse(color("#feec0a"))
 						s:settext(ShowBPMDisplay() and "BPM" or (string.upper(PROFILEMAN:GetPlayerName(pn))))
 						s:x(ShowBPMDisplay() and 40 or 80)
+						s:zoomx(ShowBPMDisplay() and 0.72 or 1)
+						s:maxwidth(130)
 					end,
 				};
 				LoadActor("BPMDisplay")..{ 
