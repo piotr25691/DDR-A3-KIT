@@ -11,7 +11,4 @@ return Def.ActorFrame {
 			end
 		end;
 	};
-	Def.Quad{
-		InitCommand=function(s) s:diffuse(Color("White")):setsize(SCREEN_WIDTH,SCREEN_HEIGHT):Center() end,
-	};
 };

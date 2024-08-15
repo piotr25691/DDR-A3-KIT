@@ -9,9 +9,9 @@ local function PaseliText_P1()
 			self:horizalign(left)
                         if GAMESTATE:IsSideJoined(PLAYER_1) then
 			    self:settext('PASELI: '..paseli):playcommand("TestHome"):playcommand("TestFree") return end
-			if GAMESTATE:IsEventMode() then self:settext('PASELI: NOT AVAILABLE') return end
-			if GAMESTATE:GetCoinMode()=='CoinMode_Free' then self:settext('PASELI: NOT AVAILABLE') return end
-			if GAMESTATE:GetCoinMode()=='CoinMode_Pay' then self:settext('EXTRA PASELI: 0') return end
+			if GAMESTATE:IsEventMode() then self:settext('PASELI: NOT AVAILABLE'):playcommand("UpdateVisible") return end
+			if GAMESTATE:GetCoinMode()=='CoinMode_Free' then self:settext('PASELI: NOT AVAILABLE'):playcommand("UpdateVisible") return end
+			if GAMESTATE:GetCoinMode()=='CoinMode_Pay' then self:settext('EXTRA PASELI: 0'):playcommand("UpdateVisible") return end
 			if GAMESTATE:GetCoinMode()=='CoinMode_Home' then self:settext('') return end 
 		end;
                  DeductPaseliCommand = function(self)
@@ -48,9 +48,9 @@ local function PaseliText_P2()
 			self:horizalign(right)
 			if GAMESTATE:IsSideJoined(PLAYER_2) then
 			    self:settext('PASELI: '..paseli):playcommand("TestHome"):playcommand("TestFree") return end
-			if GAMESTATE:IsEventMode() then self:settext('PASELI: NOT AVAILABLE') return end
-			if GAMESTATE:GetCoinMode()=='CoinMode_Free' then self:settext('PASELI: NOT AVAILABLE') return end
-			if GAMESTATE:GetCoinMode()=='CoinMode_Pay' then self:settext('EXTRA PASELI: 0') return end
+			if GAMESTATE:IsEventMode() then self:settext('PASELI: NOT AVAILABLE'):playcommand("UpdateVisible") return end
+			if GAMESTATE:GetCoinMode()=='CoinMode_Free' then self:settext('PASELI: NOT AVAILABLE'):playcommand("UpdateVisible") return end
+			if GAMESTATE:GetCoinMode()=='CoinMode_Pay' then self:settext('EXTRA PASELI: 0'):playcommand("UpdateVisible") return end
 			if GAMESTATE:GetCoinMode()=='CoinMode_Home' then self:settext('') return end 
 		end;
                 DeductPaseliCommand = function(self)
@@ -104,7 +104,7 @@ local function CreditsText()
 				s=s..0
 			end
 			--self:horizalign(left)
-			self:settext(s)
+			self:settext(s):playcommand("UpdateVisible")
 		end;
 		UpdateVisibleCommand=function(self)
 			local screen = SCREENMAN:GetTopScreen();
@@ -144,7 +144,7 @@ local function CoinsText()
 				self:visible(false);
 			end
 
-			self:settext(s)
+			self:settext(s):playcommand("UpdateVisible")
 		end;
 		UpdateVisibleCommand=function(self)
 			local screen = SCREENMAN:GetTopScreen();
@@ -177,18 +177,8 @@ local function NetworkText()
 			self:strokecolor(color("0.3,0.3,0.3,1"));
 		end;
 		RefreshCommand=function (self)
-		local netConnected = IsNetConnected();
-		local loggedOnSMO = IsNetSMOnline();
-
-			if not netConnected then
-				self:diffuse(color("#00FF00"));
-				self:settext("ONLINE");
-				--self:settext("");		
-			else
-				self:diffuse(color("#00FF00"));
-				self:settext("ONLINE");
-				--self:settext("");
-			end;
+			self:diffuse(color("#00FF00"));
+			self:settext("ONLINE"):playcommand("UpdateVisible");
 		end;
 		UpdateVisibleCommand=function(self)
 			local screen = SCREENMAN:GetTopScreen();
@@ -211,8 +201,6 @@ end;
 local t = Def.ActorFrame {}
 
 t[#t+1] = Def.ActorFrame {
- 	--CreditsText( PLAYER_1 );
-	--CreditsText( PLAYER_2 );
 	NetworkText();
 	CreditsText();
 	CoinsText();
