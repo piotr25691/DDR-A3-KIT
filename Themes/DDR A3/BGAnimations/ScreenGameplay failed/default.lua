@@ -14,13 +14,6 @@ return Def.ActorFrame{
 			SOUND:PlayOnce(StreamingSound(sound)) 
 		end,
 	};
-	Def.ActorFrame{
-		StartTransitioningCommand=function(s) s:sleep(AnimationSleep+0.035):queuecommand("Play") end,
-		PlayCommand=function(s) 
-			local sound = THEME:GetPathS("","DoorFailed")
-			SOUND:PlayOnce(StreamingSound(sound)) 
-		end,
-	};
 	LoadActor(loader); 
 	
 	Def.Sprite{

@@ -86,10 +86,10 @@ local function CreditsText()
 		InitCommand=cmd(draworder,99;x,SCREEN_CENTER_X;y,SCREEN_BOTTOM-7.5;zoom,0.42;strokecolor,color("0.3,0.3,0.3,1");playcommand,"Refresh");
 		RefreshCommand=function(self)
 		--Other coin modes
-			if GAMESTATE:IsEventMode() then self:settext('EVENT MODE') return end
+			if GAMESTATE:IsEventMode() then self:settext('EVENT MODE'):playcommand("UpdateVisible") return end
 			--if GAMESTATE:IsEventMode() then self:settext('CREDIT : 0') return end
-			if GAMESTATE:GetCoinMode()=='CoinMode_Free' then self:settext('FREE PLAY') return end
-			if GAMESTATE:GetCoinMode()=='CoinMode_Home' then self:settext('HOME MODE') return end
+			if GAMESTATE:GetCoinMode()=='CoinMode_Free' then self:settext('FREE PLAY'):playcommand("UpdateVisible") return end
+			if GAMESTATE:GetCoinMode()=='CoinMode_Home' then self:settext('HOME MODE'):playcommand("UpdateVisible") return end
 		--Normal pay
 			local coins=GAMESTATE:GetCoins()
 			local coinsPerCredit=PREFSMAN:GetPreference('CoinsPerCredit')
