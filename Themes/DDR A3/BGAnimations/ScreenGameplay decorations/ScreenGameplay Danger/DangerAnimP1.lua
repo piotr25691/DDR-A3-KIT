@@ -29,40 +29,40 @@ return Def.ActorFrame{
 			--BG
 			LoadActor(filter)..{
 				InitCommand=function(s) s:zoom(0.667):y(_screen.cy):blend('BlendMode_Add'):diffusealpha(0) end,
-				ShowCommand=function(s) s:diffusealpha(0.5):zoomy(1) end,
-				HideCommand=function(s) s:linear(0.25):zoomy(0):diffusealpha(0) end,
+				ShowCommand=function(s) s:diffusealpha(0.5) end,
+				HideCommand=function(s) s:diffusealpha(0) end,
 			};
 			--Left
 			LoadActor("dance_danger0000_rope")..{
 				InitCommand=function(s) s:x(-StyleX):y(_screen.cy):zoomx(0.6):zoomy(1):customtexturerect(0,0,1,2):texcoordvelocity(0,-0.5):diffusealpha(0) end,
-				ShowCommand=function(s) s:diffusealpha(0.85):zoomy(1) end,
-				HideCommand=function(s) s:linear(0.25):zoomy(0):diffusealpha(0) end,
+				ShowCommand=function(s) s:diffusealpha(0.85) end,
+				HideCommand=function(s) s:diffusealpha(0) end,
 			};
 			LoadActor("dance_danger0000_danger")..{
 				InitCommand=function(s) s:x(-StyleX):y(_screen.cy+5):zoom(0.6):diffusealpha(0) end,
-				ShowCommand=function(s) s:diffusealpha(1):zoomy(1) end,
-				HideCommand=function(s) s:linear(0.25):zoomy(0):diffusealpha(0) end,
+				ShowCommand=function(s) s:diffusealpha(1) end,
+				HideCommand=function(s) s:diffusealpha(0) end,
 			};
 			LoadActor("dance_danger0000_danger")..{
 				InitCommand=function(s) s:x(-StyleX):y(_screen.cy+5):zoom(0.6):diffusealpha(0):blend('BlendMode_Add'):heartbeat():effectmagnitude(1.1,1,0):effectperiod(0.7) end,
-				ShowCommand=function(s) s:diffusealpha(0.4):zoomy(1) end,
-				HideCommand=function(s) s:linear(0.25):zoomy(0):diffusealpha(0) end,
+				ShowCommand=function(s) s:diffusealpha(0.4) end,
+				HideCommand=function(s) s:diffusealpha(0) end,
 			};
 			--Right
 			LoadActor("dance_danger0000_rope")..{
 				InitCommand=function(s) s:x(StyleX):y(_screen.cy):zoomx(0.6):zoomy(1):customtexturerect(0,0,1,2):texcoordvelocity(0,-0.5):diffusealpha(0) end,
-				ShowCommand=function(s) s:diffusealpha(0.85):zoomy(1) end,
-				HideCommand=function(s) s:linear(0.25):zoomy(0):diffusealpha(0) end,
+				ShowCommand=function(s) s:diffusealpha(0.85) end,
+				HideCommand=function(s) s:diffusealpha(0) end,
 			};
 			LoadActor("dance_danger0000_danger")..{
 				InitCommand=function(s) s:x(StyleX):y(_screen.cy+5):zoom(0.6):diffusealpha(0) end,
-				ShowCommand=function(s) s:diffusealpha(1):zoomy(1) end,
-				HideCommand=function(s) s:linear(0.25):zoomy(0):diffusealpha(0) end,
+				ShowCommand=function(s) s:diffusealpha(1) end,
+				HideCommand=function(s) s:diffusealpha(0) end,
 			};
 			LoadActor("dance_danger0000_danger")..{
 				InitCommand=function(s) s:x(StyleX):y(_screen.cy+5):zoom(0.6):diffusealpha(0):blend('BlendMode_Add'):heartbeat():effectmagnitude(1.1,1,0):effectperiod(0.7) end,
-				ShowCommand=function(s) s:diffusealpha(0.4):zoomy(1) end,
-				HideCommand=function(s) s:linear(0.25):zoomy(0):diffusealpha(0) end,
+				ShowCommand=function(s) s:diffusealpha(0.4) end,
+				HideCommand=function(s) s:diffusealpha(0) end,
 			};
 		};
 	};

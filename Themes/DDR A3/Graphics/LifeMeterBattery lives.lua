@@ -4,7 +4,7 @@ return Def.ActorFrame{
 	-- RISKY 
 	LoadActor(THEME:GetPathB("ScreenGameplay","decorations/lifeframe/stream/danger"))..{
 		InitCommand=function(self)
-			self:texcoordvelocity(-4,0)
+			self:texcoordvelocity(-0.6,0)
 			self:zoomto(296,20)
 		end;
 	};
@@ -48,43 +48,17 @@ return Def.ActorFrame{
 				if screen:GetNextScreenName() ~= "ScreenGameplay" then --Make sure Screen="ScreenGameplay"
 					local glifemeter = screen:GetLifeMeter(player);
 					if params.Player == player then
-						if GAMESTATE:IsCourseMode() then
-							if glifemeter:GetTotalLives() == 1 then
-								self:visible(false)
-							else
-								if	GAMESTATE:IsPlayerEnabled(player) then
-									if 	GAMESTATE:GetCurrentTrail(player):GetDifficulty() == "Difficulty_Hard"  then
-										if params.LivesLeft >= 4 then
-											self:visible(true);
-										else
-											self:visible(false);
-										end
-									else
-										if params.LivesLeft >= 8 then
-											self:visible(true);
-										else
-											self:visible(false);
-										end
-									end
-								end
-							end
+						if glifemeter:GetTotalLives() == 1 then
+							self:visible(false)
+						elseif params.LivesLeft == glifemeter:GetTotalLives() then
+							self:visible(true)
 						else
-							if glifemeter:GetTotalLives() == 1 then
-								self:visible(false)
-							elseif params.LivesLeft == glifemeter:GetTotalLives() then
-								self:visible(true)
-							else
-								self:visible(false)
-							end
+							self:visible(false)
 						end
-					
-						
 					end
 				end
 			end
 		end;
-		
-
 	};
 	-- LifeMetterBar under
 	LoadActor(THEME:GetPathB("ScreenGameplay","decorations/lifeframe/stream/base"))..{

@@ -21,13 +21,10 @@ return Def.ActorFrame{
 			if param.PlayerNumber == pn then
 				if param.HealthState == "HealthState_Danger" then
 					self:Load(THEME:GetPathB("","ScreenGameplay decorations/lifeframe/stream/danger"))
-					self:texcoordvelocity(pn=="PlayerNumber_P2" and 4 or -4,0)
 				elseif param.HealthState == "HealthState_Hot" then
 					self:Load(THEME:GetPathB("","ScreenGameplay decorations/lifeframe/stream/full"))
-					self:texcoordvelocity(pn=="PlayerNumber_P2" and 0.6 or -0.6,0)
 		  		else
 					self:Load(THEME:GetPathB("","ScreenGameplay decorations/lifeframe/stream/normal"))
-					self:texcoordvelocity(pn=="PlayerNumber_P2" and 0.6 or -0.6,0)
 		  		end;
 			end;
 		end;
