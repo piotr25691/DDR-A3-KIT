@@ -21,5 +21,6 @@ Modified to more closely match the arcade data of DDR A3.
 - Needs several restarts to boot without crashing.
 - Announcer may quit talking at some point.
 - Encore Extra Stage is not operational, and will crash the game.
+- Course Mode is a work in progress and wasn't fully themed.
 
 <sub><sup>*Build date: 2023-04-12</sub></sup>
