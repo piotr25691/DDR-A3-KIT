@@ -8,7 +8,7 @@ local JudgeCmds = {
 	TapNoteScore_W2 = THEME:GetMetric( "Judgment", "JudgmentW2Command" );
 	TapNoteScore_W3 = THEME:GetMetric( "Judgment", "JudgmentW3Command" );
 	TapNoteScore_W4 = THEME:GetMetric( "Judgment", "JudgmentW4Command" );
-	TapNoteScore_W5 = THEME:GetMetric( "Judgment", "JudgmentW5Command" );
+	TapNoteScore_W5 = THEME:GetMetric( "Judgment", "JudgmentW4Command" );
 	TapNoteScore_Miss = THEME:GetMetric( "Judgment", "JudgmentMissCommand" );
 };
 
@@ -17,7 +17,7 @@ local TNSFrames = {
 	TapNoteScore_W2 = 1;
 	TapNoteScore_W3 = 2;
 	TapNoteScore_W4 = 3;
-	TapNoteScore_W5 = 4;
+	TapNoteScore_W5 = 3;
 	TapNoteScore_Miss = 4;
 };
 
@@ -32,7 +32,7 @@ t[#t+1] = Def.ActorFrame {
 			if not ShowFastSlow() then return end;
 			if params.Player ~= player then return end;
 			if 		params.TapNoteScore == 'TapNoteScore_W1' 
-				or 	params.TapNoteScore == 'TapNoteScore_W5' 
+				or 	params.TapNoteScore == 'TapNoteScore_W4' 
 				or	params.TapNoteScore == 'TapNoteScore_Miss'
 				or	params.TapNoteScore == 'TapNoteScore_HitMine' 
 				or	params.TapNoteScore == 'TapNoteScore_AvoidMine' 
