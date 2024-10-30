@@ -16,14 +16,7 @@ return Def.ActorFrame {
 			end;
 		end;
 		Def.Sprite{
-			Texture=THEME:GetPathG("","OptionIcon/"..player.."/Speed"),
-		};
-		Def.BitmapText{
-			Font="OptionIcon Speed",
-			OnCommand=function(self)
-				self:y(1):zoomx(0.78):zoomy(0.74):maxwidth(34)
-				self:settext("x"..GAMESTATE:GetPlayerState(pn):GetPlayerOptions("ModsLevel_Preferred"):ScrollSpeed());
-			end;	
+			Texture=THEME:GetPathG("","OptionIcon/"..player.."/Speed/x"..GAMESTATE:GetPlayerState(pn):GetPlayerOptions("ModsLevel_Preferred"):ScrollSpeed()..".png"),
 		};
 	};
 	-- Boost
