@@ -5,14 +5,14 @@ local t = Def.ActorFrame{
             self:FullScreen()
         end,
         OnCommand=function(self)
-            self:play()
+            self:play() 
         end,
     },
 
-    LoadActor("music.ogg")..{
+    LoadActor(Language().."music.ogg")..{
         OnCommand=function(self)
             self:play()
-        end,
+        end,    
     },
 }
 
