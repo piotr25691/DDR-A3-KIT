@@ -39,11 +39,4 @@ return Def.ActorFrame {
 			s:sleep(10):linear(0.5):diffusealpha(1):sleep(2):linear(0.5):diffusealpha(0)
 		end,
 	};
-	Def.Sprite{
-		Texture="THANK YOU",
-		InitCommand=function(s) s:FullScreen():diffusealpha(0) end,
-		OnCommand=function(s)
-			s:sleep(12):linear(0.5):diffusealpha(1):sleep(3):linear(0.5):diffusealpha(0)
-		end,
-	};
 };

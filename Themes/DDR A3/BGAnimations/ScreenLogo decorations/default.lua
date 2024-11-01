@@ -17,7 +17,7 @@ return Def.ActorFrame {
 	
 	LoadActor(Logo());
 	LoadActor(THEME:GetPathB("ScreenLogo","decorations/copyright"))..{
-		InitCommand=function(s) s:xy(_screen.cx,SCREEN_BOTTOM-98):zoom(0.54) end,
+		InitCommand=function(s) s:xy(_screen.cx,SCREEN_BOTTOM-98):zoom(0.66) end,
 	};
 	Def.Quad{
 		InitCommand=function(s) s:diffuse(Color("White")):FullScreen() end,

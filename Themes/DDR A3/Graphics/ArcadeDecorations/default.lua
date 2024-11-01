@@ -21,17 +21,17 @@ if not IsTitleMenu() then
 		SetCommand=function(s)
 			if GAMESTATE:GetCoinMode() == 'CoinMode_Free' then
 				s:Load(THEME:GetPathG("","ArcadeDecorations/"..Model()..Language().."start"))
-				s:diffuseshift():effectcolor1(color("##ffffff")):effectcolor2(color("#ffea00")):effectperiod(2.5)  
+				s:diffusealpha(1):diffuseshift():effectcolor1(color("##ffffff")):effectcolor2(color("#ffea00")):effectperiod(2.5):sleep(2.5):diffusealpha(0):sleep(2.5):queuecommand("Set") 
 			elseif GAMESTATE:GetCoinMode() == "CoinMode_Home" then
 				s:Load(THEME:GetPathG("","ArcadeDecorations/"..Model()..Language().."start"))
-				s:diffuseshift():effectcolor1(color("##ffffff")):effectcolor2(color("#ffea00")):effectperiod(2.5)  
+				s:diffusealpha(1):diffuseshift():effectcolor1(color("##ffffff")):effectcolor2(color("#ffea00")):effectperiod(2.5):sleep(2.5):diffusealpha(0):sleep(2.5):queuecommand("Set")    
 			else
 				if GAMESTATE:EnoughCreditsToJoin() == true then
 					s:Load(THEME:GetPathG("","ArcadeDecorations/"..Model()..Language().."start"))
-					s:diffuseshift():effectcolor1(color("##ffffff")):effectcolor2(color("#ffea00")):effectperiod(2.5)  
+					s:diffusealpha(1):diffuseshift():effectcolor1(color("##ffffff")):effectcolor2(color("#ffea00")):effectperiod(2.5):sleep(2.5):diffusealpha(0):sleep(2.5):queuecommand("Set")     
 				else
 					s:Load(THEME:GetPathG("","ArcadeDecorations/coin"))
-					s:diffuseshift():effectcolor1(color("##ffffff")):effectcolor2(color("#b4ff01")):effectperiod(2.5)
+					s:diffusealpha(1):diffuseshift():effectcolor1(color("##ffffff")):effectcolor2(color("#b4ff01")):effectperiod(2.5):sleep(2.5):diffusealpha(0):sleep(2.5):queuecommand("Set")   
 				end
 			end
 		end
@@ -43,16 +43,41 @@ if not IsTitleMenu() then
 			SetCommand=function(s)
 				if GAMESTATE:GetCoinMode() == 'CoinMode_Free' then
 					s:Load(THEME:GetPathG("","ArcadeDecorations/"..Language().."button"))
+					s:diffusealpha(1):sleep(2.5):diffusealpha(0):sleep(2.5):queuecommand("Set") 
 				elseif GAMESTATE:GetCoinMode() == "CoinMode_Home" then
 					s:Load(THEME:GetPathG("","ArcadeDecorations/"..Language().."button"))
+					s:diffusealpha(1):sleep(2.5):diffusealpha(0):sleep(2.5):queuecommand("Set") 
 				else
 					if GAMESTATE:EnoughCreditsToJoin() == true then
 						s:Load(THEME:GetPathG("","ArcadeDecorations/"..Language().."button"))
+						s:diffusealpha(1):sleep(2.5):diffusealpha(0):sleep(2.5):queuecommand("Set") 
 					end
 				end
 			end
 		};
 	end
+
+	t[#t+1] = Def.Sprite{
+		InitCommand=function(s) s:zoom(0.6):xy(_screen.cx,_screen.cy+186):queuecommand("Set") end,
+		CoinInsertedMessageCommand=function(s) s:queuecommand("Set") end,
+		SetCommand=function(s)
+			if GAMESTATE:GetCoinMode() == 'CoinMode_Free' then
+				s:Load(THEME:GetPathG("","ArcadeDecorations/"..Language().."eamuse"))
+				s:diffusealpha(0):sleep(2.5):diffusealpha(1):diffuseshift():effectcolor1(color("##ffffff")):effectcolor2(color("#ffea00")):effectperiod(2.5):sleep(2.5):diffusealpha(0):queuecommand("Set") 
+			elseif GAMESTATE:GetCoinMode() == "CoinMode_Home" then
+				s:Load(THEME:GetPathG("","ArcadeDecorations/"..Language().."eamuse"))
+				s:diffusealpha(0):sleep(2.5):diffusealpha(1):diffuseshift():effectcolor1(color("##ffffff")):effectcolor2(color("#ffea00")):effectperiod(2.5):sleep(2.5):diffusealpha(0):queuecommand("Set")    
+			else
+				if GAMESTATE:EnoughCreditsToJoin() == true then
+					s:Load(THEME:GetPathG("","ArcadeDecorations/"..Language().."eamuse"))
+					s:diffusealpha(0):sleep(2.5):diffusealpha(1):diffuseshift():effectcolor1(color("##ffffff")):effectcolor2(color("#ffea00")):effectperiod(2.5):sleep(2.5):diffusealpha(0):queuecommand("Set")     
+				else
+					s:Load(THEME:GetPathG("","ArcadeDecorations/"..Language().."eamuse"))
+					s:diffusealpha(0):sleep(2.5):diffusealpha(1):diffuseshift():effectcolor1(color("##ffffff")):effectcolor2(color("#b4ff01")):effectperiod(2.5):sleep(2.5):diffusealpha(0):queuecommand("Set")   
+				end
+			end
+		end
+	};
 end 
 
 return t
