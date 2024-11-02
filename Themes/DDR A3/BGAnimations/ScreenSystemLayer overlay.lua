@@ -6,13 +6,16 @@ local function PaseliText_P1()
 	local text = LoadFont("Common Normal") .. {
 		InitCommand = cmd(draworder,99;x,SCREEN_LEFT+7;y,SCREEN_BOTTOM-7.5;zoom,0.42;strokecolor,color("0.3,0.3,0.3,1");playcommand,"Refresh");
 		RefreshCommand = function(self)
+			local netConnected = IsNetConnected()
 			self:horizalign(left)
-                        if GAMESTATE:IsSideJoined(PLAYER_1) then
+			if not netConnected then self:settext('') return end 
+			if GAMESTATE:IsSideJoined(PLAYER_1) then
 			    self:settext('PASELI: '..paseli):playcommand("TestHome"):playcommand("TestFree") return end
 			if GAMESTATE:IsEventMode() then self:settext('PASELI: NOT AVAILABLE'):playcommand("UpdateVisible") return end
 			if GAMESTATE:GetCoinMode()=='CoinMode_Free' then self:settext('PASELI: NOT AVAILABLE'):playcommand("UpdateVisible") return end
 			if GAMESTATE:GetCoinMode()=='CoinMode_Pay' then self:settext('EXTRA PASELI: 0'):playcommand("UpdateVisible") return end
-			if GAMESTATE:GetCoinMode()=='CoinMode_Home' then self:settext('') return end 
+			if GAMESTATE:GetCoinMode()=='CoinMode_Home' then self:settext('') return end
+
 		end;
                  DeductPaseliCommand = function(self)
                  if GAMESTATE:IsSideJoined(PLAYER_1) and paseli >= paseliPrice then 
@@ -45,7 +48,9 @@ local function PaseliText_P2()
 	local text = LoadFont("Common Normal") .. {
 		InitCommand = cmd(draworder,99;x,SCREEN_RIGHT-7;y,SCREEN_BOTTOM-7.5;zoom,0.42;strokecolor,color("0.3,0.3,0.3,1");playcommand,"Refresh");
 		RefreshCommand = function(self)
+			local netConnected = IsNetConnected()
 			self:horizalign(right)
+			if not netConnected then self:settext('') return end
 			if GAMESTATE:IsSideJoined(PLAYER_2) then
 			    self:settext('PASELI: '..paseli):playcommand("TestHome"):playcommand("TestFree") return end
 			if GAMESTATE:IsEventMode() then self:settext('PASELI: NOT AVAILABLE'):playcommand("UpdateVisible") return end
@@ -177,8 +182,15 @@ local function NetworkText()
 			self:strokecolor(color("0.3,0.3,0.3,1"));
 		end;
 		RefreshCommand=function (self)
-			self:diffuse(color("#00FF00"));
-			self:settext("ONLINE"):playcommand("UpdateVisible");
+			local netConnected = IsNetConnected();
+
+			if netConnected then
+				self:diffuse(color("#00FF00"));
+				self:settext("ONLINE"):playcommand("UpdateVisible");
+			else
+				self:diffuse(color("#888888"));
+				self:settext("LOCAL MODE"):playcommand("UpdateVisible");
+			end
 		end;
 		UpdateVisibleCommand=function(self)
 			local screen = SCREENMAN:GetTopScreen();
@@ -199,6 +211,7 @@ local function NetworkText()
 end;
 
 local t = Def.ActorFrame {}
+local netConnected = IsNetConnected();
 
 t[#t+1] = Def.ActorFrame {
 	NetworkText();
