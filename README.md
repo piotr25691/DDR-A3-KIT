@@ -21,5 +21,6 @@ Modified to more closely match the arcade data of DDR A3.
 - Needs several restarts to boot without crashing.
 - Announcer may quit talking at some point.
 - Encore Extra Stage is not operational, and will crash the game.
+- There are two "Good" windows, to fix this, set the TNS_W4 and TNS_W5 windows to be the same.
 
 <sub><sup>*Build date: 2023-04-12</sub></sup>
