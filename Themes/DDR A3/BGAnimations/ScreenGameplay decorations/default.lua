@@ -91,6 +91,7 @@ t[#t+1] = Def.ActorFrame {
 	};
 };
 
-t[#t+1] = LoadActor("TargetScore");
+t[#t+1] = LoadActor("TargetScore/P1");
+t[#t+1] = LoadActor("TargetScore/P2");
 
 return t
