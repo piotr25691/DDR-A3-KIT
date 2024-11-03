@@ -267,4 +267,6 @@ if not GAMESTATE:IsDemonstration() then
 	};
 end
 
+t[#t+1] = LoadActor("TargetScore");
+
 return t
