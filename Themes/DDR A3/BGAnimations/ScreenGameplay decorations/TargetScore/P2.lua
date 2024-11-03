@@ -9,13 +9,13 @@ local pname = ToEnumShortString(player);
 local ts = {0,0};
 
 local TargetScore_JudgeCmdsPlayer = {
-		TapNoteScore_W1 = THEME:GetMetric( "Judgment", "TargetScore_2013_JudgmentW1Command" );
-		TapNoteScore_W2 = THEME:GetMetric( "Judgment",  "TargetScore_2013_JudgmentW2Command" );
-		TapNoteScore_W3 = THEME:GetMetric( "Judgment",  "TargetScore_2013_JudgmentW3Command" );
-		TapNoteScore_W4 = THEME:GetMetric( "Judgment",  "TargetScore_2013_JudgmentW4Command" );
-		TapNoteScore_W5 = THEME:GetMetric( "Judgment",  "TargetScore_2013_JudgmentW5Command" );
-		TapNoteScore_Miss = THEME:GetMetric( "Judgment",  "TargetScore_2013_JudgmentMissCommand" );
-	};
+	TapNoteScore_W1 = THEME:GetMetric( "Judgment", "TargetScore_2013_JudgmentW1Command" );
+	TapNoteScore_W2 = THEME:GetMetric( "Judgment",  "TargetScore_2013_JudgmentW2Command" );
+	TapNoteScore_W3 = THEME:GetMetric( "Judgment",  "TargetScore_2013_JudgmentW3Command" );
+	TapNoteScore_W4 = THEME:GetMetric( "Judgment",  "TargetScore_2013_JudgmentW4Command" );
+	TapNoteScore_W5 = THEME:GetMetric( "Judgment",  "TargetScore_2013_JudgmentW5Command" );
+	TapNoteScore_Miss = THEME:GetMetric( "Judgment",  "TargetScore_2013_JudgmentMissCommand" );
+};
 
 local t = Def.ActorFrame {};
 
@@ -193,7 +193,7 @@ if not GAMESTATE:IsDemonstration() and not GAMESTATE:IsCourseMode() and GAMESTAT
 					end;
 					
 					if GAMESTATE:IsDemonstration() or (not GAMESTATE:IsSideJoined(player) and GAMESTATE:GetPlayMode() == 'PlayMode_Rave') then
-						TargetScore_JudgeCmds[params.TapNoteScore](self)
+						-- do nothing here
 					else
 						TargetScore_JudgeCmdsPlayer[params.TapNoteScore](self)
 					end
