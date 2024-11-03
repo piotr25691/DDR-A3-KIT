@@ -132,7 +132,7 @@ if not GAMESTATE:IsDemonstration() and not GAMESTATE:IsCourseMode() and GAMESTAT
 		end;
 		LoadFont("_Bolster 16px") .. {
 			InitCommand=function(self)
-				self:x((player == PLAYER_1) and SCREEN_CENTER_X-190 or SCREEN_CENTER_X+190);
+				self:x((player == PLAYER_1) and SCREEN_CENTER_X-190 or SCREEN_CENTER_X+290);
 				self:y(SCREEN_CENTER_Y-55);
 				self:zoom(0.8);
 				(cmd(horizalign,right;strokecolor,color("#000000")))(self)
