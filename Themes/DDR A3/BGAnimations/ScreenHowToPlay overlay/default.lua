@@ -81,7 +81,7 @@ if not IsTitleMenu() then
 						s:Load(THEME:GetPathG("","ArcadeDecorations/"..Model()..Language().."start"))
 						s:diffusealpha(1):diffuseshift():effectcolor1(color("##ffffff")):effectcolor2(color(effectColor())):effectperiod(2.5):sleep(2.5):diffusealpha(0):sleep(2.5):queuecommand("Set")     
 					else
-						s:Load(THEME:GetPathG("","ArcadeDecorations/coin"))
+						s:Load(THEME:GetPathG("","ArcadeDecorations/"..Language().."coin"))
 						s:diffusealpha(1):diffuseshift():effectcolor1(color("##ffffff")):effectcolor2(color(effectColor())):effectperiod(2.5):sleep(2.5):diffusealpha(0):sleep(2.5):queuecommand("Set")   
 					end
 				end
@@ -123,7 +123,7 @@ if not IsTitleMenu() then
 						s:Load(THEME:GetPathG("","ArcadeDecorations/"..Model()..Language().."start"))
 						s:diffuseshift():effectcolor1(color("##ffffff")):effectcolor2(color(effectColor())):effectperiod(2.5)  
 					else
-						s:Load(THEME:GetPathG("","ArcadeDecorations/coin"))
+						s:Load(THEME:GetPathG("","ArcadeDecorations/"..Language().."coin"))
 						s:diffuseshift():effectcolor1(color("##ffffff")):effectcolor2(color(effectColor())):effectperiod(2.5)
 					end
 				end

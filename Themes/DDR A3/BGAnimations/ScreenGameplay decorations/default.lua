@@ -91,4 +91,6 @@ t[#t+1] = Def.ActorFrame {
 	};
 };
 
+t[#t+1] = LoadActor("TargetScore");
+
 return t
