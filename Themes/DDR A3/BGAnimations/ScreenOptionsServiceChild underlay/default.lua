@@ -1,39 +1,38 @@
-return Def.ActorFrame {
-	LoadActor(THEME:GetPathB("ScreenWithMenuElements","background"));
-	Def.ActorFrame{
-		InitCommand=function(s) s:x(_screen.cx):y(-7) end,
-		OnCommand=function(s) s:linear(0.25):y(15) end,
-		OffCommand=function(s) s:linear(0.25):y(-7) end,
-		LoadActor(THEME:GetPathG("ScreenWithMenuElements","header/"..Model().."base"))..{
-			InitCommand=function(s) s:zoom(0.667):y(2) end,
-		};
-		LoadActor(THEME:GetPathG("ScreenWithMenuElements","header/"..Model().."OPTIONS"))..{
-			InitCommand=function(s) s:setsize(340,27):y(-0.5) end,
-		};
-	};
-	LoadActor(Model().."Back") .. {
-		InitCommand=function(s) 
-			if IsOptionService() or IsOptionManageProfiles() then
-				s:xy(_screen.cx+10,_screen.cy-24):setsize(500,400)
-			else
-				s:xy(_screen.cx,_screen.cy-9):setsize(720,430)
-			end
-		end,
-		OnCommand=function(s) s:zoomx(0):linear(0.25):zoomx(1) end,
-		OffCommand=function(s) s:sleep(0.3):linear(0.25):zoomx(0) end,
-	};
-	LoadActor(THEME:GetPathG("","ScreenSelectProfile/"..Model().."bottom")) .. {
-		InitCommand=function(s) s:x(_screen.cx):setsize(400,59)
-			if IsOptionService() or IsOptionManageProfiles() then
-				s:y(SCREEN_BOTTOM-86)
-			else
-				s:y(SCREEN_BOTTOM-60) 
-			end
-		end,
-		OnCommand=function(s) s:zoomx(0):linear(0.25):zoomx(1) end,
-		OffCommand=function(s) s:sleep(0.3):linear(0.25):zoomx(0) end,
-	};
-};
+local t = Def.ActorFrame{}
+
+	
+t[#t+1] =Def.Quad {
+	InitCommand=function(s) s:diffuse(color("#000000")):FullScreen():diffusealpha(1) end,
+}
+
+t[#t+1] = Def.BitmapText {
+	Font="Common Normal",
+	Text="MAIN MENU",
+	InitCommand=function(s) s:xy(SCREEN_CENTER_X,30):zoom(0.8):zoomx(0.7):diffuse(color("#ffffff")) end,
+}
+
+t[#t+1] = Def.BitmapText {
+	Font="Common Normal",
+	Text="SERVICE BUTTON = EXECUTE",
+	InitCommand=function(s) s:xy(SCREEN_CENTER_X,SCREEN_BOTTOM-30):zoom(0.5):zoomx(0.4):diffuse(color("#ffffff")) end,
+}
+t[#t+1] = Def.BitmapText {
+	Font="Common Normal",
+	Text="TEST BUTTON = SELECT ITEM",
+	InitCommand=function(s) s:xy(SCREEN_CENTER_X,SCREEN_BOTTOM-45):zoom(0.5):zoomx(0.4):diffuse(color("#ffffff")) end,
+}
+t[#t+1] = Def.BitmapText {
+	Font="Common Normal",
+	Text="START BUTTON = EXECUTE",
+	InitCommand=function(s) s:xy(SCREEN_CENTER_X,SCREEN_BOTTOM-60):zoom(0.5):zoomx(0.4):diffuse(color("#ffffff")) end,
+}
+t[#t+1] = Def.BitmapText {
+	Font="Common Normal",
+	Text="PLAYER1 LEFT/RIGHT = SELECT ITEM",
+	InitCommand=function(s) s:xy(SCREEN_CENTER_X,SCREEN_BOTTOM-75):zoom(0.5):zoomx(0.4):diffuse(color("#ffffff")) end,
+}
+
+return t
 
 
 

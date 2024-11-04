@@ -10,7 +10,7 @@ return Def.ActorFrame {
 		};
 	};
 	Def.ActorFrame{
-		InitCommand=function(s) s:y(_screen.cy+125):linear(0.34):y(0):sleep(44):linear(0.34):y(_screen.cy+125) end,
+		InitCommand=function(s) s:y(_screen.cy+125):linear(0.2):y(0):sleep(44):linear(0.2):y(_screen.cy+125) end,
 		LoadActor(Model().."demo")..{
 			InitCommand=function(s) s:xy(_screen.cx+254,_screen.cy+9):zoom(0.68) end,
 		};

@@ -10,7 +10,7 @@ local function PaseliText_P1()
 			self:horizalign(left)
 			if not netConnected then self:settext('') return end 
 			if GAMESTATE:IsSideJoined(PLAYER_1) then
-			    self:settext('PASELI: '..paseli):playcommand("TestHome"):playcommand("TestFree") return end
+			    self:settext('PASELI: '..paseli):playcommand("TestHome"):playcommand("TestFree"):playcommand("UpdateVisible") return end
 			if GAMESTATE:IsEventMode() then self:settext('PASELI: NOT AVAILABLE'):playcommand("UpdateVisible") return end
 			if GAMESTATE:GetCoinMode()=='CoinMode_Free' then self:settext('PASELI: NOT AVAILABLE'):playcommand("UpdateVisible") return end
 			if GAMESTATE:GetCoinMode()=='CoinMode_Pay' then self:settext('EXTRA PASELI: 0'):playcommand("UpdateVisible") return end
@@ -52,7 +52,7 @@ local function PaseliText_P2()
 			self:horizalign(right)
 			if not netConnected then self:settext('') return end
 			if GAMESTATE:IsSideJoined(PLAYER_2) then
-			    self:settext('PASELI: '..paseli):playcommand("TestHome"):playcommand("TestFree") return end
+			    self:settext('PASELI: '..paseli):playcommand("TestHome"):playcommand("TestFree"):playcommand("UpdateVisible")  return end
 			if GAMESTATE:IsEventMode() then self:settext('PASELI: NOT AVAILABLE'):playcommand("UpdateVisible") return end
 			if GAMESTATE:GetCoinMode()=='CoinMode_Free' then self:settext('PASELI: NOT AVAILABLE'):playcommand("UpdateVisible") return end
 			if GAMESTATE:GetCoinMode()=='CoinMode_Pay' then self:settext('EXTRA PASELI: 0'):playcommand("UpdateVisible") return end
@@ -143,10 +143,8 @@ local function CoinsText()
 				s=''
 			end
 
-			if GAMESTATE:GetCoinMode() == 'CoinMode_Pay' then
-				self:visible(true);
-			else
-				self:visible(false);
+			if not GAMESTATE:GetCoinMode() == 'CoinMode_Pay' then
+				self:settext('');
 			end
 
 			self:settext(s):playcommand("UpdateVisible")

@@ -90,7 +90,7 @@ local function DrawDiffListItem(diff)
 	Def.ActorFrame{
 		InitCommand=function(s) s:x(90) end,
 		Def.Sprite{
-			InitCommand=function(s) s:xy(24,2) end,
+			InitCommand=function(s) s:xy(27,2) end,
 			SetCommand=function(self)
 				local st = GAMESTATE:GetCurrentStyle():GetStepsType();
 				local song = GAMESTATE:GetCurrentSong();
@@ -208,7 +208,7 @@ return Def.ActorFrame{
 	};
 	Def.Sprite{
 		Texture=Model()..Language().."text",
-		InitCommand=function(s) s:xy(20,-112) end,
+		InitCommand=function(s) s:xy(10,-112) end,
 		OnCommand=function(s) s:diffusealpha(0):sleep(0.4):linear(0.05):diffusealpha(0.75):linear(0.1):diffusealpha(0.25):linear(0.1):diffusealpha(1) end,
 	};
     DiffList..{

@@ -1,5 +1,7 @@
 local t = Def.ActorFrame{};
 
+local netConnected = IsNetConnected();
+
 local function effectColor()
 	if Model() == "blue_" then
 		return "#b4ff01"

@@ -91,7 +91,12 @@ t[#t+1] = Def.ActorFrame {
 	};
 };
 
-t[#t+1] = LoadActor("TargetScore/P1");
-t[#t+1] = LoadActor("TargetScore/P2");
+if GAMESTATE:IsSideJoined(PLAYER_1) then
+	t[#t+1] = LoadActor("TargetScore/P1");
+end
+
+if GAMESTATE:IsSideJoined(PLAYER_2) then
+	t[#t+1] = LoadActor("TargetScore/P2");
+end
 
 return t

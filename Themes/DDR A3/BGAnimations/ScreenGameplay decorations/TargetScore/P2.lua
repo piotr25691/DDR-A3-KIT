@@ -167,7 +167,7 @@ if not GAMESTATE:IsDemonstration() and not GAMESTATE:IsCourseMode() and GAMESTAT
 						ts[p] = ts[p] + moto
 						local last = math.round((ret-ts[p]));
 						if last > 0 then
-							self:diffuse(color("#716b96"));
+							self:diffuse(color("#766fbd"));
 							self:settext("+"..last);
 						elseif last < 0 then
 							self:diffuse(color("#bd727f"));
@@ -181,7 +181,7 @@ if not GAMESTATE:IsDemonstration() and not GAMESTATE:IsCourseMode() and GAMESTAT
 						ts[p] = ts[p] + moto
 						local last = math.round((ret-ts[p])*0.1);
 						if last > 0 then
-							self:diffuse(color("#716b96"));
+							self:diffuse(color("#766fbd"));
 							self:settext("+"..last*10);
 						elseif last < 0 then
 							self:diffuse(color("#bd727f"));
@@ -192,11 +192,7 @@ if not GAMESTATE:IsDemonstration() and not GAMESTATE:IsCourseMode() and GAMESTAT
 						end;
 					end;
 					
-					if GAMESTATE:IsDemonstration() or (not GAMESTATE:IsSideJoined(player) and GAMESTATE:GetPlayMode() == 'PlayMode_Rave') then
-						-- do nothing here
-					else
-						TargetScore_JudgeCmdsPlayer[params.TapNoteScore](self)
-					end
+					TargetScore_JudgeCmdsPlayer[params.TapNoteScore](self)
 				end;
 			end;
 		};

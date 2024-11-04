@@ -59,7 +59,7 @@ return Def.ActorFrame{
 			LoadActor("BPM")..{ InitCommand=function(s) s:xy(91,9):zoom(0.87) end, };
 			Def.Sprite{
 				Texture="_meter 2x2.png";
-				InitCommand=cmd(xy,58,16;effectclock,'beatnooffset';SetAllStateDelays,1);
+				InitCommand=cmd(xy,64,16;effectclock,'beatnooffset';SetAllStateDelays,1;zoomx,1.5;skewx,-0.25);
 			};
 			LoadFont("Bpm")..{
 			InitCommand=cmd(zoom,1.4;xy,148,1);

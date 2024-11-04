@@ -1,7 +1,7 @@
 return Def.ActorFrame {
 	Def.Quad{
 		InitCommand=function(s) s:diffuse(color("#ffffff")):FullScreen():diffusealpha(1) end,
-		OnCommand=function(s) s:sleep(0.01):linear(1):diffusealpha(0) end,
+		OnCommand=function(s) s:sleep(1):linear(1):diffusealpha(0) end,
 	};
 	LoadActor(Model().."jp_warning")..{
 		InitCommand=function(s) s:FullScreen():diffusealpha(0) end,
