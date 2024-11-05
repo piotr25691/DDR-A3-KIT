@@ -56,13 +56,13 @@ return Def.ActorFrame{
 	Def.ActorFrame{
 		Name="BPMBar";
 		InitCommand=cmd(xy,-20,44);
-			LoadActor("BPM")..{ InitCommand=function(s) s:xy(91,9):zoom(0.87) end, };
+			LoadActor("BPM")..{ InitCommand=function(s) s:xy(91,9):zoom(1) end, };
 			Def.Sprite{
 				Texture="_meter 2x2.png";
 				InitCommand=cmd(xy,64,16;effectclock,'beatnooffset';SetAllStateDelays,1;zoomx,1.5;skewx,-0.25);
 			};
 			LoadFont("Bpm")..{
-			InitCommand=cmd(zoom,1.4;xy,148,1);
+			InitCommand=cmd(zoom,1.4;xy,103,1);
 			SetCommand=function(self)
 				local song = GAMESTATE:GetCurrentSong();
 				if song then
@@ -70,10 +70,12 @@ return Def.ActorFrame{
 					bpmtext = song:GetDisplayBpms();
 						if bpmtext[1] == bpmtext[2] then
 							bpmtext = round(bpmtext[1],0);
+							self:x(115);
 						else
-							bpmtext = string.format("%d\nx%3d",round(bpmtext[1],0),round(bpmtext[2],0));
+							bpmtext = string.format("  %d\nx%3d",round(bpmtext[1],0),round(bpmtext[2],0));
+							self:x(101);
 						end
-					self:horizalign(right);
+					self:horizalign(left);
 					self:vertalign(top);
 					self:settext(bpmtext);
 					self:visible(true);

@@ -26,22 +26,18 @@ t[#t+1] = Def.Actor{
 	end;
 };
 
-local lastAnnouncer = ANNOUNCER:GetCurrentAnnouncer()
-t[#t+1] = Def.ActorFrame {
-	Def.Actor {
-		InitCommand=function(s) 
-			ANNOUNCER:SetCurrentAnnouncer('')
-			s:sleep(BeginReadyDelay()):queuecommand('Play') 
-		end,
-		PlayCommand=function(s) 
-			if lastAnnouncer then
-				ANNOUNCER:SetCurrentAnnouncer(lastAnnouncer)
-			end
-			SOUND:PlayAnnouncer('gameplay ready') end,
-	},
-};
-
 if not GAMESTATE:IsDemonstration() then
+	t[#t+1] = Def.ActorFrame {
+		Def.Actor {
+			InitCommand=function(s) 
+				s:sleep(BeginReadyDelay()):queuecommand('Play') 
+			end,
+			PlayCommand=function(s) 
+				SOUND:PlayAnnouncer('gameplay ready')
+			end,
+		},
+	};
+	
 	if ShowCutIns() then
 		if GetUserPref("OptionRowGameplayBackground")=='DanceStages' then
 			t[#t+1] = LoadActor("Cut-In/DanceStages")

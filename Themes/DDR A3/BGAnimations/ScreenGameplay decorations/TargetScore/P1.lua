@@ -68,7 +68,6 @@ end;
 local bTargetScore = TargetScore(player);
 
 if not GAMESTATE:IsDemonstration() and not GAMESTATE:IsCourseMode() and GAMESTATE:GetPlayMode() == 'PlayMode_Regular' and bTargetScore ~= "off" then
-
 	local bEXScore = EXScore(player);
 	
 	local function GetMachinePersonalHighScores()
@@ -130,14 +129,15 @@ if not GAMESTATE:IsDemonstration() and not GAMESTATE:IsCourseMode() and GAMESTAT
 				self:visible(true);
 			end;
 		end;
-		LoadFont("_Bolster 16px") .. {
+		LoadFont("TargetScore numbers") .. {
 			InitCommand=function(self)
 				self:x((player == PLAYER_1) and SCREEN_CENTER_X-190 or SCREEN_CENTER_X+290);
-				self:y(SCREEN_CENTER_Y-55);
-				self:zoom(0.8);
+				self:y(SCREEN_CENTER_Y-60);
+				self:zoom(0.5);
 				(cmd(horizalign,right;strokecolor,color("#000000")))(self)
 			end;
 			JudgmentMessageCommand=function(self,params)
+				if GAMESTATE:GetPlayerState(PLAYER_1):GetHealthState() == "HealthState_Dead" then return end
 				if params.Player ~= player then return end;
 				self:finishtweening();
 				if params.TapNoteScore and
@@ -188,7 +188,7 @@ if not GAMESTATE:IsDemonstration() and not GAMESTATE:IsCourseMode() and GAMESTAT
 							self:settext(last*10);
 						else
 							self:diffuse(color("#ffffff"));
-							self:settext("+0");
+							self:settext("±0");
 						end;
 					end;
 					

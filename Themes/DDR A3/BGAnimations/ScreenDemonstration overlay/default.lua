@@ -1,7 +1,7 @@
 return Def.ActorFrame {	
 	Def.ActorFrame{
 		InitCommand=function(s) s:x(_screen.cx):y(SCREEN_TOP-30) end,
-		OnCommand=function(s) s:linear(0.3):y(SCREEN_TOP+15):sleep(44):linear(0.3):y(SCREEN_TOP-30) end,
+		OnCommand=function(s) s:linear(0.2):y(SCREEN_TOP+15):sleep(44):linear(0.2):y(SCREEN_TOP-30) end,
 		LoadActor(THEME:GetPathG("ScreenWithMenuElements","header/"..Model().."base"))..{
 			InitCommand=function(s) s:zoom(0.667):y(2) end,
 		};

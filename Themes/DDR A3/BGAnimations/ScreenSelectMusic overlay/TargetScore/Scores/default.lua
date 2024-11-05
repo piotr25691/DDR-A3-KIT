@@ -112,15 +112,15 @@ return Def.ActorFrame{
         InitCommand=function(s) s:valign(0):xy(pn==PLAYER_1 and -104 or -79, 71):diffuse(color("#000000")):zoom(0.85) end,
     };
     Def.Sprite{
-        Texture=Language().."rival1",
+        Texture="rival1",
         InitCommand=function(s) s:valign(0):xy(pn==PLAYER_1 and -104 or -79, 94):zoom(0.85) end,
     };
     Def.Sprite{
-        Texture=Language().."rival2",
+        Texture="rival2",
         InitCommand=function(s) s:valign(0):xy(pn==PLAYER_1 and -104 or -79, 117):zoom(0.85) end,
     };
     Def.Sprite{
-        Texture=Language().."rival3",
+        Texture="rival3",
         InitCommand=function(s) s:valign(0):xy(pn==PLAYER_1 and -104 or -79, 139):zoom(0.85) end,
     };
 	Def.ActorFrame{

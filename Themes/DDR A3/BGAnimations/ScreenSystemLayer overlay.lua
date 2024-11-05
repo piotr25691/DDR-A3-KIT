@@ -137,14 +137,10 @@ local function CoinsText()
 			local coinsPerCredit=PREFSMAN:GetPreference('CoinsPerCredit')
 			local remainder=math.mod(coins,coinsPerCredit)
 			local s='COIN: '
-			if coinsPerCredit > 1 then
+			if coinsPerCredit > 1 and GAMESTATE:GetCoinMode() == 'CoinMode_Pay' then
 				s=s..remainder..'/'..coinsPerCredit
 			else
 				s=''
-			end
-
-			if not GAMESTATE:GetCoinMode() == 'CoinMode_Pay' then
-				self:settext('');
 			end
 
 			self:settext(s):playcommand("UpdateVisible")

@@ -22,6 +22,7 @@ for i=1,2 do
 		Def.Sprite{
 			InitCommand=function(s) s:xy(i==1 and 260 or -260,2):queuecommand("Set") end,
 			OnCommand=function(s) s:diffusealpha(0):sleep(0.3):linear(0.3):diffusealpha(1) end,
+			CoinInsertedMessageCommand=function(s) s:queuecommand("Set") end,
 			SetCommand=function(s)
 				local GetP1 = GAMESTATE:IsPlayerEnabled(PLAYER_1)
 				local GetP2 = GAMESTATE:IsPlayerEnabled(PLAYER_2)
@@ -37,10 +38,10 @@ for i=1,2 do
 				elseif i == 2 then
 					if GetP2 == true and GAMESTATE:GetNumPlayersEnabled() == 1 then
 						s:Load(THEME:GetPathB("","ScreenSelectStyle overlay/"..Model()..Language().."2p_start"));
-					elseif GetP2 == false and GAMESTATE:GetMasterPlayerNumber() == PLAYER_1  then
+					elseif GetP2 == false and GAMESTATE:GetMasterPlayerNumber() == PLAYER_1 and GAMESTATE:EnoughCreditsToJoin() then
 						s:Load(THEME:GetPathB("","ScreenSelectStyle overlay/"..Model()..Language().."2p_join"));
 					else
-						s:Load(THEME:GetPathB("","ScreenSelectStyle overlay/"..Model()..Language().."2p_start"));
+						s:Load(THEME:GetPathB("","ScreenSelectStyle overlay/"..Language().."insertmorecoins"));
 					end
 				end
 			end,

@@ -251,7 +251,7 @@ function Language()
 	elseif GetUserPref("OptionRowLanguage")=='kor' then
 		return "kor_"
 	else
-		return "en_"
+		return "jp_"
 	end
 end
 
@@ -587,6 +587,17 @@ GoldenLeagueSong = {
 	["Jungle Dance"] = "league";							--12th
 	["Rave in the Shell"] = "league";						--13th
 	["Not Alone"] = "league";								--14th
+};
+
+DemoSong = {
+	-- A3
+	["fill this out"] = "demo";
+	-- A20 PLUS
+	["fill this out"] = "demo";
+	-- A20
+	["fill this out"] = "demo";
+	-- A
+	["fill this out"] = "demo";
 };
 
 function AttackPerfectFullCombo()
