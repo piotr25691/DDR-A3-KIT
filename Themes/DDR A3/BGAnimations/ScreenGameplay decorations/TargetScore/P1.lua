@@ -13,7 +13,7 @@ local TargetScore_JudgeCmdsPlayer = {
 	TapNoteScore_W2 = THEME:GetMetric( "Judgment",  "TargetScore_2013_JudgmentW2Command" );
 	TapNoteScore_W3 = THEME:GetMetric( "Judgment",  "TargetScore_2013_JudgmentW3Command" );
 	TapNoteScore_W4 = THEME:GetMetric( "Judgment",  "TargetScore_2013_JudgmentW4Command" );
-	TapNoteScore_W5 = THEME:GetMetric( "Judgment",  "TargetScore_2013_JudgmentW5Command" );
+	TapNoteScore_W4 = THEME:GetMetric( "Judgment",  "TargetScore_2013_JudgmentW4Command" );
 	TapNoteScore_Miss = THEME:GetMetric( "Judgment",  "TargetScore_2013_JudgmentMissCommand" )
 };
 

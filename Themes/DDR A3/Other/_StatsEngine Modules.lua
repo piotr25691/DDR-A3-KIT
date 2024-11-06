@@ -129,7 +129,7 @@ return {
 					curBase = 'TapNoteScore_Miss'
 				end
 
-    			curBase = (curBase == 'TapNoteScore_W5') and 'TapNoteScore_W4' or curBase
+    			curBase = (curBase == 'TapNoteScore_W4') and 'TapNoteScore_W4' or curBase
     			local short = ToEnumShortString(curBase)
     			if params.PSS:FullComboOfScore(minimum) then
     				varTable.Label = "Label"..short

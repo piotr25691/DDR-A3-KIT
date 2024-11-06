@@ -11,7 +11,7 @@ function TopRecord(pn) --�^�ǳ̰��������Ӭ���
 		["topW2"]=0;
 		["topW3"]=0;
 		["topW4"]=0;
-		["topW5"]=0;
+		["topW4"]=0;
 		["topMiss"]=0;
 		["topOK"]=0;
 		["topEXScore"]=0;
@@ -54,8 +54,8 @@ function TopRecord(pn) --�^�ǳ̰��������Ӭ���
 			myScoreSet["topW2"]  = scores[1]:GetTapNoteScore("TapNoteScore_W2");
 			myScoreSet["topW3"]  = scores[1]:GetTapNoteScore("TapNoteScore_W3");
 			myScoreSet["topW4"]  = scores[1]:GetTapNoteScore("TapNoteScore_W4");
-			myScoreSet["topW5"]  = scores[1]:GetTapNoteScore("TapNoteScore_W5");
-			myScoreSet["topMiss"]  = scores[1]:GetTapNoteScore("TapNoteScore_W5")+scores[1]:GetTapNoteScore("TapNoteScore_Miss");
+			myScoreSet["topW4"]  = scores[1]:GetTapNoteScore("TapNoteScore_W4");
+			myScoreSet["topMiss"]  = scores[1]:GetTapNoteScore("TapNoteScore_W4")+scores[1]:GetTapNoteScore("TapNoteScore_Miss");
 			myScoreSet["topOK"]  = scores[1]:GetHoldNoteScore("HoldNoteScore_Held");
 			myScoreSet["topEXScore"]  = scores[1]:GetTapNoteScore("TapNoteScore_W1")*3+scores[1]:GetTapNoteScore("TapNoteScore_W2")*2+scores[1]:GetTapNoteScore("TapNoteScore_W3")+scores[1]:GetHoldNoteScore("HoldNoteScore_Held")*3;
 			myScoreSet["topMAXCombo"]  = scores[1]:GetMaxCombo();
@@ -127,7 +127,7 @@ return Def.ActorFrame{
 						topscore = scores[1];
 							assert(topscore);
 						local misses = topscore:GetTapNoteScore("TapNoteScore_Miss")+topscore:GetTapNoteScore("TapNoteScore_CheckpointMiss")
-						local boos = topscore:GetTapNoteScore("TapNoteScore_W5")
+						local boos = topscore:GetTapNoteScore("TapNoteScore_W4")
 						local goods = topscore:GetTapNoteScore("TapNoteScore_W4")
 						local greats = topscore:GetTapNoteScore("TapNoteScore_W3")
 						local perfects = topscore:GetTapNoteScore("TapNoteScore_W2")

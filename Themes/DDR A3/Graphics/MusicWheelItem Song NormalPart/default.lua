@@ -109,7 +109,7 @@ return Def.ActorFrame{
 			local size = wheel:GetNumItems()
 			local move = newIndex-wheel:GetCurrentIndex()
 
-		if math.abs(move)>math.floor(size/2) then
+		if math.abs(move)>math.floor(size) then
 			if newIndex > wheel:GetCurrentIndex() then
 				move = (move)%size-size
 			else

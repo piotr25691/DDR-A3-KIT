@@ -36,7 +36,7 @@ return Def.ActorFrame{
 						topscore = scores[1];
 						assert(topscore);
 						local misses = topscore:GetTapNoteScore("TapNoteScore_Miss")+topscore:GetTapNoteScore("TapNoteScore_CheckpointMiss")
-						local boos = topscore:GetTapNoteScore("TapNoteScore_W5")
+						local boos = topscore:GetTapNoteScore("TapNoteScore_W4")
 						local goods = topscore:GetTapNoteScore("TapNoteScore_W4")
 						local greats = topscore:GetTapNoteScore("TapNoteScore_W3")
 						local perfects = topscore:GetTapNoteScore("TapNoteScore_W2")
