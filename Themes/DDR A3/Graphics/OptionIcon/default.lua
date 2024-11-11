@@ -177,7 +177,29 @@ return Def.ActorFrame {
 	Def.Sprite {
 		InitCommand=function(self)
 			self:x(151);
-			if table.search(GAMESTATE:GetPlayerState(pn):GetPlayerOptionsArray("ModsLevel_Preferred"), '4Lives') then			
+			if table.search(GAMESTATE:GetPlayerState(pn):GetPlayerOptionsArray("ModsLevel_Preferred"), 'Flare1') then	
+				self:Load(THEME:GetPathG("","OptionIcon/"..player.."/Gauge/Flare1.png"));
+			elseif table.search(GAMESTATE:GetPlayerState(pn):GetPlayerOptionsArray("ModsLevel_Preferred"), 'Flare2') then	
+				self:Load(THEME:GetPathG("","OptionIcon/"..player.."/Gauge/Flare2.png"));
+			elseif table.search(GAMESTATE:GetPlayerState(pn):GetPlayerOptionsArray("ModsLevel_Preferred"), 'Flare3') then	
+				self:Load(THEME:GetPathG("","OptionIcon/"..player.."/Gauge/Flare3.png"));
+			elseif table.search(GAMESTATE:GetPlayerState(pn):GetPlayerOptionsArray("ModsLevel_Preferred"), 'Flare4') then	
+				self:Load(THEME:GetPathG("","OptionIcon/"..player.."/Gauge/Flare4.png"));
+			elseif table.search(GAMESTATE:GetPlayerState(pn):GetPlayerOptionsArray("ModsLevel_Preferred"), 'Flare5') then	
+				self:Load(THEME:GetPathG("","OptionIcon/"..player.."/Gauge/Flare5.png"));
+			elseif table.search(GAMESTATE:GetPlayerState(pn):GetPlayerOptionsArray("ModsLevel_Preferred"), 'Flare6') then	
+				self:Load(THEME:GetPathG("","OptionIcon/"..player.."/Gauge/Flare6.png"));
+			elseif table.search(GAMESTATE:GetPlayerState(pn):GetPlayerOptionsArray("ModsLevel_Preferred"), 'Flare7') then	
+				self:Load(THEME:GetPathG("","OptionIcon/"..player.."/Gauge/Flare7.png"));
+			elseif table.search(GAMESTATE:GetPlayerState(pn):GetPlayerOptionsArray("ModsLevel_Preferred"), 'Flare8') then	
+				self:Load(THEME:GetPathG("","OptionIcon/"..player.."/Gauge/Flare8.png"));
+			elseif table.search(GAMESTATE:GetPlayerState(pn):GetPlayerOptionsArray("ModsLevel_Preferred"), 'Flare9') then	
+				self:Load(THEME:GetPathG("","OptionIcon/"..player.."/Gauge/Flare9.png"));
+			elseif table.search(GAMESTATE:GetPlayerState(pn):GetPlayerOptionsArray("ModsLevel_Preferred"), 'FlareEX') then	
+				self:Load(THEME:GetPathG("","OptionIcon/"..player.."/Gauge/FlareEX.png"));
+			elseif table.search(GAMESTATE:GetPlayerState(pn):GetPlayerOptionsArray("ModsLevel_Preferred"), 'FloatingFlare') then	
+				self:Load(THEME:GetPathG("","OptionIcon/"..player.."/Gauge/Hard.png"));
+			elseif table.search(GAMESTATE:GetPlayerState(pn):GetPlayerOptionsArray("ModsLevel_Preferred"), '4Lives') then			
 				self:Load(THEME:GetPathG("","OptionIcon/"..player.."/Gauge/Life4.png"));
 			elseif table.search(GAMESTATE:GetPlayerState(pn):GetPlayerOptionsArray("ModsLevel_Preferred"), '1Lives') then			
 				self:Load(THEME:GetPathG("","OptionIcon/"..player.."/Gauge/Risky.png"));                                			

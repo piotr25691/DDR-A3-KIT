@@ -929,26 +929,71 @@ function OptionRowGauge()
 		SelectType = "SelectOne",
 		OneChoiceForAllPlayers = false,
 		ExportOnChange = true,
-		Choices = {"NORMAL", "LIFE4", "RISKY"};
+		Choices = {"NORMAL", "FLARE I", "FLARE II", "FLARE III", "FLARE IV", "FLARE V", "FLARE VI", "FLARE VII", "FLARE VIII", "FLARE IX", "FLARE EX", "FLOATING FLARE", "LIFE4", "RISKY"};
 		LoadSelections = function(self, list, pn)
 			local po = GAMESTATE:GetPlayerState(pn):GetPlayerOptionsArray("ModsLevel_Preferred")
 				if table.search(po, "4Lives") then
-					list[2] = true
+					list[13] = true
 				elseif table.search(po, "1Lives") then
+					list[14] = true
+				elseif table.search(po, "Flare1") then
+					list[2] = true
+				elseif table.search(po, "Flare2") then
 					list[3] = true
+				elseif table.search(po, "Flare3") then
+					list[4] = true
+				elseif table.search(po, "Flare4") then
+					list[5] = true
+				elseif table.search(po, "Flare5") then
+					list[6] = true
+				elseif table.search(po, "Flare6") then
+					list[7] = true
+				elseif table.search(po, "Flare7") then
+					list[8] = true
+				elseif table.search(po, "Flare8") then
+					list[9] = true
+				elseif table.search(po, "Flare9") then
+					list[10] = true
+				elseif table.search(po, "FlareEX") then
+					list[11] = true
+				elseif table.search(po, "FloatingFlare") then
+					list[12] = true
 				else
 					list[1] = true
 				end
 		end,
 		SaveSelections = function(self, list, pn)
 			local mod
-			if list[2] then
+			if list[12] then
+				mod = "bar,floating-flare,failimmediate"
+			elseif list[13] then
 				mod = "4 lives,battery,failimmediate"
-			elseif list[3] then
+			elseif list[14] then
 				mod = "1 lives,battery,failimmediate"
+			elseif list[2] then
+				mod = "bar,flare-1,failimmediate"
+			elseif list[3] then
+				mod = "bar,flare-2,failimmediate"
+			elseif list[4] then
+				mod = "bar,flare-3,failimmediate"
+			elseif list[5] then
+				mod = "bar,flare-4,failimmediate"
+			elseif list[6] then
+				mod = "bar,flare-5,failimmediate"
+			elseif list[7] then
+				mod = "bar,flare-6,failimmediate"
+			elseif list[8] then
+				mod = "bar,flare-7,failimmediate"
+			elseif list[9] then
+				mod = "bar,flare-8,failimmediate"
+			elseif list[10] then
+				mod = "bar,flare-9,failimmediate"
+			elseif list[11] then
+				mod = "bar,flare-ex,failimmediate"
 			else
-				mod = "bar,failimmediate"
+				mod = "bar,normal-drain,failimmediate"
 			end
+
 			if mod ~= "" then
 				GAMESTATE:ApplyPreferredModifiers(pn, mod)
 			end

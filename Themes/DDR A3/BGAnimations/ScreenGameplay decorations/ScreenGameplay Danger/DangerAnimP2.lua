@@ -28,8 +28,8 @@ return Def.ActorFrame{
 			end;
 			--BG
 			LoadActor(filter)..{
-				InitCommand=function(s) s:zoom(0.667):y(_screen.cy):blend('BlendMode_Add'):diffusealpha(0) end,
-				ShowCommand=function(s) s:diffusealpha(0.5):zoomy(1) end,
+				InitCommand=function(s) s:zoom(0.667):y(_screen.cy):diffuse(color("#ff0000")):diffusealpha(0) end,
+				ShowCommand=function(s) s:diffusealpha(0.8):zoomy(1) end,
 				HideCommand=function(s) s:linear(0.25):zoomy(0):diffusealpha(0) end,
 			};
 			--Left

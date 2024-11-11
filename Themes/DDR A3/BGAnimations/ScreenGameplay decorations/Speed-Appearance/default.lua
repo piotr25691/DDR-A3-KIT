@@ -39,6 +39,50 @@ function retrieveMeterType()
 				OptionsP1P = string.gsub(OptionsP1P, "(battery,)", "");
 				OptionsP1P = string.gsub(OptionsP1P, "(4Lives,)", "");
 				OptionsP1P = OptionsP1P..",failimmediate,battery, 4 Lives";
+			elseif string.find(OptionsP1P,"Flare1") then
+				OptionsP1P = string.gsub(OptionsP1P, "(bar,)", "");
+				OptionsP1P = string.gsub(OptionsP1P, "(Flare1,)", "");
+				OptionsP1P = OptionsP1P..",failimmediate,bar,flare-1";
+			elseif string.find(OptionsP1P,"Flare2") then
+				OptionsP1P = string.gsub(OptionsP1P, "(bar,)", "");
+				OptionsP1P = string.gsub(OptionsP1P, "(Flare2,)", "");
+				OptionsP1P = OptionsP1P..",failimmediate,bar,flare-2";
+			elseif string.find(OptionsP1P,"Flare3") then
+				OptionsP1P = string.gsub(OptionsP1P, "(bar,)", "");
+				OptionsP1P = string.gsub(OptionsP1P, "(Flare3,)", "");
+				OptionsP1P = OptionsP1P..",failimmediate,bar,flare-3";
+			elseif string.find(OptionsP1P,"Flare4") then
+				OptionsP1P = string.gsub(OptionsP1P, "(bar,)", "");
+				OptionsP1P = string.gsub(OptionsP1P, "(Flare4,)", "");
+				OptionsP1P = OptionsP1P..",failimmediate,bar,flare-4";
+			elseif string.find(OptionsP1P,"Flare5") then
+				OptionsP1P = string.gsub(OptionsP1P, "(bar,)", "");
+				OptionsP1P = string.gsub(OptionsP1P, "(Flare5,)", "");
+				OptionsP1P = OptionsP1P..",failimmediate,bar,flare-5";
+			elseif string.find(OptionsP1P,"Flare6") then
+				OptionsP1P = string.gsub(OptionsP1P, "(bar,)", "");
+				OptionsP1P = string.gsub(OptionsP1P, "(Flare6,)", "");
+				OptionsP1P = OptionsP1P..",failimmediate,bar,flare-6";
+			elseif string.find(OptionsP1P,"Flare7") then
+				OptionsP1P = string.gsub(OptionsP1P, "(bar,)", "");
+				OptionsP1P = string.gsub(OptionsP1P, "(Flare7,)", "");
+				OptionsP1P = OptionsP1P..",failimmediate,bar,flare-7";
+			elseif string.find(OptionsP1P,"Flare8") then
+				OptionsP1P = string.gsub(OptionsP1P, "(bar,)", "");
+				OptionsP1P = string.gsub(OptionsP1P, "(Flare8,)", "");
+				OptionsP1P = OptionsP1P..",failimmediate,bar,flare-8";
+			elseif string.find(OptionsP1P,"Flare9") then
+				OptionsP1P = string.gsub(OptionsP1P, "(bar,)", "");
+				OptionsP1P = string.gsub(OptionsP1P, "(Flare9,)", "");
+				OptionsP1P = OptionsP1P..",failimmediate,bar,flare-9";
+			elseif string.find(OptionsP1P,"FlareEX") then
+				OptionsP1P = string.gsub(OptionsP1P, "(bar,)", "");
+				OptionsP1P = string.gsub(OptionsP1P, "(FlareEX,)", "");
+				OptionsP1P = OptionsP1P..",failimmediate,bar,flare-ex";
+			elseif string.find(OptionsP1P,"FloatingFlare") then
+				OptionsP1P = string.gsub(OptionsP1P, "(bar,)", "");
+				OptionsP1P = string.gsub(OptionsP1P, "(FloatingFlare,)", "");
+				OptionsP1P = OptionsP1P..",failimmediate,bar,floating-flare";
 			else
 				OptionsP1P = string.gsub(OptionsP1P, "(battery,)", "");
 			end
@@ -59,6 +103,50 @@ function retrieveMeterType()
 				OptionsP2P = string.gsub(OptionsP2P, "(battery,)", "");
 				OptionsP2P = string.gsub(OptionsP2P, "(4Lives,)", "");
 				OptionsP2P = OptionsP2P..",failimmediate,battery, 4 Lives";
+			elseif string.find(OptionsP2P,"Flare1") then
+				OptionsP2P = string.gsub(OptionsP2P, "(bar,)", "");
+				OptionsP2P = string.gsub(OptionsP2P, "(Flare1,)", "");
+				OptionsP2P = OptionsP2P..",failimmediate,bar,flare-1";
+			elseif string.find(OptionsP2P,"Flare2") then
+				OptionsP2P = string.gsub(OptionsP2P, "(bar,)", "");
+				OptionsP2P = string.gsub(OptionsP2P, "(Flare2,)", "");
+				OptionsP2P = OptionsP2P..",failimmediate,bar,flare-2";
+			elseif string.find(OptionsP2P,"Flare3") then
+				OptionsP2P = string.gsub(OptionsP2P, "(bar,)", "");
+				OptionsP2P = string.gsub(OptionsP2P, "(Flare3,)", "");
+				OptionsP2P = OptionsP2P..",failimmediate,bar,flare-3";
+			elseif string.find(OptionsP2P,"Flare4") then
+				OptionsP2P = string.gsub(OptionsP2P, "(bar,)", "");
+				OptionsP2P = string.gsub(OptionsP2P, "(Flare4,)", "");
+				OptionsP2P = OptionsP2P..",failimmediate,bar,flare-4";
+			elseif string.find(OptionsP2P,"Flare5") then
+				OptionsP2P = string.gsub(OptionsP2P, "(bar,)", "");
+				OptionsP2P = string.gsub(OptionsP2P, "(Flare5,)", "");
+				OptionsP2P = OptionsP2P..",failimmediate,bar,flare-5";
+			elseif string.find(OptionsP2P,"Flare6") then
+				OptionsP2P = string.gsub(OptionsP2P, "(bar,)", "");
+				OptionsP2P = string.gsub(OptionsP2P, "(Flare6,)", "");
+				OptionsP2P = OptionsP2P..",failimmediate,bar,flare-6";
+			elseif string.find(OptionsP2P,"Flare7") then
+				OptionsP2P = string.gsub(OptionsP2P, "(bar,)", "");
+				OptionsP2P = string.gsub(OptionsP2P, "(Flare7,)", "");
+				OptionsP2P = OptionsP2P..",failimmediate,bar,flare-7";
+			elseif string.find(OptionsP2P,"Flare8") then
+				OptionsP2P = string.gsub(OptionsP2P, "(bar,)", "");
+				OptionsP2P = string.gsub(OptionsP2P, "(Flare8,)", "");
+				OptionsP2P = OptionsP2P..",failimmediate,bar,flare-8";
+			elseif string.find(OptionsP2P,"Flare9") then
+				OptionsP2P = string.gsub(OptionsP2P, "(bar,)", "");
+				OptionsP2P = string.gsub(OptionsP2P, "(Flare9,)", "");
+				OptionsP2P = OptionsP2P..",failimmediate,bar,flare-9";
+			elseif string.find(OptionsP2P,"FlareEX") then
+				OptionsP2P = string.gsub(OptionsP2P, "(bar,)", "");
+				OptionsP2P = string.gsub(OptionsP2P, "(FlareEX,)", "");
+				OptionsP2P = OptionsP2P..",failimmediate,bar,flare-ex";
+			elseif string.find(OptionsP2P,"FloatingFlare") then
+				OptionsP2P = string.gsub(OptionsP2P, "(bar,)", "");
+				OptionsP2P = string.gsub(OptionsP2P, "(FloatingFlare,)", "");
+				OptionsP2P = OptionsP2P..",failimmediate,bar,floating-flare";
 			else
 				OptionsP2P = string.gsub(OptionsP2P, "(battery,)", "");
 			end
@@ -91,7 +179,31 @@ function RecordGameplayMeterType(player)
 				SaveGameplayMeterTypeForPlayer(PlayerUID,"4 Lives");
 			end
 		else
-			SaveGameplayMeterTypeForPlayer(PlayerUID,"Normal");
+			if string.find(Options,"Flare1") then
+				SaveGameplayMeterTypeForPlayer(PlayerUID,"Flare1");
+			elseif string.find(Options,"Flare2") then
+				SaveGameplayMeterTypeForPlayer(PlayerUID,"Flare2");
+			elseif string.find(Options,"Flare3") then
+				SaveGameplayMeterTypeForPlayer(PlayerUID,"Flare3");
+			elseif string.find(Options,"Flare4") then
+				SaveGameplayMeterTypeForPlayer(PlayerUID,"Flare4");
+			elseif string.find(Options,"Flare5") then
+				SaveGameplayMeterTypeForPlayer(PlayerUID,"Flare5");
+			elseif string.find(Options,"Flare6") then
+				SaveGameplayMeterTypeForPlayer(PlayerUID,"Flare6");
+			elseif string.find(Options,"Flare7") then
+				SaveGameplayMeterTypeForPlayer(PlayerUID,"Flare7");
+			elseif string.find(Options,"Flare8") then
+				SaveGameplayMeterTypeForPlayer(PlayerUID,"Flare8");
+			elseif string.find(Options,"Flare9") then
+				SaveGameplayMeterTypeForPlayer(PlayerUID,"Flare9");
+			elseif string.find(Options,"FlareEX") then
+				SaveGameplayMeterTypeForPlayer(PlayerUID,"FlareEX");
+			elseif string.find(Options,"FloatingFlare") then
+				SaveGameplayMeterTypeForPlayer(PlayerUID,"FloatingFlare");
+			else
+				SaveGameplayMeterTypeForPlayer(PlayerUID,"Normal");
+			end
 		end
 	end
 end
@@ -128,6 +240,50 @@ function SetGameplayMeterType(player)
 			Options = string.gsub(Options, "(battery,)", "");
 			Options = string.gsub(Options, "(4Lives,)", "");
 			Options = Options..",failimmediate,battery, 4 Lives";
+		elseif val == "Flare1" then
+			Options = string.gsub(Options, "(bar,)", "");
+			Options = string.gsub(Options, "(Flare1,)", "");
+			Options = Options..",failimmediate,bar,Flare1";
+		elseif val == "Flare2" then
+			Options = string.gsub(Options, "(bar,)", "");
+			Options = string.gsub(Options, "(Flare2,)", "");
+			Options = Options..",failimmediate,bar,Flare2";
+		elseif val == "Flare3" then
+			Options = string.gsub(Options, "(bar,)", "");
+			Options = string.gsub(Options, "(Flare3,)", "");
+			Options = Options..",failimmediate,bar,Flare3";
+		elseif val == "Flare4" then
+			Options = string.gsub(Options, "(bar,)", "");
+			Options = string.gsub(Options, "(Flare4,)", "");
+			Options = Options..",failimmediate,bar,Flare4";
+		elseif val == "Flare5" then
+			Options = string.gsub(Options, "(bar,)", "");
+			Options = string.gsub(Options, "(Flare5,)", "");
+			Options = Options..",failimmediate,bar,Flare5";
+		elseif val == "Flare6" then
+			Options = string.gsub(Options, "(bar,)", "");
+			Options = string.gsub(Options, "(Flare6,)", "");
+			Options = Options..",failimmediate,bar,Flare6";
+		elseif val == "Flare7" then
+			Options = string.gsub(Options, "(bar,)", "");
+			Options = string.gsub(Options, "(Flare7,)", "");
+			Options = Options..",failimmediate,bar,Flare7";
+		elseif val == "Flare8" then
+			Options = string.gsub(Options, "(bar,)", "");
+			Options = string.gsub(Options, "(Flare8,)", "");
+			Options = Options..",failimmediate,bar,Flare8";
+		elseif val == "Flare9" then
+			Options = string.gsub(Options, "(bar,)", "");
+			Options = string.gsub(Options, "(Flare9,)", "");
+			Options = Options..",failimmediate,bar,Flare9";
+		elseif val == "FlareEX" then
+			Options = string.gsub(Options, "(bar,)", "");
+			Options = string.gsub(Options, "(FlareEX,)", "");
+			Options = Options..",failimmediate,bar,FlareEX";
+		elseif val == "FloatingFlare" then
+			Options = string.gsub(Options, "(bar,)", "");
+			Options = string.gsub(Options, "(FloatingFlare,)", "");
+			Options = Options..",failimmediate,bar,FloatingFlare";
 		else
 			Options = string.gsub(Options, "(battery,)", "");
 		end;
@@ -144,7 +300,7 @@ end
 
  function ReadOrCreateGameplayMeterTypeForPlayer(PlayerUID, MyValue)
 	local File = RageFileUtil:CreateRageFile()
-	if File:Open("Save/GameplayMeterType/"..PlayerUID..".txt",1) then 
+	if File:Open("Save/GameplayMeterType/"..PlayerUID..".txt",1) then
 		local str = File:Read();
 		MyValue =str;
 	else
@@ -157,7 +313,6 @@ end
 end
 
 function SaveGameplayMeterTypeForPlayer( PlayerUID, MyValue)
-
 	local File = RageFileUtil:CreateRageFile();
 	File:Open("Save/GameplayMeterType/"..PlayerUID..".txt",2);
 	File:Write(tostring(MyValue));
@@ -668,6 +823,7 @@ if GAMESTATE:GetPlayMode()=="PlayMode_Oni" then
  end
 
 --ApplyOptions
+
 GAMESTATE:GetPlayerState('PlayerNumber_P1'):SetPlayerOptions('ModsLevel_Preferred',OptionsP1P);
 GAMESTATE:GetPlayerState('PlayerNumber_P2'):SetPlayerOptions('ModsLevel_Preferred',OptionsP2P);
 

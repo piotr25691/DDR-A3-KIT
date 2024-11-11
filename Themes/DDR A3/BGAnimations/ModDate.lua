@@ -8,13 +8,13 @@ local revision = 0
 return Def.BitmapText{
     Font="_futura pt medium 30px";
     InitCommand=function(s)  
-		-- MDX:A:A:A:Year/Month/Day/00
+		--         MDX:A:A:A:Year/Month/Day/00
 		s:settext(
 		    string.format(
-		       "%s:%s:%s:%s:%d%02d", 
+		       "%s:%s:%s:%s:%d%02d",
 		       identifier,
 		       region,
-                       type,
+               type,
 		       spec,
 		       date,
 		       revision

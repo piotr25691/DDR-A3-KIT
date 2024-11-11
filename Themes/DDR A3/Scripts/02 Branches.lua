@@ -294,5 +294,4 @@ Branch = {
 			return "ScreenDataSaveSummaryEnd"
 		end
 	end,
-	
 }
