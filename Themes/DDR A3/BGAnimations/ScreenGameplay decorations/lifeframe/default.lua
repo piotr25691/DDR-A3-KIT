@@ -3,6 +3,30 @@ local Risky = GAMESTATE:GetPlayerState(pn):GetPlayerOptions('ModsLevel_Current')
 
 local gauge = GAMESTATE:GetPlayerState(pn):GetPlayerOptions('ModsLevel_Current'):DrainSetting()
 
+local gaugeP1 = GAMESTATE:GetPlayerState(PLAYER_1):GetPlayerOptions('ModsLevel_Current'):DrainSetting()
+local gaugeP2 = GAMESTATE:GetPlayerState(PLAYER_2):GetPlayerOptions('ModsLevel_Current'):DrainSetting()
+
+flareData = {
+    PlayerNumber_P1 = {
+        isFlare = false,
+        currentFlare = 9,
+        previousFlareLife = 1,
+    },
+    PlayerNumber_P2 = {
+        isFlare = false,
+        currentFlare = 9,
+        previousFlareLife = 1,
+    }
+}
+
+if gaugeP1 == "DrainType_FloatingFlare" then
+	flareData["PlayerNumber_P1"].isFlare = true;
+end
+
+if gaugeP2 == "DrainType_FloatingFlare" then
+	flareData["PlayerNumber_P2"].isFlare = true;
+end
+
 function GaugeTextureDanger(g)
 	if g == 'DrainType_Flare1' then
 		return "Flare1"
@@ -87,6 +111,32 @@ function GaugeTexture(g)
 	end
 end
 
+function FloatingGaugeTexture(i)
+	if i == 0 then
+		return "Flare1"
+	elseif i == 1 then
+		return "Flare2"
+	elseif i == 2 then
+		return "Flare3"
+	elseif i == 3 then
+		return "Flare4"
+	elseif i == 4 then
+		return "Flare5"
+	elseif i == 5 then
+		return "Flare6"
+	elseif i == 6 then
+		return "Flare7"
+	elseif i == 7 then
+		return "Flare8"
+	elseif i == 8 then
+		return "Flare9"
+	elseif i == 9 then
+		return "FlareEX"
+	else
+		return "Flare1"
+	end
+end
+
 function GaugeSpeed(g)
 	if string.find(g, "Flare") then
 		return pn=="PlayerNumber_P2" and 0.8 or -0.8
@@ -128,7 +178,27 @@ return Def.ActorFrame{
             :MaskDest():ztestmode("ZTestMode_WriteOnFail"):customtexturerect(0,0,1,1)
             :texcoordvelocity(GaugeSpeed(gauge),0)
         end,
+		-- FLOATING FLARE
+		LifeChangedMessageCommand=function(self, param)
+			if not flareData[pn].isFlare then return end
+			if gauge == "DrainType_FloatingFlare" then
+				-- Decrement FLOATING FLARE one FLARE GAUGE
+				if param.LifeMeter:GetLife() > flareData[pn].previousFlareLife and param.Player == pn then
+					flareData[pn].currentFlare = flareData[pn].currentFlare - 1
+					self:Load(THEME:GetPathB("","ScreenGameplay decorations/lifeframe/stream/"..FloatingGaugeTexture(flareData[pn].currentFlare)))
+					self:diffuse(color("#ffffff"))
+					flareData[pn].previousFlareLife = param.LifeMeter:GetLife()
+				-- Handle DANGER state
+				elseif param.LifeMeter:GetLife() < 0.3 and param.Player == pn then
+					self:Load(THEME:GetPathB("","ScreenGameplay decorations/lifeframe/stream/"..FloatingGaugeTexture(flareData[pn].currentFlare)))
+					self:diffuse(color("#888888"))
+					flareData[pn].previousFlareLife = param.LifeMeter:GetLife()
+				end
+			end
+		end,
+		-- NORMAL, CLASS, FLARE I through FLARE EX
         HealthStateChangedMessageCommand=function(self, param)
+			if flareData[pn].isFlare then return end
 			if param.PlayerNumber == pn then
 				if param.HealthState == "HealthState_Danger" then
 					self:Load(THEME:GetPathB("","ScreenGameplay decorations/lifeframe/stream/"..GaugeTextureDanger(gauge)))
