@@ -200,7 +200,7 @@ return Def.ActorFrame{
         HealthStateChangedMessageCommand=function(self, param)
 			if flareData[pn].isFlare then return end
 			if param.PlayerNumber == pn then
-				if param.HealthState == "HealthState_Danger" then
+				if param.HealthState == "HealthState_Danger" or param.HealthState == "HealthState_Danger_NoComment" then
 					self:Load(THEME:GetPathB("","ScreenGameplay decorations/lifeframe/stream/"..GaugeTextureDanger(gauge)))
 					self:texcoordvelocity(GaugeSpeedDanger(gauge),0)
 					self:diffuse(color(GaugeDiffuse(gauge)))

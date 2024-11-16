@@ -19,7 +19,7 @@ return Def.ActorFrame{
 			Name="Danger";
 			HealthStateChangedMessageCommand=function(self, param)
 				if param.PlayerNumber == PLAYER_2 then
-					if param.HealthState == "HealthState_Danger" then
+					if param.HealthState == "HealthState_Danger" or param.HealthState == "HealthState_Danger_NoComment" then
 						self:RunCommandsOnChildren(cmd(playcommand,"Show"))
 					else
 						self:RunCommandsOnChildren(cmd(playcommand,"Hide"))
