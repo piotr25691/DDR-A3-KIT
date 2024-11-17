@@ -20,3 +20,10 @@ Modified to more closely match the arcade data of DDR A3.
 - Encore Extra Stage is not operational, and will crash the game.
 
 <sub><sup>*Recompiled with DDR features used by the theme.</sub></sup>
+
+## Addons
+This project vendors several addons used to make DDR A3 better:
+
+- https://github.com/Enciso0720/Enciso0720DDR
+- https://zenius-i-vanisher.com/v5.2/thread?threadid=11227
+- https://zenius-i-vanisher.com/v5.2/thread?threadid=11050
