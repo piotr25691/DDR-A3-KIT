@@ -3,7 +3,10 @@ local env = GAMESTATE:Env()
 	
 t[#t+1] = Def.ActorFrame{
     Def.ActorFrame{
-		GainFocusCommand=function(s) s:stoptweening():linear(0.2):y(0) end,
+		GainFocusCommand=function(s) s:stoptweening():linear(0.2):y(0):queuecommand("Comment") end,
+		CommentCommand=function(s)
+			SOUND:PlayAnnouncer("style versus")
+		end,
 		LoseFocusCommand=function(s) s:linear(0.2):y(102) end,
 		Def.ActorFrame{
 			InitCommand=cmd(diffusealpha,0;zoom,0.667;x,-11;y,-52);

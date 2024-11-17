@@ -991,7 +991,7 @@ function OptionRowGauge()
 			elseif list[11] then
 				mod = "bar,flare-ex,failimmediate"
 			else
-				mod = "bar,normal-drain,failimmediate"
+				mod = "bar,normal-drain,failimmediatecontinue/"
 			end
 
 			if mod ~= "" then

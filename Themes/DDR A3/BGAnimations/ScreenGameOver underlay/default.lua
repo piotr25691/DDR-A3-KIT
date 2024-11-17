@@ -6,6 +6,8 @@ else
 	loader = THEME:GetPathB("","_doors open")
 end
 
+SOUND:StopMusic()
+
 return Def.ActorFrame{
 	--InitCommand=function(s) s:sleep(1) end,
 	LoadActor(THEME:GetPathS("ScreenGameOver","sound"))..{

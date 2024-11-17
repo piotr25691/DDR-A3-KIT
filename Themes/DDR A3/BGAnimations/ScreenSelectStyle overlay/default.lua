@@ -2,8 +2,19 @@ local t = Def.ActorFrame {};
 
 for i=1,2 do
 	t[#t+1] = Def.ActorFrame{
-		InitCommand=function(s) s:xy(i==1 and SCREEN_LEFT-1 or SCREEN_RIGHT+1,SCREEN_BOTTOM-53):zoom(0.667) end,
+		InitCommand=function(s) s:xy(i==1 and SCREEN_LEFT-1 or SCREEN_RIGHT+1,SCREEN_BOTTOM-53):zoom(0.667):sleep(2):queuecommand("Comment") end,
 		OffCommand=function(s) s:smooth(0.2):diffusealpha(0) end,
+		CommentCommand=function(s)
+			local players = GAMESTATE:GetNumSidesJoined()
+
+			if i == 1 then
+				if players == 1 then
+					SOUND:PlayAnnouncer("style single")
+				else
+					SOUND:PlayAnnouncer("style versus")
+				end
+			end
+		end,
 		PlayerJoinedMessageCommand=function(s,p)
 			if p.Player then
 				s:queuecommand("Off")

@@ -1,3 +1,5 @@
+
+
 return Def.ActorFrame { 
 	Def.Actor{
 		OnCommand=function(self)
@@ -9,6 +11,7 @@ return Def.ActorFrame {
 			if coins >= 1 then
 				GAMESTATE:InsertCoin(-coins)
 			end
+			SCREENMAN:GetTopScreen():StartTransitioningScreen("SM_GoToNextScreen");
 		end;
 	};
 };

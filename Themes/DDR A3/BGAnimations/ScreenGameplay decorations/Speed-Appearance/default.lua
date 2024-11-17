@@ -17,72 +17,72 @@ local DoubleGraphic = Model().."double"
 function retrieveMeterType()
 	if true then
 		if GAMESTATE:IsExtraStage() then
-			OptionsP1P = OptionsP1P..',failimmediate,battery,4 lives,';
-			OptionsP2P = OptionsP2P..',failimmediate,battery,4 lives,';
+			OptionsP1P = OptionsP1P..',battery,4 lives,failimmediate';
+			OptionsP2P = OptionsP2P..',battery,4 lives,failimmediate';
 		elseif GAMESTATE:IsExtraStage2() then
-			OptionsP1P = OptionsP1P..',failimmediate,battery,1 lives,';
-			OptionsP2P = OptionsP2P..',failimmediate,battery,1 lives,';
+			OptionsP1P = OptionsP1P..',battery,1 lives,failimmediate';
+			OptionsP2P = OptionsP2P..',battery,1 lives,failimmediate';
 		else
 			if string.find(OptionsP1P,"1Lives") then
 				OptionsP1P = string.gsub(OptionsP1P, "(battery,)", "");
 				OptionsP1P = string.gsub(OptionsP1P, "(1Lives,)", "");
-				OptionsP1P = OptionsP1P..",failimmediate,battery, 1 Lives";
+				OptionsP1P = OptionsP1P..",battery, 1 Lives,failimmediate";
 			elseif string.find(OptionsP1P,"2Lives") then
 				OptionsP1P = string.gsub(OptionsP1P, "(battery,)", "");
 				OptionsP1P = string.gsub(OptionsP1P, "(2Lives,)", "");
-				OptionsP1P = OptionsP1P..",failimmediate,battery, 2 Lives";
+				OptionsP1P = OptionsP1P..",battery, 2 Lives,failimmediate";
 			elseif string.find(OptionsP1P,"3Lives") then
 				OptionsP1P = string.gsub(OptionsP1P, "(battery,)", "");
 				OptionsP1P = string.gsub(OptionsP1P, "(3Lives,)", "");
-				OptionsP1P = OptionsP1P..",failimmediate,battery, 3 Lives";
+				OptionsP1P = OptionsP1P..",battery, 3 Lives,failimmediate";
 			elseif string.find(OptionsP1P,"4Lives") then
 				OptionsP1P = string.gsub(OptionsP1P, "(battery,)", "");
 				OptionsP1P = string.gsub(OptionsP1P, "(4Lives,)", "");
-				OptionsP1P = OptionsP1P..",failimmediate,battery, 4 Lives";
+				OptionsP1P = OptionsP1P..",battery, 4 Lives,failimmediate";
 			elseif string.find(OptionsP1P,"Flare1") then
 				OptionsP1P = string.gsub(OptionsP1P, "(bar,)", "");
 				OptionsP1P = string.gsub(OptionsP1P, "(Flare1,)", "");
-				OptionsP1P = OptionsP1P..",failimmediate,bar,flare-1";
+				OptionsP1P = OptionsP1P..",bar,flare-1,failimmediate";
 			elseif string.find(OptionsP1P,"Flare2") then
 				OptionsP1P = string.gsub(OptionsP1P, "(bar,)", "");
 				OptionsP1P = string.gsub(OptionsP1P, "(Flare2,)", "");
-				OptionsP1P = OptionsP1P..",failimmediate,bar,flare-2";
+				OptionsP1P = OptionsP1P..",bar,flare-2,failimmediate";
 			elseif string.find(OptionsP1P,"Flare3") then
 				OptionsP1P = string.gsub(OptionsP1P, "(bar,)", "");
 				OptionsP1P = string.gsub(OptionsP1P, "(Flare3,)", "");
-				OptionsP1P = OptionsP1P..",failimmediate,bar,flare-3";
+				OptionsP1P = OptionsP1P..",bar,flare-3,failimmediate";
 			elseif string.find(OptionsP1P,"Flare4") then
 				OptionsP1P = string.gsub(OptionsP1P, "(bar,)", "");
 				OptionsP1P = string.gsub(OptionsP1P, "(Flare4,)", "");
-				OptionsP1P = OptionsP1P..",failimmediate,bar,flare-4";
+				OptionsP1P = OptionsP1P..",bar,flare-4,failimmediate";
 			elseif string.find(OptionsP1P,"Flare5") then
 				OptionsP1P = string.gsub(OptionsP1P, "(bar,)", "");
 				OptionsP1P = string.gsub(OptionsP1P, "(Flare5,)", "");
-				OptionsP1P = OptionsP1P..",failimmediate,bar,flare-5";
+				OptionsP1P = OptionsP1P..",bar,flare-5,failimmediate";
 			elseif string.find(OptionsP1P,"Flare6") then
 				OptionsP1P = string.gsub(OptionsP1P, "(bar,)", "");
 				OptionsP1P = string.gsub(OptionsP1P, "(Flare6,)", "");
-				OptionsP1P = OptionsP1P..",failimmediate,bar,flare-6";
+				OptionsP1P = OptionsP1P..",bar,flare-6,failimmediate";
 			elseif string.find(OptionsP1P,"Flare7") then
 				OptionsP1P = string.gsub(OptionsP1P, "(bar,)", "");
 				OptionsP1P = string.gsub(OptionsP1P, "(Flare7,)", "");
-				OptionsP1P = OptionsP1P..",failimmediate,bar,flare-7";
+				OptionsP1P = OptionsP1P..",bar,flare-7,failimmediate";
 			elseif string.find(OptionsP1P,"Flare8") then
 				OptionsP1P = string.gsub(OptionsP1P, "(bar,)", "");
 				OptionsP1P = string.gsub(OptionsP1P, "(Flare8,)", "");
-				OptionsP1P = OptionsP1P..",failimmediate,bar,flare-8";
+				OptionsP1P = OptionsP1P..",bar,flare-8,failimmediate";
 			elseif string.find(OptionsP1P,"Flare9") then
 				OptionsP1P = string.gsub(OptionsP1P, "(bar,)", "");
 				OptionsP1P = string.gsub(OptionsP1P, "(Flare9,)", "");
-				OptionsP1P = OptionsP1P..",failimmediate,bar,flare-9";
+				OptionsP1P = OptionsP1P..",bar,flare-9,failimmediate";
 			elseif string.find(OptionsP1P,"FlareEX") then
 				OptionsP1P = string.gsub(OptionsP1P, "(bar,)", "");
 				OptionsP1P = string.gsub(OptionsP1P, "(FlareEX,)", "");
-				OptionsP1P = OptionsP1P..",failimmediate,bar,flare-ex";
+				OptionsP1P = OptionsP1P..",bar,flare-ex,failimmediate";
 			elseif string.find(OptionsP1P,"FloatingFlare") then
 				OptionsP1P = string.gsub(OptionsP1P, "(bar,)", "");
 				OptionsP1P = string.gsub(OptionsP1P, "(FloatingFlare,)", "");
-				OptionsP1P = OptionsP1P..",failimmediate,bar,floating-flare";
+				OptionsP1P = OptionsP1P..",bar,floating-flare,failimmediate";
 			else
 				OptionsP1P = string.gsub(OptionsP1P, "(battery,)", "");
 			end
@@ -90,63 +90,63 @@ function retrieveMeterType()
 			if string.find(OptionsP2P,"1Lives") then
 				OptionsP2P = string.gsub(OptionsP2P, "(battery,)", "");
 				OptionsP2P = string.gsub(OptionsP2P, "(1Lives,)", "");
-				OptionsP2P = OptionsP2P..",failimmediate,battery, 1 Lives";
+				OptionsP2P = OptionsP2P..",battery, 1 Lives,failimmediate";
 			elseif string.find(OptionsP2P,"2Lives") then
 				OptionsP2P = string.gsub(OptionsP2P, "(battery,)", "");
 				OptionsP2P = string.gsub(OptionsP2P, "(2Lives,)", "");
-				OptionsP2P = OptionsP2P..",failimmediate,battery, 2 Lives";
+				OptionsP2P = OptionsP2P..",battery, 2 Lives,failimmediate";
 			elseif string.find(OptionsP2P,"3Lives") then
 				OptionsP2P = string.gsub(OptionsP2P, "(battery,)", "");
 				OptionsP2P = string.gsub(OptionsP2P, "(3Lives,)", "");
-				OptionsP2P = OptionsP2P..",failimmediate,battery, 3 Lives";
+				OptionsP2P = OptionsP2P..",battery, 3 Lives,failimmediate";
 			elseif string.find(OptionsP2P,"4Lives") then
 				OptionsP2P = string.gsub(OptionsP2P, "(battery,)", "");
 				OptionsP2P = string.gsub(OptionsP2P, "(4Lives,)", "");
-				OptionsP2P = OptionsP2P..",failimmediate,battery, 4 Lives";
+				OptionsP2P = OptionsP2P..",battery, 4 Lives,failimmediate";
 			elseif string.find(OptionsP2P,"Flare1") then
 				OptionsP2P = string.gsub(OptionsP2P, "(bar,)", "");
 				OptionsP2P = string.gsub(OptionsP2P, "(Flare1,)", "");
-				OptionsP2P = OptionsP2P..",failimmediate,bar,flare-1";
+				OptionsP2P = OptionsP2P..",bar,flare-1,failimmediate";
 			elseif string.find(OptionsP2P,"Flare2") then
 				OptionsP2P = string.gsub(OptionsP2P, "(bar,)", "");
 				OptionsP2P = string.gsub(OptionsP2P, "(Flare2,)", "");
-				OptionsP2P = OptionsP2P..",failimmediate,bar,flare-2";
+				OptionsP2P = OptionsP2P..",bar,flare-2,failimmediate";
 			elseif string.find(OptionsP2P,"Flare3") then
 				OptionsP2P = string.gsub(OptionsP2P, "(bar,)", "");
 				OptionsP2P = string.gsub(OptionsP2P, "(Flare3,)", "");
-				OptionsP2P = OptionsP2P..",failimmediate,bar,flare-3";
+				OptionsP2P = OptionsP2P..",bar,flare-3,failimmediate";
 			elseif string.find(OptionsP2P,"Flare4") then
 				OptionsP2P = string.gsub(OptionsP2P, "(bar,)", "");
 				OptionsP2P = string.gsub(OptionsP2P, "(Flare4,)", "");
-				OptionsP2P = OptionsP2P..",failimmediate,bar,flare-4";
+				OptionsP2P = OptionsP2P..",bar,flare-4,failimmediate";
 			elseif string.find(OptionsP2P,"Flare5") then
 				OptionsP2P = string.gsub(OptionsP2P, "(bar,)", "");
 				OptionsP2P = string.gsub(OptionsP2P, "(Flare5,)", "");
-				OptionsP2P = OptionsP2P..",failimmediate,bar,flare-5";
+				OptionsP2P = OptionsP2P..",bar,flare-5,failimmediate";
 			elseif string.find(OptionsP2P,"Flare6") then
 				OptionsP2P = string.gsub(OptionsP2P, "(bar,)", "");
 				OptionsP2P = string.gsub(OptionsP2P, "(Flare6,)", "");
-				OptionsP2P = OptionsP2P..",failimmediate,bar,flare-6";
+				OptionsP2P = OptionsP2P..",bar,flare-6,failimmediate";
 			elseif string.find(OptionsP2P,"Flare7") then
 				OptionsP2P = string.gsub(OptionsP2P, "(bar,)", "");
 				OptionsP2P = string.gsub(OptionsP2P, "(Flare7,)", "");
-				OptionsP2P = OptionsP2P..",failimmediate,bar,flare-7";
+				OptionsP2P = OptionsP2P..",bar,flare-7,failimmediate";
 			elseif string.find(OptionsP2P,"Flare8") then
 				OptionsP2P = string.gsub(OptionsP2P, "(bar,)", "");
 				OptionsP2P = string.gsub(OptionsP2P, "(Flare8,)", "");
-				OptionsP2P = OptionsP2P..",failimmediate,bar,flare-8";
+				OptionsP2P = OptionsP2P..",bar,flare-8,failimmediate";
 			elseif string.find(OptionsP2P,"Flare9") then
 				OptionsP2P = string.gsub(OptionsP2P, "(bar,)", "");
 				OptionsP2P = string.gsub(OptionsP2P, "(Flare9,)", "");
-				OptionsP2P = OptionsP2P..",failimmediate,bar,flare-9";
+				OptionsP2P = OptionsP2P..",bar,flare-9,failimmediate";
 			elseif string.find(OptionsP2P,"FlareEX") then
 				OptionsP2P = string.gsub(OptionsP2P, "(bar,)", "");
 				OptionsP2P = string.gsub(OptionsP2P, "(FlareEX,)", "");
-				OptionsP2P = OptionsP2P..",failimmediate,bar,flare-ex";
+				OptionsP2P = OptionsP2P..",bar,flare-ex,failimmediate";
 			elseif string.find(OptionsP2P,"FloatingFlare") then
 				OptionsP2P = string.gsub(OptionsP2P, "(bar,)", "");
 				OptionsP2P = string.gsub(OptionsP2P, "(FloatingFlare,)", "");
-				OptionsP2P = OptionsP2P..",failimmediate,bar,floating-flare";
+				OptionsP2P = OptionsP2P..",bar,floating-flare,failimmediate";
 			else
 				OptionsP2P = string.gsub(OptionsP2P, "(battery,)", "");
 			end
@@ -227,63 +227,63 @@ function SetGameplayMeterType(player)
 		if val == "1 Lives" then
 			Options = string.gsub(Options, "(battery,)", "");
 			Options = string.gsub(Options, "(1Lives,)", "");
-			Options = Options..",failimmediate,battery, 1 Lives";
+			Options = Options..",battery, 1 Lives,failimmediate";
 		elseif val == "2 Lives" then
 			Options = string.gsub(Options, "(battery,)", "");
 			Options = string.gsub(Options, "(2Lives,)", "");
-			Options = Options..",failimmediate,battery, 2 Lives";
+			Options = Options..",battery, 2 Lives,failimmediate";
 		elseif val == "3 Lives" then
 			Options = string.gsub(Options, "(battery,)", "");
 			Options = string.gsub(Options, "(3Lives,)", "");
-			Options = Options..",failimmediate,battery, 3 Lives";
+			Options = Options..",battery, 3 Lives,failimmediate";
 		elseif val == "4 Lives" then
 			Options = string.gsub(Options, "(battery,)", "");
 			Options = string.gsub(Options, "(4Lives,)", "");
-			Options = Options..",failimmediate,battery, 4 Lives";
+			Options = Options..",battery, 4 Lives,failimmediate";
 		elseif val == "Flare1" then
 			Options = string.gsub(Options, "(bar,)", "");
 			Options = string.gsub(Options, "(Flare1,)", "");
-			Options = Options..",failimmediate,bar,Flare1";
+			Options = Options..",bar,Flare1,failimmediate";
 		elseif val == "Flare2" then
 			Options = string.gsub(Options, "(bar,)", "");
 			Options = string.gsub(Options, "(Flare2,)", "");
-			Options = Options..",failimmediate,bar,Flare2";
+			Options = Options..",bar,Flare2,failimmediate";
 		elseif val == "Flare3" then
 			Options = string.gsub(Options, "(bar,)", "");
 			Options = string.gsub(Options, "(Flare3,)", "");
-			Options = Options..",failimmediate,bar,Flare3";
+			Options = Options..",bar,Flare3,failimmediate";
 		elseif val == "Flare4" then
 			Options = string.gsub(Options, "(bar,)", "");
 			Options = string.gsub(Options, "(Flare4,)", "");
-			Options = Options..",failimmediate,bar,Flare4";
+			Options = Options..",bar,Flare4,failimmediate";
 		elseif val == "Flare5" then
 			Options = string.gsub(Options, "(bar,)", "");
 			Options = string.gsub(Options, "(Flare5,)", "");
-			Options = Options..",failimmediate,bar,Flare5";
+			Options = Options..",bar,Flare5,failimmediate";
 		elseif val == "Flare6" then
 			Options = string.gsub(Options, "(bar,)", "");
 			Options = string.gsub(Options, "(Flare6,)", "");
-			Options = Options..",failimmediate,bar,Flare6";
+			Options = Options..",bar,Flare6,failimmediate";
 		elseif val == "Flare7" then
 			Options = string.gsub(Options, "(bar,)", "");
 			Options = string.gsub(Options, "(Flare7,)", "");
-			Options = Options..",failimmediate,bar,Flare7";
+			Options = Options..",bar,Flare7,failimmediate";
 		elseif val == "Flare8" then
 			Options = string.gsub(Options, "(bar,)", "");
 			Options = string.gsub(Options, "(Flare8,)", "");
-			Options = Options..",failimmediate,bar,Flare8";
+			Options = Options..",bar,Flare8,failimmediate";
 		elseif val == "Flare9" then
 			Options = string.gsub(Options, "(bar,)", "");
 			Options = string.gsub(Options, "(Flare9,)", "");
-			Options = Options..",failimmediate,bar,Flare9";
+			Options = Options..",bar,Flare9,failimmediate";
 		elseif val == "FlareEX" then
 			Options = string.gsub(Options, "(bar,)", "");
 			Options = string.gsub(Options, "(FlareEX,)", "");
-			Options = Options..",failimmediate,bar,FlareEX";
+			Options = Options..",bar,FlareEX,failimmediate";
 		elseif val == "FloatingFlare" then
 			Options = string.gsub(Options, "(bar,)", "");
 			Options = string.gsub(Options, "(FloatingFlare,)", "");
-			Options = Options..",failimmediate,bar,FloatingFlare";
+			Options = Options..",bar,FloatingFlare,failimmediate";
 		else
 			Options = string.gsub(Options, "(battery,)", "");
 		end;
@@ -805,17 +805,17 @@ if GAMESTATE:GetPlayMode()=="PlayMode_Oni" then
 	
 	if	GAMESTATE:IsPlayerEnabled('PlayerNumber_P1') then
 		if GAMESTATE:GetCurrentTrail('PlayerNumber_P1'):GetDifficulty() == "Difficulty_Hard" then
-			OptionsP1P = OptionsP1P..',failimmediate,battery,4 lives,';
+			OptionsP1P = OptionsP1P..',battery,4 lives,failimmediate';
 		else
-			OptionsP1P = OptionsP1P..',failimmediate,battery,8 lives,';
+			OptionsP1P = OptionsP1P..',battery,8 lives,failimmediate';
 		end
 	end
 	
 	if	GAMESTATE:IsPlayerEnabled('PlayerNumber_P2') then
 		if GAMESTATE:GetCurrentTrail('PlayerNumber_P2'):GetDifficulty() == "Difficulty_Hard" then
-			OptionsP2P = OptionsP2P..',failimmediate,battery,4 lives,';
+			OptionsP2P = OptionsP2P..',battery,4 lives,failimmediate';
 		else
-			OptionsP2P = OptionsP2P..',failimmediate,battery,8 lives,';
+			OptionsP2P = OptionsP2P..',battery,8 lives,failimmediate';
 		end
 	end
 	
