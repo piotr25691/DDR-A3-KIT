@@ -25,3 +25,10 @@ Modified to more closely match the arcade data of DDR A3.
 - There are two "Good" windows, to fix this, set the TNS_W4 and TNS_W5 windows to be the same.
 
 <sub><sup>*Build date: 2023-04-12</sub></sup>
+
+## Addons
+This project vendors several addons used to make DDR A3 better:
+
+- https://github.com/Enciso0720/Enciso0720DDR
+- https://zenius-i-vanisher.com/v5.2/thread?threadid=11227
+- https://zenius-i-vanisher.com/v5.2/thread?threadid=11050
