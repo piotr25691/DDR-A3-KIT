@@ -137,13 +137,22 @@ function FloatingGaugeTexture(i)
 	end
 end
 
-function GaugeSpeed(g)
+function GaugeSpeed(g, s)
 	if string.find(g, "Flare") then
 		return pn=="PlayerNumber_P2" and 0.8 or -0.8
 	else
 		return pn=="PlayerNumber_P2" and 0.6 or -0.6
 	end
 end
+
+function GaugeSpeedNormal(g)
+	if string.find(g, "Flare") then
+		return pn=="PlayerNumber_P2" and 0.8 or -0.8
+	else
+		return 0
+	end
+end
+
 
 function GaugeSpeedDanger(g)
 	if string.find(g, "Flare") then
@@ -176,7 +185,7 @@ return Def.ActorFrame{
 		InitCommand=function(s) s:x(pn==PLAYER_1 and -8 or 10) end,
         OnCommand=function(s) s:scaletoclipped(296,20)
             :MaskDest():ztestmode("ZTestMode_WriteOnFail"):customtexturerect(0,0,1,1)
-            :texcoordvelocity(GaugeSpeed(gauge),0)
+            :texcoordvelocity(GaugeSpeedNormal(gauge),0)
         end,
 		-- FLOATING FLARE
 		LifeChangedMessageCommand=function(self, param)
@@ -210,7 +219,7 @@ return Def.ActorFrame{
 					self:diffuse(color("#ffffff"))
 		  		else
 					self:Load(THEME:GetPathB("","ScreenGameplay decorations/lifeframe/stream/"..GaugeTexture(gauge)))
-					self:texcoordvelocity(GaugeSpeed(gauge),0)
+					self:texcoordvelocity(GaugeSpeedNormal(gauge),0)
 					self:diffuse(color("#ffffff"))
 		  		end;
 			end;
