@@ -333,6 +333,20 @@ t[#t+1]=Def.ActorFrame{
 			self:x(pn == PLAYER_1 and cx-527 or cx+342);
 		end;
 	};
+
+	-- Region
+	-- TODO: make region changeable in settings
+	LoadFont("_helveticaneuelt pro 65 md 24px") .. {
+		Text="World";
+		InitCommand=function(s) s:maxwidth(180):zoomy(0.6):zoom(0.8)
+			s:x(pn == PLAYER_1 and cx-307-ox or cx+562+ox)
+			s:y(SCREEN_BOTTOM+110):strokecolor(Color("Outline")):maxwidth(120) end,
+		OnCommand=function(self)
+			self:sleep(SleepOffset+0.2):linear(0.05);
+			self:x(pn == PLAYER_1 and cx-307 or cx+562);
+			self:skewx(-0.1);
+		end;
+	};
 };
 end;
 	
