@@ -3,8 +3,7 @@ local player = ToEnumShortString(pn)
 
 return Def.ActorFrame {
 	-- Speed
-	Def.ActorFrame{
-		OnCommand=function(s) s:x(-186) end,
+	Def.Sprite{
 		PlayerJoinedMessageCommand=function(self, params)
 			if params.Player == pn then
 				self:playcommand("On");
@@ -15,9 +14,8 @@ return Def.ActorFrame {
 				self:queuecommand("On");
 			end;
 		end;
-		Def.Sprite{
-			Texture=THEME:GetPathG("","OptionIcon/"..player.."/Speed/x"..GAMESTATE:GetPlayerState(pn):GetPlayerOptions("ModsLevel_Preferred"):ScrollSpeed()..".png"),
-		};
+		OnCommand=function(self) self:Load(THEME:GetPathG("","OptionIcon/"..player.."/Speed/x"..GAMESTATE:GetPlayerState(pn):GetPlayerOptions("ModsLevel_Song"):ScrollSpeed()..".png")):x(-186):queuecommand("Update") end,
+		UpdateCommand=function(self) self:sleep(0.01):queuecommand("On") end
 	};
 	-- Boost
 	Def.Sprite {

@@ -770,9 +770,6 @@ if GAMESTATE:GetPlayMode()=="PlayMode_Oni" then
 		end
 	end
 	
-	if not trailHasSpeedMod then
-		t[#t+1] = LoadActor("SpeedKill.lua");
-	end	
 	if not trailHasAppearanceMode then
 		if	GAMESTATE:IsPlayerEnabled('PlayerNumber_P1') then
 			OptionsP1P = AppearancePlusMain('PlayerNumber_P1');
@@ -783,7 +780,6 @@ if GAMESTATE:GetPlayMode()=="PlayMode_Oni" then
 	end	
 
 else
-	t[#t+1] = LoadActor("SpeedKill.lua");	
 
 	if	GAMESTATE:IsPlayerEnabled('PlayerNumber_P1') then
 		OptionsP1P = AppearancePlusMain('PlayerNumber_P1');
