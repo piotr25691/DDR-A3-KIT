@@ -1,5 +1,5 @@
 local filter
-local playerFailed = true;
+local playerFailed = false
 
 if GAMESTATE:GetCurrentStyle():GetStepsType() == 'StepsType_Dance_Double' then
 	filter = "dance_danger_filter0000_filter_double.png"

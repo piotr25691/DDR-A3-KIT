@@ -2,13 +2,13 @@ local player = Var "Player"
 
 return Def.ActorFrame{
 	-- RISKY 
-	LoadActor(THEME:GetPathB("ScreenGameplay","decorations/lifeframe/stream/dangerbase (stretch).png"))..{
+	LoadActor(THEME:GetPathB("ScreenGameplay","decorations/lifeframe/stream/danger_base"))..{
 		InitCommand=function(self)
 			self:zoomto(296,20)
 		end;
 	};
 
-	LoadActor(THEME:GetPathB("ScreenGameplay","decorations/lifeframe/stream/danger (stretch).png"))..{
+	LoadActor(THEME:GetPathB("ScreenGameplay","decorations/lifeframe/stream/danger_flash"))..{
 		InitCommand=function(self)
 			self:zoomto(296,20)			
 			self:blend('BlendMode_Add')
