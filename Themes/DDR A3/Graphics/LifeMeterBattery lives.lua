@@ -2,10 +2,21 @@ local player = Var "Player"
 
 return Def.ActorFrame{
 	-- RISKY 
-	LoadActor(THEME:GetPathB("ScreenGameplay","decorations/lifeframe/stream/danger"))..{
+	LoadActor(THEME:GetPathB("ScreenGameplay","decorations/lifeframe/stream/dangerbase (stretch).png"))..{
 		InitCommand=function(self)
-			self:texcoordvelocity(4,0)
 			self:zoomto(296,20)
+		end;
+	};
+
+	LoadActor(THEME:GetPathB("ScreenGameplay","decorations/lifeframe/stream/danger (stretch).png"))..{
+		InitCommand=function(self)
+			self:zoomto(296,20)			
+			self:blend('BlendMode_Add')
+			self:diffusealpha(0.6)
+			self:diffuseblink()
+			self:effectcolor1(color("#ffffff"))
+			self:effectcolor2(color("#000000"))
+			self:effectperiod(0.0166)
 		end;
 	};
 	-- LIFE 2-3

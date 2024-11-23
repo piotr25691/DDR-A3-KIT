@@ -28,30 +28,10 @@ if gaugeP2 == "DrainType_FloatingFlare" then
 end
 
 function GaugeTextureDanger(g)
-	if g == 'DrainType_Flare1' then
-		return "Flare1"
-	elseif g == 'DrainType_Flare2' then
-		return "Flare2"
-	elseif g == 'DrainType_Flare3' then
-		return "Flare3"
-	elseif g == 'DrainType_Flare4' then
-		return "Flare4"
-	elseif g == 'DrainType_Flare5' then					
-		return "Flare5"
-	elseif g == 'DrainType_Flare6' then
-		return "Flare6"
-	elseif g == 'DrainType_Flare7' then
-		return "Flare7"
-	elseif g == 'DrainType_Flare8' then
-		return "Flare8"
-	elseif g == 'DrainType_Flare9' then
-		return "Flare9"
-	elseif g == 'DrainType_FlareEX' then
-		return "FlareEX"
-	elseif g == 'DrainType_FloatingFlare' then
-		return "FlareEX"
+	if string.find(g, "Flare") then
+		return "FlareDanger"
 	else
-		return "danger"
+		return "dangerbase (stretch)"
 	end
 end
 
@@ -162,14 +142,6 @@ function GaugeSpeedDanger(g)
 	end
 end
 
-function GaugeDiffuse(g)
-	if string.find(g, "Flare") then
-		return "#888888"
-	else
-		return "#FFFFFF"
-	end
-end
-
 
 return Def.ActorFrame{
     InitCommand=function(s)
@@ -199,8 +171,7 @@ return Def.ActorFrame{
 					flareData[pn].previousFlareLife = param.LifeMeter:GetLife()
 				-- Handle DANGER state
 				elseif param.LifeMeter:GetLife() < 0.3 and param.Player == pn then
-					self:Load(THEME:GetPathB("","ScreenGameplay decorations/lifeframe/stream/"..FloatingGaugeTexture(flareData[pn].currentFlare)))
-					self:diffuse(color("#888888"))
+					self:Load(THEME:GetPathB("","ScreenGameplay decorations/lifeframe/stream/".."FlareDanger"))
 					flareData[pn].previousFlareLife = param.LifeMeter:GetLife()
 				end
 			end
@@ -212,16 +183,37 @@ return Def.ActorFrame{
 				if param.HealthState == "HealthState_Danger" or param.HealthState == "HealthState_Danger_NoComment" then
 					self:Load(THEME:GetPathB("","ScreenGameplay decorations/lifeframe/stream/"..GaugeTextureDanger(gauge)))
 					self:texcoordvelocity(GaugeSpeedDanger(gauge),0)
-					self:diffuse(color(GaugeDiffuse(gauge)))
 				elseif param.HealthState == "HealthState_Hot" then
 					self:Load(THEME:GetPathB("","ScreenGameplay decorations/lifeframe/stream/"..GaugeTextureHot(gauge)))
 					self:texcoordvelocity(GaugeSpeed(gauge),0)
-					self:diffuse(color("#ffffff"))
 		  		else
 					self:Load(THEME:GetPathB("","ScreenGameplay decorations/lifeframe/stream/"..GaugeTexture(gauge)))
 					self:texcoordvelocity(GaugeSpeedNormal(gauge),0)
-					self:diffuse(color("#ffffff"))
 		  		end;
+			end;
+		end;
+    };
+	Def.Sprite{
+        Texture=THEME:GetPathB("","ScreenGameplay decorations/lifeframe/stream/".."danger (stretch)"),
+		InitCommand=function(s) s:x(pn==PLAYER_1 and -8 or 10) end,
+        OnCommand=function(s) s:scaletoclipped(296,20)
+            :MaskDest():ztestmode("ZTestMode_WriteOnFail"):customtexturerect(0,0,1,1)
+            :texcoordvelocity(GaugeSpeedNormal(gauge),0)
+			:Load(THEME:GetPathB("","ScreenGameplay decorations/lifeframe/stream/".."danger (stretch)"))
+			:blend('BlendMode_Add')
+			:diffusealpha(0.6)
+			:texcoordvelocity(4,0)
+			:visible(false)
+        end,
+		-- NORMAL, CLASS, FLARE I through FLARE EX
+        HealthStateChangedMessageCommand=function(self, param)
+			if string.find(gauge, "Flare") then return end
+			if param.PlayerNumber == pn then
+				if param.HealthState == "HealthState_Danger" or param.HealthState == "HealthState_Danger_NoComment" then
+					self:visible(true)
+				else
+					self:visible(false)
+				end
 			end;
 		end;
     };

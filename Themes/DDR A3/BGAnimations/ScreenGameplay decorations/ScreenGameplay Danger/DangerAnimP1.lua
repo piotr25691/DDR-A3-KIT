@@ -1,4 +1,6 @@
 local filter
+local playerFailed = false
+
 if GAMESTATE:GetCurrentStyle():GetStepsType() == 'StepsType_Dance_Double' then
 	filter = "dance_danger_filter0000_filter_double.png"
 else
@@ -18,12 +20,18 @@ return Def.ActorFrame{
 		Def.ActorFrame{
 			Name="Danger";
 			HealthStateChangedMessageCommand=function(self, param)
-				if param.PlayerNumber == PLAYER_1 then
+				if param.PlayerNumber == PLAYER_1 and not playerFailed then
 					if param.HealthState == "HealthState_Danger" or param.HealthState == "HealthState_Danger_NoComment" then
 						self:RunCommandsOnChildren(cmd(playcommand,"Show"))
 					else
 						self:RunCommandsOnChildren(cmd(playcommand,"Hide"))
 					end
+				end
+			end;
+			LifeChangedMessageCommand=function(self, param)
+				if param.LifeMeter:GetLife() == 0 then
+					self:queuecommand("Hide")
+					playerFailed = true
 				end
 			end;
 			--BG
