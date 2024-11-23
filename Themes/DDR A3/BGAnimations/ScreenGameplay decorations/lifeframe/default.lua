@@ -203,7 +203,7 @@ return Def.ActorFrame{
 			:blend('BlendMode_Add')
 			:diffusealpha(0.6)
 			:texcoordvelocity(4,0)
-			:visible(false)q
+			:visible(false)
         end,
 		-- NORMAL, CLASS, FLARE I through FLARE EX
         HealthStateChangedMessageCommand=function(self, param)
