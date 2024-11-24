@@ -136,6 +136,11 @@ if not GAMESTATE:IsDemonstration() and not GAMESTATE:IsCourseMode() and GAMESTAT
 				self:zoom(0.5);
 				(cmd(horizalign,right;strokecolor,color("#000000")))(self)
 			end;
+			OnCommand=function(self)
+				if GAMESTATE:GetCurrentStyle():GetName() == "double" then
+					self:x(SCREEN_CENTER_X+55)
+				end
+			end;
 			JudgmentMessageCommand=function(self,params)
 				if GAMESTATE:GetPlayerState(PLAYER_1):GetHealthState() == "HealthState_Dead" then return end
 				if params.Player ~= player then return end;
