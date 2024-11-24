@@ -31,9 +31,10 @@ function GaugeTextureDanger(g)
 	if string.find(g, "Flare") then
 		return "FlareDanger"
 	else
-		return "dangerbase (stretch)"
+		return "danger_base"
 	end
 end
+
 
 function GaugeTextureHot(g)
 	if g == 'DrainType_Flare1' then
@@ -194,12 +195,11 @@ return Def.ActorFrame{
 		end;
     };
 	Def.Sprite{
-        Texture=THEME:GetPathB("","ScreenGameplay decorations/lifeframe/stream/".."danger (stretch)"),
 		InitCommand=function(s) s:x(pn==PLAYER_1 and -8 or 10) end,
         OnCommand=function(s) s:scaletoclipped(296,20)
             :MaskDest():ztestmode("ZTestMode_WriteOnFail"):customtexturerect(0,0,1,1)
             :texcoordvelocity(GaugeSpeedNormal(gauge),0)
-			:Load(THEME:GetPathB("","ScreenGameplay decorations/lifeframe/stream/".."danger (stretch)"))
+			:Load(THEME:GetPathB("","ScreenGameplay decorations/lifeframe/stream/".."danger_flash"))
 			:blend('BlendMode_Add')
 			:diffusealpha(0.6)
 			:texcoordvelocity(4,0)
