@@ -731,3 +731,7 @@ function dofile_safer(path, env)
     setfenv(code, env)
     return pcall(code)
 end
+
+function RandomComment()
+	return math.random(5, 10)
+end

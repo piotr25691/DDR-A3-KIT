@@ -7,6 +7,20 @@ local function getXSpacing(pn)
 	return pn == PLAYER_1 and X_SPACING*-1 or X_SPACING
 end;
 
+-- Create a curve instead of laying the objects inline
+local function getCurveX(pn, i, selection, is_focus, k)
+    local d = i - selection[pn]
+	local direction = pn == PLAYER_1 and 1 or -1
+    local x_offset = direction * -k * d^2
+    local base_x = math.abs(d) * getXSpacing(pn) - (i * 10)
+    if is_focus then
+        base_x = base_x + i * 10
+    else
+        base_x = base_x + 10
+    end
+    return base_x + x_offset
+end
+
 
 --local song = SONGMAN:FindSong("Ace For Aces")
 local song = GAMESTATE:GetCurrentSong()
@@ -50,7 +64,7 @@ end;
 local function adjustScrollerFrame(pn)
 	for i=1,numDiffs do
 		local is_focus = (i == selection[pn])
-		frame[pn]:GetChild(i):stoptweening():decelerate(.2):zoom(is_focus and 1 or 0.7):xy(math.abs(i-selection[pn])*getXSpacing(pn),(i-selection[pn])*Y_SPACING):GetChild("Highlight"):visible(is_focus)
+		frame[pn]:GetChild(i):stoptweening():decelerate(0.2):zoom(is_focus and 1 or 0.7):xy(getCurveX(pn, i, selection, is_focus, 10, math.pi/4),(i - selection[pn]) * Y_SPACING):GetChild("Highlight"):visible(is_focus)
 	end;
 end;
 

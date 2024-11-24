@@ -87,15 +87,16 @@ t[#t+1] = Def.ActorFrame {
 	};
 };
 
-
 if GAMESTATE:IsSideJoined(PLAYER_1) then
 	t[#t+1] = LoadActor("TargetScore/P1");
 	t[#t+1] = LoadActor("SpeedChange/P1");
+	t[#t+1] = LoadActor(THEME:GetPathG("", "Player ShockArrow judgment/P1"));
 end
 
 if GAMESTATE:IsSideJoined(PLAYER_2) then
 	t[#t+1] = LoadActor("TargetScore/P2");
 	t[#t+1] = LoadActor("SpeedChange/P2");
+	t[#t+1] = LoadActor(THEME:GetPathG("", "Player ShockArrow judgment/P2"));
 end
 
 return t

@@ -9,6 +9,8 @@ local JudgeCmds = {
 	TapNoteScore_W3 = THEME:GetMetric( "Judgment", "JudgmentW3Command" );
 	TapNoteScore_W4 = THEME:GetMetric( "Judgment", "JudgmentW4Command" );
 	TapNoteScore_Miss = THEME:GetMetric( "Judgment", "JudgmentMissCommand" );
+	TapNoteScore_AvoidMine = THEME:GetMetric( "Judgment", "JudgmentAvoidMineCommand" );
+	TapNoteScore_HitMine = THEME:GetMetric( "Judgment", "JudgmentHitMineCommand" );
 };
 
 local TNSFrames = {
@@ -20,8 +22,6 @@ local TNSFrames = {
 };
 
 local t = Def.ActorFrame {};
-
-
 
 t[#t+1] = Def.ActorFrame {
 	LoadActor("FastSlow")..{
@@ -50,7 +50,16 @@ t[#t+1] = Def.ActorFrame {
 		Name="Judgment";
 		InitCommand=cmd(pause;visible,false);
 		OnCommand=THEME:GetMetric("Judgment","JudgmentOnCommand");
-		ResetCommand=cmd(finishtweening;stopeffect;visible,false);
+		JudgmentMessageCommand=function(self, param)
+			if param.Player ~= player then return end;
+			if param.TapNoteScore == "TapNoteScore_AvoidMine" then
+				self:visible(false)
+			elseif param.TapNoteScore == "TapNoteScore_HitMine" then
+				self:visible(false)
+			else
+				self:visible(true)
+			end
+		end
 	};
 	InitCommand = function(self) c = self:GetChildren(); end;
 	JudgmentMessageCommand=function(self, param)

@@ -1,11 +1,12 @@
 local pn = ...
 local yspacing = 38;
+local position = GAMESTATE:GetCurrentStyle():GetName() == "double" and 120 or 80;
 local DiffList = Def.ActorFrame{};
 
 local function DrawDiffListItem(diff)
   local DifficultyListItem = Def.ActorFrame{
     InitCommand=function(s)
-      s:xy(pn==PLAYER_1 and -3 or 3,(Difficulty:Reverse()[diff] * yspacing)-80)
+      s:xy(pn==PLAYER_1 and -3 or 3,(Difficulty:Reverse()[diff] * yspacing)-position)
     end,
     SetCommand=function(self)
       local st=GAMESTATE:GetCurrentStyle():GetStepsType()
@@ -191,7 +192,13 @@ local function DrawDiffListItem(diff)
   return DifficultyListItem
 end
 
-local difficulties = {"Difficulty_Beginner", "Difficulty_Easy", "Difficulty_Medium", "Difficulty_Hard", "Difficulty_Challenge"}
+local difficulties
+
+if GAMESTATE:GetCurrentStyle():GetName() ~= "double" then
+  difficulties = {"Difficulty_Beginner", "Difficulty_Easy", "Difficulty_Medium", "Difficulty_Hard", "Difficulty_Challenge"}
+else
+  difficulties = {"Difficulty_Easy", "Difficulty_Medium", "Difficulty_Hard", "Difficulty_Challenge"}
+end
 
 for diff in ivalues(difficulties) do
   DiffList[#DiffList+1] = DrawDiffListItem(diff)
@@ -218,9 +225,9 @@ return Def.ActorFrame{
 	LoadActor(Model().."line")..{
 		InitCommand=function(s) s:x(pn==PLAYER_1 and 0 or -9)
 			s:setsize(246,25):diffusealpha(0)
-			s:diffuseshift():effectcolor1(color("1,1,1,0.7")):effectcolor2(color("1,1,1,0.2")):effectperiod(0.8):visible(false) 
+			s:diffuseramp():effectcolor1(color("1,1,1,0.2")):effectcolor2(color("1,1,1,1")):effectperiod(0.8):visible(false) 
 		end,
-		OnCommand=function(s) s:diffusealpha(0):sleep(0.8):diffusealpha(0.7) end,
+		OnCommand=function(s) s:diffusealpha(0):sleep(0.8):diffusealpha(1) end,
 		SetCommand=function(s)
 			local song=GAMESTATE:GetCurrentSong()
 			if song then
@@ -229,7 +236,7 @@ return Def.ActorFrame{
 					if steps then
 					local diff = steps:GetDifficulty();
 					local st=GAMESTATE:GetCurrentStyle():GetStepsType();
-						s:y((Difficulty:Reverse()[diff] * yspacing)-80)
+						s:y((Difficulty:Reverse()[diff] * yspacing)-position)
 					end;
 			else
 				s:visible(false)
