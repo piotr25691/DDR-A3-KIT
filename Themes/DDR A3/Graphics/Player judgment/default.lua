@@ -9,8 +9,6 @@ local JudgeCmds = {
 	TapNoteScore_W3 = THEME:GetMetric( "Judgment", "JudgmentW3Command" );
 	TapNoteScore_W4 = THEME:GetMetric( "Judgment", "JudgmentW4Command" );
 	TapNoteScore_Miss = THEME:GetMetric( "Judgment", "JudgmentMissCommand" );
-	TapNoteScore_AvoidMine = THEME:GetMetric( "Judgment", "JudgmentAvoidMineCommand" );
-	TapNoteScore_HitMine = THEME:GetMetric( "Judgment", "JudgmentHitMineCommand" );
 };
 
 local TNSFrames = {
@@ -58,6 +56,7 @@ t[#t+1] = Def.ActorFrame {
 				self:visible(false)
 			else
 				self:visible(true)
+				JudgeCmds[param.TapNoteScore](self)
 			end
 		end
 	};
