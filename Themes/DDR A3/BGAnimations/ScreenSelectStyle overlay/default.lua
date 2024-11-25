@@ -43,6 +43,8 @@ for i=1,2 do
 						s:Load(THEME:GetPathB("","ScreenSelectStyle overlay/"..Model()..Language().."1p_start"));
 					elseif GetP1 == false and GAMESTATE:PlayersCanJoin() and GAMESTATE:GetMasterPlayerNumber() == PLAYER_2 then
 						s:Load(THEME:GetPathB("","ScreenSelectStyle overlay/"..Model()..Language().."1p_join"));
+					elseif GAMESTATE:GetNumPlayersEnabled() == 2 then
+						s:Load(THEME:GetPathB("","ScreenSelectStyle overlay/"..Model()..Language().."1p_join"));
 					else
 						s:Load(THEME:GetPathB("","ScreenSelectStyle overlay/"..Model()..Language().."1p_start"));
 					end;
@@ -50,6 +52,8 @@ for i=1,2 do
 					if GetP2 == true and GAMESTATE:GetNumPlayersEnabled() == 1 then
 						s:Load(THEME:GetPathB("","ScreenSelectStyle overlay/"..Model()..Language().."2p_start"));
 					elseif GetP2 == false and GAMESTATE:GetMasterPlayerNumber() == PLAYER_1 and GAMESTATE:EnoughCreditsToJoin() then
+						s:Load(THEME:GetPathB("","ScreenSelectStyle overlay/"..Model()..Language().."2p_join"));
+					elseif GAMESTATE:GetNumPlayersEnabled() == 2 then
 						s:Load(THEME:GetPathB("","ScreenSelectStyle overlay/"..Model()..Language().."2p_join"));
 					else
 						s:Load(THEME:GetPathB("","ScreenSelectStyle overlay/"..Language().."insertmorecoins"));

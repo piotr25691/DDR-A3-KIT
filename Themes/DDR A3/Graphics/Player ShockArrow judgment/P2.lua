@@ -28,7 +28,7 @@ return Def.ActorFrame {
 		end;
 		AnimateCommand=function(self)
 			self:diffusealpha(1)
-			self:zoom(0.3*1.5)
+			self:zoom(0.28*1.5)
 			self:sleep(0.5)
 			self:diffusealpha(0)
 		end,

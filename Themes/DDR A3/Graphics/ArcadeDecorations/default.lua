@@ -11,6 +11,13 @@ local function effectColor()
 	end
 end
 
+t[#t+1] = Def.ActorFrame {
+	Def.Sprite{
+		Texture="icon",
+		InitCommand=function(s) s:zoom(0.68):x(SCREEN_RIGHT-29.3):y(SCREEN_TOP+113) end,
+	};
+}
+
 if not netConnected then
 	t[#t+1] = Def.ActorFrame {
 		Def.Sprite{
@@ -33,8 +40,8 @@ if GAMESTATE:GetCoinMode() == 'CoinMode_Free' or not netConnected then
 else
 	t[#t+1] = Def.ActorFrame {
 		Def.Sprite{
-			Texture="icon",
-			InitCommand=function(s) s:zoom(0.655):x(SCREEN_RIGHT-29.3):y(SCREEN_TOP+115) end,
+			Texture="paseli_icon",
+			InitCommand=function(s) s:zoom(0.667):x(SCREEN_RIGHT-29.3):y(SCREEN_TOP+168) end,
 		};
 		Def.Sprite{
 			Texture=Language().."paseli.png",

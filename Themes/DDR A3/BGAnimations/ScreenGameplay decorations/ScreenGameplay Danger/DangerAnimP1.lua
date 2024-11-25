@@ -29,8 +29,9 @@ return Def.ActorFrame{
 				end
 			end;
 			LifeChangedMessageCommand=function(self, param)
+				if param.Player ~= PLAYER_1 then return end
 				if param.LifeMeter:GetLife() == 0 then
-					self:queuecommand("Hide")
+					self:RunCommandsOnChildren(cmd(playcommand,"Hide"))
 					playerFailed = true
 				end
 			end;

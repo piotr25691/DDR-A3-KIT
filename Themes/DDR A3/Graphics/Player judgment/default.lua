@@ -48,6 +48,7 @@ t[#t+1] = Def.ActorFrame {
 		Name="Judgment";
 		InitCommand=cmd(pause;visible,false);
 		OnCommand=THEME:GetMetric("Judgment","JudgmentOnCommand");
+		ResetCommand=cmd(finishtweening;stopeffect;visible,false);
 		JudgmentMessageCommand=function(self, param)
 			if param.Player ~= player then return end;
 			if param.TapNoteScore == "TapNoteScore_AvoidMine" then
@@ -56,7 +57,6 @@ t[#t+1] = Def.ActorFrame {
 				self:visible(false)
 			else
 				self:visible(true)
-				JudgeCmds[param.TapNoteScore](self)
 			end
 		end
 	};

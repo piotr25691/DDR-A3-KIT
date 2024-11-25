@@ -8,6 +8,8 @@ local st = GAMESTATE:GetCurrentStyle():GetStepsType();
 local pname = ToEnumShortString(player);
 local ts = {0,0};
 
+local playerFailed = false;
+
 local TargetScore_JudgeCmdsPlayer = {
 	TapNoteScore_W1 = THEME:GetMetric( "Judgment", "TargetScore_2013_JudgmentW1Command" );
 	TapNoteScore_W2 = THEME:GetMetric( "Judgment",  "TargetScore_2013_JudgmentW2Command" );
@@ -140,6 +142,13 @@ if not GAMESTATE:IsDemonstration() and not GAMESTATE:IsCourseMode() and GAMESTAT
 			OnCommand=function(self)
 				if GAMESTATE:GetCurrentStyle():GetName() == "double" then
 					self:x(SCREEN_CENTER_X+55)
+				end
+			end;
+			LifeChangedMessageCommand=function(self,params)
+				if params.Player ~= PLAYER_2 then return end
+				if params.LifeMeter:GetLife() == 0 then
+					self:visible(false)
+					playerFailed = true
 				end
 			end;
 			JudgmentMessageCommand=function(self,params)

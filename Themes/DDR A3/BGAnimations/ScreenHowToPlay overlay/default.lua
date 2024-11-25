@@ -30,6 +30,13 @@ t[#t+1] = Def.ActorFrame{
     },
 }
 
+t[#t+1] = Def.ActorFrame {
+	Def.Sprite{
+		Texture=THEME:GetPathG("","ArcadeDecorations/".."icon") ,
+		InitCommand=function(s) s:zoom(0.68):x(SCREEN_RIGHT-29.3):y(SCREEN_TOP+113) end,
+	};
+}
+
 t[#t+1] = Def.Quad{
     InitCommand=function(s) s:diffuse(color("#ffffff")):FullScreen():diffusealpha(1) end,
     OnCommand=function(s) s:sleep(0.01):linear(0.25):diffusealpha(0) end,
@@ -53,8 +60,8 @@ if GAMESTATE:GetCoinMode() == 'CoinMode_Free' or not netConnected then
 else
 	t[#t+1] = Def.ActorFrame {
 		Def.Sprite{
-			Texture=THEME:GetPathG("","ArcadeDecorations/".."icon") ,
-			InitCommand=function(s) s:zoom(0.655):x(SCREEN_RIGHT-29.3):y(SCREEN_TOP+115) end,
+			Texture=THEME:GetPathG("","ArcadeDecorations/".."paseli_icon"),
+			InitCommand=function(s) s:zoom(0.667):x(SCREEN_RIGHT-29.3):y(SCREEN_TOP+168) end,
 		};
 		Def.Sprite{
 			Texture=THEME:GetPathG("","ArcadeDecorations/"..Language().."paseli.png"),
