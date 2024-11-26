@@ -1,4 +1,5 @@
 -- NOTE: this implementation is buggy, don't rely on it.
+-- A debounce might be needed to avoid repeated calls.
 
 local currentEvent = nil
 local previousEvent = nil
@@ -6,7 +7,7 @@ local isAnimating = false
 
 return Def.ActorFrame {
     LoadActor(THEME:GetPathG("","HoldJudgment label 1x2/Hold"))..{
-        InitCommand=function(s) s:diffusealpha(0):animate(false):xy(SCREEN_LEFT+185, SCREEN_CENTER_Y-75) end,
+        InitCommand=function(s) s:diffusealpha(0):animate(false):xy(SCREEN_RIGHT-185, SCREEN_CENTER_Y-75) end,
         OnCommand=function(s)
             -- Fix position when playing Double Style
             if GAMESTATE:GetCurrentStyle():GetName() == "double" then
@@ -45,7 +46,7 @@ return Def.ActorFrame {
 			-- OK
             elseif currentEvent == 'TapNoteScore_AvoidMine' and previousEvent ~= 'TapNoteScore_HitMine' then
                 self:setstate(0)
-			-- OK after NG (buggy with only comparing 1 recent judgment)
+			-- OK after NG
 			else
 				self:setstate(0)
             end
@@ -54,6 +55,9 @@ return Def.ActorFrame {
             self:zoom(0.28*1.5)
             self:sleep(0.5)
             self:diffusealpha(0)
+
+            -- Debounce this event
+            self:sleep(1)
 
             -- Reset currentEvent after animation
 			previousEvent = currentEvent
