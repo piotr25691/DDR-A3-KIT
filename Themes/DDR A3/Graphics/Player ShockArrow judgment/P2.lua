@@ -56,9 +56,6 @@ return Def.ActorFrame {
             self:sleep(0.5)
             self:diffusealpha(0)
 
-            -- Debounce this event
-            self:sleep(1)
-
             -- Reset currentEvent after animation
 			previousEvent = currentEvent
             currentEvent = nil

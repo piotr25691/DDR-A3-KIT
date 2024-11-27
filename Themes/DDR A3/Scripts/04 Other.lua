@@ -736,5 +736,5 @@ end
 -- Make announcer talk his lines with random timing.
 -- DDR does not wait exactly an amount before dispatching a new announcer line.
 function RandomComment()
-    return math.random(5, 10)
+    return math.random(5, 10) * GAMESTATE:GetNumPlayersEnabled()
 end

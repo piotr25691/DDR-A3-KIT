@@ -7,12 +7,6 @@ t[#t+1] =Def.Quad {
 
 t[#t+1] = Def.BitmapText {
 	Font="_helvetica-condensed-light 24px",
-	Text="MAIN MENU",
-	InitCommand=function(s) s:xy(SCREEN_CENTER_X,30):zoom(0.8):diffuse(color("#ffffff")) end,
-}
-
-t[#t+1] = Def.BitmapText {
-	Font="_helvetica-condensed-light 24px",
 	Text="SERVICE BUTTON = EXECUTE",
 	InitCommand=function(s) s:xy(SCREEN_CENTER_X,SCREEN_BOTTOM-30):zoom(0.5):diffuse(color("#ffffff")) end,
 }
