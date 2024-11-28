@@ -4,7 +4,6 @@ t = Def.ActorFrame{
 	Condition=not GAMESTATE:IsEventMode();
 }
 
-
 t[#t+1]	= LoadActor(THEME:GetPathB("ScreenEvaluation","decorations/stars/"..Model().."base"))..{
 	InitCommand=function(s) s:xy(-2.16,1) end,
 };

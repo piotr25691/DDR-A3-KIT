@@ -4,53 +4,71 @@
 ExtraStageStars = 0
 StarsAddedRecently = 0
 
+-- How many Extra Stage stars do we have?
 function GetExtraStageStars()
     return ExtraStageStars
 end
 
+-- How many Extra Stage stars we got this stage?
 function GetRecentExtraStageStars()
     return StarsAddedRecently
 end
 
+-- Did we get a full combo?
 local function IsFullCombo(pn)
     return STATSMAN:GetCurStageStats():GetPlayerStageStats(pn):FullComboOfScore("TapNoteScore_W4")
 end
 
+-- Are we using a LIFE4 or RISKY bar? These bars are strict.
 local function IsRiskyOrLife4(pn)
     local options = GAMESTATE:GetPlayerState(pn):GetPlayerOptionsArray("ModsLevel_Preferred")
     return table.search(options, '4Lives') or table.search(options, '1Lives')
 end
 
+-- Are we in the Final Stage?
 local function IsFinalStage()
     return STATSMAN:GetCurStageStats():GetStage() == "Stage_Final"
 end
 
+-- Are Extra Stages enabled?
 local function IsExtraStageEnabled()
     return PREFSMAN:GetPreference("AllowExtraStage")
 end
 
+-- Are we in Event Mode?
 local function IsEventMode()
     return GAMESTATE:IsEventMode()
 end
 
+-- Are we in an Extra Stage?
 local function IsExtraStage()
+    -- You cannot play an Encore Extra Stage, but we account for it either way.
     return GAMESTATE:IsExtraStage() or GAMESTATE:IsExtraStage2()
 end
 
+-- Did we play the song yet?
 local function DidPlaySong()
     local currentScreen = Var "LoadingScreen"
-    return currentScreen == "ScreenEvaluationNormal"
+    return currentScreen == "ScreenGameplay"
 end
 
+-- Grant Extra Stage stars.
+-- If we got 9 stars, an extra stage will be unlocked.
 function AddExtraStageStars(rank, pn)
-	-- Extra Stage is turned off in Event Mode
-	if IsEventMode() then return end
+    -- Extra Stage is turned off in Event Mode
+    if IsEventMode() then return end
+
+    -- Ensure we played a song.
     if not DidPlaySong() then return end
+
+    -- We cannot grant Extra Stage stars in an Extra Stage.
     if IsExtraStage() then return end
 
     local starsToAdd = 0
+
     -- AAA
-    if rank == "Grade_Tier01" or rank == "Grade_Tier02" then
+    -- Tier01 is reserved for gatekeeping from obtaining an Extra Stage if we did not get enough stars.
+    if rank == "Grade_Tier02" then
         starsToAdd = 3
     -- AA
     elseif rank == "Grade_Tier03" or rank == "Grade_Tier04" or rank == "Grade_Tier05" then
@@ -75,7 +93,7 @@ function AddExtraStageStars(rank, pn)
         starsToAdd = 3
     end
 
-    -- Ensure we don't exceed 9 stars if you have >=7 stars.
+    -- Ensure we don't exceed 9 stars if the adding would result in >=10 stars.
     local maxStarsAllowed = 9 - ExtraStageStars
     if starsToAdd > maxStarsAllowed then
         starsToAdd = maxStarsAllowed
@@ -85,11 +103,18 @@ function AddExtraStageStars(rank, pn)
         ExtraStageStars = ExtraStageStars + starsToAdd
     end
 
+    -- This value is saved so we know how many stars we got for this stage.
     StarsAddedRecently = starsToAdd
+
+    -- Make sure the Extra Stage is unlocked if you met the Extra Stage requirements.
+    -- The necessary logic uses an impossible rank in the theme metrics.
+    THEME:ReloadMetrics()
+
     return starsToAdd
 end
 
--- Overwriting GAMESTATE to change the StepMania extra stage mechanics.
+-- Determine if we can enter the Extra Stage.
+-- We do not want an Extra Stage to begin with <9 stars.
 function HasEarnedArcadeExtraStage()
     if ExtraStageStars == 9 and IsFinalStage() and IsExtraStageEnabled() and not IsEventMode() then
         return "Grade_Tier16"

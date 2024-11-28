@@ -52,6 +52,9 @@ return Def.ActorFrame{
 			s:linear(0.1):diffusealpha(0.5):zoomx(0.62):zoomy(0.64)
 			s:linear(0.1):diffusealpha(0.5):zoomx(0.72):zoomy(0.74)
 			s:linear(0.1):diffusealpha(0):zoom(0.92)
+
+			-- This stage has ended. Grant Extra Stage stars now.
+			AddExtraStageStars(STATSMAN:GetCurStageStats():GetPlayerStageStats(GAMESTATE:GetMasterPlayerNumber()):GetGrade(), GAMESTATE:GetMasterPlayerNumber())
 		end,
 	};
 };

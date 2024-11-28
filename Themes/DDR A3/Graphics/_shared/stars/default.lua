@@ -1,11 +1,6 @@
 local positions = {-101, -76, -51, -26, 0, 25, 50, 75, 100}
 local currentScreen = Var "LoadingScreen"
 
-
-if currentScreen == "ScreenEvaluationNormal" then
-	AddExtraStageStars(STATSMAN:GetCurStageStats():GetPlayerStageStats(GAMESTATE:GetMasterPlayerNumber()):GetGrade(), GAMESTATE:GetMasterPlayerNumber())
-end
-
 t = Def.ActorFrame{
 	Condition=not GAMESTATE:IsEventMode();
 }
