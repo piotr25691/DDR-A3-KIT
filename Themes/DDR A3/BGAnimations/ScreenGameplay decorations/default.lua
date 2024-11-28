@@ -2,6 +2,10 @@ local t = LoadFallbackB()
 
 t[#t+1] = StatsEngine()
 
+if STATSMAN:GetCurStageStats():GetStage() == "Stage_Final" then
+	THEME:ReloadMetrics()
+end
+
 t[#t+1] = Def.Actor{
     AfterStatsEngineMessageCommand = function(self, params)
         local pn = params.Player

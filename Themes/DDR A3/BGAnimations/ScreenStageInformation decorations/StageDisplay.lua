@@ -13,6 +13,10 @@ if tRemap[sStage] == PREFSMAN:GetPreference("SongsPerPlay") then
 else
 	sStage = sStage;
 end;
+
+if sStage == "Stage_Extra1" then
+	ExtraStageStars = 0
+end
 ----------------------------------------------------------------------------
 return Def.ActorFrame {
 	--InitCommand=function(s) s:zoom(0.667)

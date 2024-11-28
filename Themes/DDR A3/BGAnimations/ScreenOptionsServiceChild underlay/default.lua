@@ -1,4 +1,9 @@
-local t = Def.ActorFrame{}
+local t = Def.ActorFrame {
+  OnCommand=function(s)
+       SOUND:StopMusic()
+  end
+}
+
 local screenName = Var "ScreenName"
 
 t[#t+1] =Def.Quad {

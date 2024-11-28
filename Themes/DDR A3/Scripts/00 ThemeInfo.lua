@@ -1,8 +1,8 @@
 -- themeInfo = {
-	-- ProductCode = "DDR A3 Theme",
-	-- Name = "DDR A3",
-	-- Version = "2.0",
-	-- Date = "20230418",
+	-- ProductCode = "DDR_A3_ArcadeMod",
+	-- Name = "DDR A3 (ArcadeMod)",
+	-- Version = "4.0",
+	-- Date = "20241127",
 	-- Author = "KENP",
-	-- Mod = "SchneiderAFX, Curilang, Inorizushi, Wyvern-D, Midflight Digital, Jindev"
+	-- Mod = "SchneiderAFX, Curilang, Inorizushi, Wyvern-D, Midflight Digital, Jindev, Lunah"
 -- },

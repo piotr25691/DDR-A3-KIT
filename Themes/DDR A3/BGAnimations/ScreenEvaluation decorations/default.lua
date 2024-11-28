@@ -8,6 +8,13 @@ t[#t+1] = Def.ActorFrame{
     StandardDecorationFromFileOptional("Footer","Footer");
 }
 
+if not ((StageIndex == FinalStage+1) or (StageIndex == FinalStage+2)) then
+	t[#t+1] = LoadActor(THEME:GetPathG("","_shared/stars"))..{
+		InitCommand=function(s) s:xy(_screen.cx,_screen.cy+184):zoom(0.667) end,
+		OffCommand=function(s) s:linear(0.2):diffusealpha(0) end,
+	};
+end
+
 
 for _,pn in pairs(GAMESTATE:GetEnabledPlayers()) do
 	local pss = STATSMAN:GetCurStageStats():GetPlayerStageStats(pn)
@@ -160,15 +167,6 @@ else
 		InitCommand=cmd(xy,_screen.cx+168,_screen.cy+85;zoom,0.667);
 	};
 end;
-
-
-
-if not ((StageIndex == FinalStage+1) or (StageIndex == FinalStage+2)) then
-	t[#t+1] = LoadActor(THEME:GetPathG("","_shared/stars"))..{
-		InitCommand=function(s) s:xy(_screen.cx,_screen.cy+184):zoom(0.667) end,
-		OffCommand=function(s) s:linear(0.2):diffusealpha(0) end,
-	};
-end
 
 if (GAMESTATE:HasEarnedExtraStage() and GAMESTATE:IsExtraStage()) then
 	t[#t+1] = LoadActor("Extra");
