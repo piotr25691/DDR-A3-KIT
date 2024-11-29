@@ -5,7 +5,7 @@ function OptionRowAppearancePlus()
 		SelectType = "SelectOne",
 		OneChoiceForAllPlayers = false,
 		ExportOnChange = false,
-		Choices = { "Visible", 'Hidden', 'Sudden', 'Stealth', 'Hidden+', 'Sudden+', 'Hidden+&Sudden+', },
+		Choices = { "Visible", 'Hidden', 'Sudden', 'Stealth', 'Hidden+', 'Sudden+', 'Hidden+&Sudden+', 'Constant'},
 		LoadSelections = function(self, list, pn)
 			local AppearancePlusValue = "Visible";
 			local pf = PROFILEMAN:GetProfile(pn);
@@ -32,6 +32,8 @@ function OptionRowAppearancePlus()
 					list[6] = true
 				elseif AppearancePlusValue == "Hidden+&Sudden+" then
 					list[7] = true
+				elseif AppearancePlusValue == "Constant" then
+					list[8] = true
 				else
 					list[1] = true
 				end
@@ -69,6 +71,8 @@ function OptionRowAppearancePlus()
 							val = "Sudden+";
 						elseif i==7 then
 							val = "Hidden+&Sudden+";
+						elseif i==8 then
+							val = "Constant";
 						else
 							val = "Visible";
 						end

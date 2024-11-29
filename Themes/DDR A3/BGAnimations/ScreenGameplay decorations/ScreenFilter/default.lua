@@ -32,7 +32,7 @@ return Def.ActorFrame {
 	CurrentSongChangedMessageCommand=function(s) s:sleep(BeginReadyDelay()+SongMeasureSec()):diffusealpha(Darkness) end,
 	ChangeCourseSongInMessageCommand=function(s) s:playcommand('FilterOff') end,
 	OffCommand=function(s) 
-		if (GAMESTATE:GetSongBeat() >= GAMESTATE:GetCurrentSong():GetLastBeat()) then 
+		if (GAMESTATE:GetSongBeat() >= GAMESTATE:GetCurrentSong():GetLastBeat()) then
 			s:diffusealpha(GuideLines() and Darkness or 0)
 		end
 	end,

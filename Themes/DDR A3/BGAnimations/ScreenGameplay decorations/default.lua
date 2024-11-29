@@ -3,6 +3,15 @@ local t = LoadFallbackB()
 t[#t+1] = StatsEngine()
 
 t[#t+1] = Def.Actor{
+	OffCommand=function(s)
+		if (GAMESTATE:GetSongBeat() >= GAMESTATE:GetCurrentSong():GetLastBeat()) then
+			-- This stage has ended. Grant Extra Stage stars now.
+			AddExtraStageStars(STATSMAN:GetCurStageStats():GetPlayerStageStats(GAMESTATE:GetMasterPlayerNumber()):GetGrade(), GAMESTATE:GetMasterPlayerNumber())
+		end
+	end
+}
+
+t[#t+1] = Def.Actor{
     AfterStatsEngineMessageCommand = function(self, params)
         local pn = params.Player
         local pss = STATSMAN:GetCurStageStats():GetPlayerStageStats(pn)
@@ -90,12 +99,14 @@ t[#t+1] = Def.ActorFrame {
 if GAMESTATE:IsSideJoined(PLAYER_1) then
 	t[#t+1] = LoadActor("TargetScore/P1");
 	t[#t+1] = LoadActor("SpeedChange/P1");
+	t[#t+1] = LoadActor("Constant/P1")
 	t[#t+1] = LoadActor(THEME:GetPathG("", "Player ShockArrow judgment/P1"));
 end
 
 if GAMESTATE:IsSideJoined(PLAYER_2) then
 	t[#t+1] = LoadActor("TargetScore/P2");
 	t[#t+1] = LoadActor("SpeedChange/P2");
+	t[#t+1] = LoadActor("Constant/P2")
 	t[#t+1] = LoadActor(THEME:GetPathG("", "Player ShockArrow judgment/P2"));
 end
 

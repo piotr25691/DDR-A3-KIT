@@ -43,13 +43,7 @@ end
 -- Are we in an Extra Stage?
 local function IsExtraStage()
     -- You cannot play an Encore Extra Stage, but we account for it either way.
-    return GAMESTATE:IsExtraStage() or GAMESTATE:IsExtraStage2()
-end
-
--- Did we play the song yet?
-local function DidPlaySong()
-    local currentScreen = Var "LoadingScreen"
-    return currentScreen == "ScreenGameplay"
+    return GAMESTATE:IsExtraStage()
 end
 
 -- Grant Extra Stage stars.
@@ -57,9 +51,6 @@ end
 function AddExtraStageStars(rank, pn)
     -- Extra Stage is turned off in Event Mode
     if IsEventMode() then return end
-
-    -- Ensure we played a song.
-    if not DidPlaySong() then return end
 
     -- We cannot grant Extra Stage stars in an Extra Stage.
     if IsExtraStage() then return end

@@ -21,10 +21,19 @@ return Def.ActorFrame{
 			Name="Danger";
 			HealthStateChangedMessageCommand=function(self, param)
 				if param.PlayerNumber == PLAYER_2 and not playerFailed then
-					if param.HealthState == "HealthState_Danger" or param.HealthState == "HealthState_Danger_NoComment" then
-						self:RunCommandsOnChildren(cmd(playcommand,"Show"))
+					local options = GAMESTATE:GetPlayerState(PLAYER_2):GetPlayerOptionsArray("ModsLevel_Preferred")
+					if table.search(options, '4Lives') or table.search(options, '1Lives') then
+						if param.HealthState == "HealthState_Danger" then
+							self:RunCommandsOnChildren(cmd(playcommand,"Show"))
+						else
+							self:RunCommandsOnChildren(cmd(playcommand,"Hide"))
+						end
 					else
-						self:RunCommandsOnChildren(cmd(playcommand,"Hide"))
+						if param.HealthState == "HealthState_Danger" or param.HealthState == "HealthState_Danger_NoComment" then
+							self:RunCommandsOnChildren(cmd(playcommand,"Show"))
+						else
+							self:RunCommandsOnChildren(cmd(playcommand,"Hide"))
+						end
 					end
 				end
 			end;

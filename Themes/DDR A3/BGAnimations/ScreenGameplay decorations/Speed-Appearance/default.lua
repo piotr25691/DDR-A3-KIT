@@ -319,9 +319,6 @@ function SaveGameplayMeterTypeForPlayer( PlayerUID, MyValue)
 	File:Close();
 end
 
-
-
-
 function SaveAppearancePluShowForPlayer( PlayerUID, MyValue)
 
 	local AppearancePlusShowFile = RageFileUtil:CreateRageFile();
@@ -630,6 +627,10 @@ function AppearancePlusMain(pn)
 		OptionString = string.gsub(OptionString, "(Sudden,)", "");
 		OptionString = string.gsub(OptionString, "(Hidden,)", "");
 		OptionString = OptionString..', Stealth,';
+	elseif MyValue == "Constant" then
+		OptionString = string.gsub(OptionString, "(Sudden,)", "");
+		OptionString = string.gsub(OptionString, "(Hidden,)", "");
+		OptionString = OptionString..', Sudden,100% SuddenOffset';
 	elseif MyValue == "Hidden+" then
 		OptionString = string.gsub(OptionString, "(Sudden,)", "");
 		OptionString = string.gsub(OptionString, "(Stealth,)", "");
