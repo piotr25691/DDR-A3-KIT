@@ -48,19 +48,13 @@ local function setDiff(self,param)
 			local diff = self.ParamSong:GetOneSteps( st, sDiff)
 			local diffname = GAMESTATE:GetCurrentSteps(pn):GetDifficulty()
 			if diff then
-				if self:GetName() == diffname then
-						
-						self:settext( diff:GetMeter() )
-						self:visible(true)
-						self:zoom(2)
-				else
-					self:visible(false)
-				end;
+				self:settext( diff:GetMeter() )
+				:visible(true)
 			else
-				self:settext("")
+				self:visible(false):settext("")
 			end;
 		else
-			self:settext("")
+			self:visible(false):settext("")
 		end;
 	end;
 end;
@@ -92,6 +86,22 @@ return Def.ActorFrame{
 		};
 	};
 	Def.ActorFrame{
+		InitCommand=cmd(x,-1;zoom,0.4;draworder,2);
+		Def.BitmapText{
+			InitCommand=cmd(diffuse,color("#FFFFFF");strokecolor,color("#000000");zoom,2);
+			Font="_impact 32px";
+			Name = "Meter";
+			SetCommand=function(self,param)
+				self.ParamSong = param.Song
+				setDiff(self)
+			end;
+			CurrentStepsP1ChangedMessageCommand=function(self) setDiff(self) end;
+			CurrentStepsP2ChangedMessageCommand=function(self) setDiff(self) end;
+			CurrentSongChangedMessageCommand=function(self) setDiff(self) end;
+		};
+	};
+	--What is this, why are you making an actor for every difficulty. Just update the one.
+	--[[Def.ActorFrame{
 		InitCommand=cmd(x,-1;zoom,0.4;draworder,2);
 		Def.BitmapText{
 			InitCommand=cmd(diffuse,color("#FFFFFF");strokecolor,color("#000000"));
@@ -166,5 +176,5 @@ return Def.ActorFrame{
 			CurrentSongChangedMessageCommand=function(self) setDiff(self) end;
 		};
 		
-	};
+	};]]
 };
