@@ -96,7 +96,7 @@ return Def.ActorFrame{
 			SetCommand=function(s)
 				local song = GAMESTATE:GetCurrentSong()
 				if song then
-					s:Load(GetJacketPath(song))
+					s:LoadFromCached("Jacket",GetJacketPath(song))
 				end
 				s:setsize(150,150)
 			end

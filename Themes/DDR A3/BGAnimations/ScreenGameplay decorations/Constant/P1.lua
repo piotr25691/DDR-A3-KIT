@@ -38,9 +38,39 @@ local function UpdateConstantMod()
     -- Apply the dynamic modifier
     local playerState = GAMESTATE:GetPlayerState(PLAYER_1)
     local currentOptions = playerState:GetPlayerOptionsString("ModsLevel_Song")
+    local currentFlare = InitialOptions:match("Flare%d") or InitialOptions:match("FlareEX") or InitialOptions:match("FloatingFlare")
+
     currentOptions = currentOptions:gsub(",Sudden,-?%d+%% SuddenOffset", "")
 
-    playerState:SetPlayerOptions("ModsLevel_Song", currentOptions .. ",Sudden," .. constantOffset .. "% SuddenOffset")
+    -- Fix Flare conflict
+    local OptionsP1P = GAMESTATE:GetPlayerState('PlayerNumber_P1'):GetPlayerOptionsString('ModsLevel_Preferred');
+    local FlareModifier = "";
+    if string.find(OptionsP1P,"Flare1") then
+        FlareModifier = ",bar,flare-1,failimmediate";
+    elseif string.find(OptionsP1P,"Flare2") then
+        FlareModifier = ",bar,flare-2,failimmediate";
+    elseif string.find(OptionsP1P,"Flare3") then
+        FlareModifier = ",bar,flare-3,failimmediate";
+    elseif string.find(OptionsP1P,"Flare4") then
+        FlareModifier = ",bar,flare-4,failimmediate";
+    elseif string.find(OptionsP1P,"Flare5") then
+        FlareModifier = ",bar,flare-5,failimmediate";
+    elseif string.find(OptionsP1P,"Flare6") then
+        FlareModifier = ",bar,flare-6,failimmediate";
+    elseif string.find(OptionsP1P,"Flare7") then
+        FlareModifier = ",bar,flare-7,failimmediate";
+    elseif string.find(OptionsP1P,"Flare8") then
+        FlareModifier = ",bar,flare-8,failimmediate";
+    elseif string.find(OptionsP1P,"Flare9") then
+        FlareModifier = ",bar,flare-9,failimmediate";
+    elseif string.find(OptionsP1P,"FlareEX") then
+        FlareModifier = ",bar,flare-ex,failimmediate";
+    elseif string.find(OptionsP1P,"FloatingFlare") then
+        FlareModifier = ",bar,floating-flare,failimmediate";
+    end
+
+    -- This only applies to the current song.
+    playerState:SetPlayerOptions("ModsLevel_Song", currentOptions .. ",Sudden," .. constantOffset .. "% SuddenOffset"..FlareModifier)
 end
 
 return Def.ActorFrame{

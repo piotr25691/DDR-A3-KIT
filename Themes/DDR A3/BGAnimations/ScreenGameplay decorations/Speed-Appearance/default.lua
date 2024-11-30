@@ -618,23 +618,28 @@ function AppearancePlusMain(pn)
 	if MyValue == "Hidden" then
 		OptionString = string.gsub(OptionString, "(Sudden,)", "");
 		OptionString = string.gsub(OptionString, "(Stealth,)", "");
+		OptionString = string.gsub(OptionString, "(SuddenOffset,)", "");
 		OptionString = OptionString..', Hidden,';
 	elseif MyValue == "Sudden" then	
 		OptionString = string.gsub(OptionString, "(Stealth,)", "");
 		OptionString = string.gsub(OptionString, "(Hidden,)", "");
+		OptionString = string.gsub(OptionString, "(SuddenOffset,)", "");
 		OptionString = OptionString..', Sudden,';
 	elseif MyValue == "Stealth" then
 		OptionString = string.gsub(OptionString, "(Sudden,)", "");
 		OptionString = string.gsub(OptionString, "(Hidden,)", "");
+		OptionString = string.gsub(OptionString, "(SuddenOffset,)", "");
 		OptionString = OptionString..', Stealth,';
 	elseif MyValue == "Constant" then
 		OptionString = string.gsub(OptionString, "(Sudden,)", "");
 		OptionString = string.gsub(OptionString, "(Hidden,)", "");
+		OptionString = string.gsub(OptionString, "(SuddenOffset,)", "");
 		OptionString = OptionString..', Sudden,100% SuddenOffset';
 	elseif MyValue == "Hidden+" then
 		OptionString = string.gsub(OptionString, "(Sudden,)", "");
 		OptionString = string.gsub(OptionString, "(Stealth,)", "");
 		OptionString = string.gsub(OptionString, "(Hidden,)", "");
+		OptionString = string.gsub(OptionString, "(SuddenOffset,)", "");
 		if GAMESTATE:GetCurrentStyle():GetStepsType()=="StepsType_Dance_Single" then
 			if not GAMESTATE:PlayerIsUsingModifier(player,'reverse') then
 				AddCoverLayer(SingleGraphic, player, CoverPosition, pos, "Hidden+",false);
@@ -652,6 +657,7 @@ function AppearancePlusMain(pn)
 		OptionString = string.gsub(OptionString, "(Sudden,)", "");
 		OptionString = string.gsub(OptionString, "(Stealth,)", "");
 		OptionString = string.gsub(OptionString, "(Hidden,)", "");
+		OptionString = string.gsub(OptionString, "(SuddenOffset,)", "");
 		if GAMESTATE:GetCurrentStyle():GetStepsType()=="StepsType_Dance_Single" then
 			if not GAMESTATE:PlayerIsUsingModifier(player,'reverse') then
 				AddCoverLayer(SingleGraphic, player, CoverPosition, pos, "Sudden+",false);
@@ -694,7 +700,7 @@ function AppearancePlusMain(pn)
 		OptionString = string.gsub(OptionString, "(Sudden,)", "");
 		OptionString = string.gsub(OptionString, "(Stealth,)", "");
 		OptionString = string.gsub(OptionString, "(Hidden,)", "");
-		
+		OptionString = string.gsub(OptionString, "(SuddenOffset,)", "");
 	end
 	return OptionString;
 	

@@ -1,15 +1,57 @@
 local screenname = Var "LoadingScreen"
 local paseli = 78742 -- 500 USD
 local paseliPrice = 157 -- 1 USD
+
+
+local function IsInGame()
+	currentScreen = SCREENMAN:GetTopScreen():GetName()
+	if currentScreen ~= nil then
+		if currentScreen == "ScreenSelectProfile" or
+		currentScreen == "ScreenSelectStyle" or
+		currentScreen == "ScreenCaution" or
+		currentScreen == "ScreenSelectMusic" or
+		currentScreen == "ScreenPlayerOptions" or
+		currentScreen == "ScreenStageInformation" or
+		currentScreen == "ScreenGameplay" or
+		currentScreen == "ScreenEvaluationNormal" or
+		currentScreen == "ScreenEvaluationSummary" or
+		currentScreen == "ScreenDataSaveSummary" or
+		currentScreen == "ScreenGameOver" then
+			return true
+		else
+			return false
+		end
+	end
+end
+
+local function IsLoggedIn()
+	return GAMESTATE:HaveProfileToSave()
+end
+
+local function ShouldHideBalance()
+	currentScreen = SCREENMAN:GetTopScreen():GetName()
+	if currentScreen ~= nil then
+		if currentScreen == "ScreenSelectProfile" or
+		currentScreen == "ScreenSelectStyle" then
+			return false
+		else
+			return true
+		end
+	end
+end
+
 local function PaseliText_P1()
 	--Text of "EXTRA PASELI : XX"
 	local text = LoadFont("Common Normal") .. {
 		InitCommand = cmd(draworder,99;x,SCREEN_LEFT+7;y,SCREEN_BOTTOM-7.5;zoom,0.42;strokecolor,color("0.3,0.3,0.3,1");playcommand,"Refresh");
 		RefreshCommand = function(self)
+
 			local netConnected = IsNetConnected()
 			self:horizalign(left)
-			if not netConnected then self:settext('') return end 
-			if GAMESTATE:IsSideJoined(PLAYER_1) then
+			if not netConnected then self:settext('') return end
+			if GAMESTATE:IsSideJoined(PLAYER_1) and IsInGame() and IsLoggedIn() and ShouldHideBalance() then
+				self:settext('PASELI: ******'):playcommand("TestHome"):playcommand("TestFree"):playcommand("UpdateVisible") return end
+			if GAMESTATE:IsSideJoined(PLAYER_1) and IsInGame() and IsLoggedIn() then
 			    self:settext('PASELI: '..paseli):playcommand("TestHome"):playcommand("TestFree"):playcommand("UpdateVisible") return end
 			if GAMESTATE:IsEventMode() then self:settext('PASELI: NOT AVAILABLE'):playcommand("UpdateVisible") return end
 			if GAMESTATE:GetCoinMode()=='CoinMode_Free' then self:settext('PASELI: NOT AVAILABLE'):playcommand("UpdateVisible") return end
@@ -51,8 +93,10 @@ local function PaseliText_P2()
 			local netConnected = IsNetConnected()
 			self:horizalign(right)
 			if not netConnected then self:settext('') return end
-			if GAMESTATE:IsSideJoined(PLAYER_2) then
-			    self:settext('PASELI: '..paseli):playcommand("TestHome"):playcommand("TestFree"):playcommand("UpdateVisible")  return end
+			if GAMESTATE:IsSideJoined(PLAYER_2) and IsInGame() and IsLoggedIn() and ShouldHideBalance() then
+				self:settext('PASELI: ******'):playcommand("TestHome"):playcommand("TestFree"):playcommand("UpdateVisible") return end
+			if GAMESTATE:IsSideJoined(PLAYER_2) and IsInGame() and IsLoggedIn() then
+			    self:settext('PASELI: '..paseli):playcommand("TestHome"):playcommand("TestFree"):playcommand("UpdateVisible") return end
 			if GAMESTATE:IsEventMode() then self:settext('PASELI: NOT AVAILABLE'):playcommand("UpdateVisible") return end
 			if GAMESTATE:GetCoinMode()=='CoinMode_Free' then self:settext('PASELI: NOT AVAILABLE'):playcommand("UpdateVisible") return end
 			if GAMESTATE:GetCoinMode()=='CoinMode_Pay' then self:settext('EXTRA PASELI: 0'):playcommand("UpdateVisible") return end

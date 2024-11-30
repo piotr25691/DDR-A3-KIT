@@ -55,6 +55,9 @@ function AddExtraStageStars(rank, pn)
     -- We cannot grant Extra Stage stars in an Extra Stage.
     if IsExtraStage() then return end
 
+    -- Don't grant stars if the player failed
+    if STATSMAN:GetCurStageStats():GetPlayerStageStats(GAMESTATE:GetMasterPlayerNumber()):GetFailed() then return 0 end
+
     local starsToAdd = 0
 
     -- AAA

@@ -55,6 +55,8 @@ return Def.ActorFrame {
 				self:Load(THEME:GetPathG("","OptionIcon/"..player.."/Appearance/SuddenPlus.png"));
 			elseif MyValue == "Hidden+&Sudden+" then
 				self:Load(THEME:GetPathG("","OptionIcon/"..player.."/Appearance/HiddenSuddenPlus.png"));
+			elseif MyValue == "Constant" then
+				self:Load(THEME:GetPathG("","OptionIcon/"..player.."/Appearance/Sudden.png"));
 			end;
 		end;
 		PlayerJoinedMessageCommand=function(self, params)

@@ -46,7 +46,7 @@ for i=1,2 do
 					elseif GAMESTATE:GetNumPlayersEnabled() == 2 then
 						s:Load(THEME:GetPathB("","ScreenSelectStyle overlay/"..Model()..Language().."1p_join"));
 					else
-						s:Load(THEME:GetPathB("","ScreenSelectStyle overlay/"..Model()..Language().."1p_start"));
+						s:Load(THEME:GetPathB("","ScreenSelectStyle overlay/"..Language().."insertmorecoins"));
 					end;
 				elseif i == 2 then
 					if GetP2 == true and GAMESTATE:GetNumPlayersEnabled() == 1 then
@@ -60,6 +60,41 @@ for i=1,2 do
 					end
 				end
 			end,
+		};
+		Def.BitmapText{
+			Font="_avenirnext lt pro bold Bold 20px";
+			InitCommand=function(s)
+				if i == 1 then
+					s:xy(220, -20)
+					if Language() == "jp_" then
+						s:addx(100)
+					elseif Language() == "kor_" then
+						s:addx(-50)
+					end
+				elseif i == 2 then
+					s:xy(-300, -20)
+					if Language() == "jp_" then
+						s:addx(100)
+					elseif Language() == "kor_" then
+						s:addx(-50)
+					end
+				end
+				s:diffuse(color("#ff00ff"))
+				s:zoom(1.3)
+				s:queuecommand("Set")
+			end;
+			OnCommand=function(s) s:diffusealpha(0):sleep(0.3):linear(0.3):diffusealpha(1) end,
+			SetCommand=function(s)
+				s:settext(GAMESTATE:GetCoinsNeededToJoin() - GAMESTATE:GetCoins())
+				if GAMESTATE:IsSideJoined(PLAYER_1) and i == 1 then
+					s:diffusealpha(0)
+				elseif GAMESTATE:IsSideJoined(PLAYER_2) and i == 2 then
+					s:diffusealpha(0)
+				elseif math.floor(GAMESTATE:GetCoins() / PREFSMAN:GetPreference('CoinsPerCredit')) >= 1 then
+					s:diffusealpha(0)
+				end
+			end;
+			CoinInsertedMessageCommand=function(s) s:queuecommand("Set") end,
 		};
 	};
 end
