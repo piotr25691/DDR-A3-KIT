@@ -16,8 +16,7 @@ Modified to more closely match the arcade data of DDR A3.
 - [StepMania DDR fork](https://github.com/h-lunah/stepmania-ddr)*
 
 ## Caveats
-- Needs several restarts to boot without crashing. (unknown)
-- Encore Extra Stage is not operational, and will crash the game.
+- May potentially crash on startup and require several restarts to boot without crashing.
 
 <sub><sup>*Recompiled with DDR features used by the theme.</sub></sup>
 
