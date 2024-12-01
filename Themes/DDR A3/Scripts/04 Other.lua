@@ -281,6 +281,14 @@ function Model()
 	end
 end
 
+function Region()
+    if ReadPrefFromFile("OptionRowRegion") ~= nil then
+        return GetUserPref("OptionRowRegion")
+    else
+        return "World"
+    end
+end
+
 function GetCurrentModel()
 	if Model() == "gold_" then
 		return "Gold"

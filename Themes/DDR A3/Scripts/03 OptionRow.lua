@@ -464,7 +464,7 @@ function OptionRowGoldenLeague()
 		Name = "GoldenLeague";
 		LayoutType = "ShowAllInRow";
 		SelectType = "SelectOne";
-		OneChoiceForAllPlayers = true;
+		OneChoiceForAllPlayers = false;
 		ExportOnChange = false;
 		Choices = {"Off" ,"Bronze", "Silver", "Gold" };
 		LoadSelections = function(self, list, pn)
@@ -582,7 +582,7 @@ function OptionRowDanCourse()
 		Name = "DanCourse";
 		LayoutType = "ShowAllInRow";
 		SelectType = "SelectOne";
-		OneChoiceForAllPlayers = true;
+		OneChoiceForAllPlayers = false;
 		ExportOnChange = false;
 		Choices = {"None" ,"1st", "2nd", "3rd", "4th", "5th", "6th", "7th", "8th", "9th", "10th", "Kaiden", };
 		LoadSelections = function(self, list, pn)

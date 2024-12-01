@@ -38,7 +38,6 @@ local function UpdateConstantMod()
     -- Apply the dynamic modifier
     local playerState = GAMESTATE:GetPlayerState(PLAYER_1)
     local currentOptions = playerState:GetPlayerOptionsString("ModsLevel_Song")
-    local currentFlare = InitialOptions:match("Flare%d") or InitialOptions:match("FlareEX") or InitialOptions:match("FloatingFlare")
 
     currentOptions = currentOptions:gsub(",Sudden,-?%d+%% SuddenOffset", "")
 
@@ -70,7 +69,7 @@ local function UpdateConstantMod()
     end
 
     -- This only applies to the current song.
-    playerState:SetPlayerOptions("ModsLevel_Song", currentOptions .. ",Sudden," .. constantOffset .. "% SuddenOffset"..FlareModifier)
+    playerState:SetPlayerOptions("ModsLevel_Song", currentOptions .. ",Sudden," .. constantOffset .. "% SuddenOffset" .. FlareModifier)
 end
 
 return Def.ActorFrame{
