@@ -28,12 +28,24 @@ end
 if GAMESTATE:IsDemonstration()  then Darkness = 0.65 end
 
 return Def.ActorFrame {
-	InitCommand=function(s) s:xy(Position,_screen.cy):diffusealpha(GuideLines() and Darkness or 0) end,
-	CurrentSongChangedMessageCommand=function(s) s:sleep(BeginReadyDelay()+SongMeasureSec()):diffusealpha(Darkness) end,
+	InitCommand=function(s) 
+		s:xy(Position,_screen.cy):diffusealpha(0)
+		setenv("OptionRowGuideLines", "false")
+		THEME:ReloadMetrics()
+	end,
+	CurrentSongChangedMessageCommand=function(s) s:sleep(BeginReadyDelay()+SongMeasureSec()):diffusealpha(Darkness):queuecommand("Guidelines") end,
 	ChangeCourseSongInMessageCommand=function(s) s:playcommand('FilterOff') end,
-	OffCommand=function(s) 
-		if (GAMESTATE:GetSongBeat() >= GAMESTATE:GetCurrentSong():GetLastBeat()) then
-			s:diffusealpha(GuideLines() and Darkness or 0)
+	OffCommand=function(s)
+		s:diffusealpha(0)
+		if GetUserPref("OptionRowGuideLinesEnabled") == 'true' then
+			setenv("OptionRowGuideLines", "false")
+			THEME:ReloadMetrics()
+		end
+	end,
+	GuidelinesCommand=function(s)
+		if GetUserPref("OptionRowGuideLinesEnabled") == 'true' then
+			setenv("OptionRowGuideLines", "true")
+			THEME:ReloadMetrics()
 		end
 	end,
 	Def.Sprite { 

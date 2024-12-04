@@ -86,7 +86,11 @@ for i=1,2 do
 			OnCommand=function(s) s:diffusealpha(0):sleep(0.3):linear(0.3):diffusealpha(1) end,
 			SetCommand=function(s)
 				s:settext(GAMESTATE:GetCoinsNeededToJoin() - GAMESTATE:GetCoins())
-				if GAMESTATE:IsSideJoined(PLAYER_1) and i == 1 then
+				if GAMESTATE:IsEventMode() then
+					s:diffusealpha(0)
+				elseif GAMESTATE:GetCoinMode() == "CoinMode_Free" or GAMESTATE:GetCoinMode() == "CoinMode_Home" then
+					s:diffusealpha(0)
+				elseif GAMESTATE:IsSideJoined(PLAYER_1) and i == 1 then
 					s:diffusealpha(0)
 				elseif GAMESTATE:IsSideJoined(PLAYER_2) and i == 2 then
 					s:diffusealpha(0)

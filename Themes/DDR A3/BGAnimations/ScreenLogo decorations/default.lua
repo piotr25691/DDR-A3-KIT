@@ -1,9 +1,5 @@
 local function Logo()
-	if GetUserPref("OptionRowLogo")=='GRANDPRIX' then
-		return "GrandPrix"
-	else
-		return "Arcade"
-	end
+	return "Arcade"
 end
 
 return Def.ActorFrame { 

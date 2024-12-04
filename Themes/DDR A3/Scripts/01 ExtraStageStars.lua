@@ -87,6 +87,9 @@ function AddExtraStageStars(rank, pn)
         starsToAdd = 3
     end
 
+    -- This value is saved so we know how many stars we got for this stage.
+    StarsAddedRecently = starsToAdd
+
     -- Ensure we don't exceed 9 stars if the adding would result in >=10 stars.
     local maxStarsAllowed = 9 - ExtraStageStars
     if starsToAdd > maxStarsAllowed then
@@ -96,9 +99,6 @@ function AddExtraStageStars(rank, pn)
     if ExtraStageStars < 9 then
         ExtraStageStars = ExtraStageStars + starsToAdd
     end
-
-    -- This value is saved so we know how many stars we got for this stage.
-    StarsAddedRecently = starsToAdd
 
     -- Make sure the Extra Stage is unlocked if you met the Extra Stage requirements.
     -- The necessary logic uses an impossible rank in the theme metrics.

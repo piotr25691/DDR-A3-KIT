@@ -1,3 +1,4 @@
+-- Note: Your font needs to support Japanese and Korean to not display as fallback characters.
 regions = {
     -- United States
     Alabama = {"Alabama", "アラバマ州", "앨라배마주"},
@@ -81,6 +82,7 @@ regions = {
     Niigata = {"Niigata", "新潟県", "니가타현"},
     Oita = {"Oita", "大分県", "오이타현"},
     Okayama = {"Okayama", "岡山県", "오카야마현"},
+    Okinawa = {"Okinawa", "沖縄県", "오키나와현"},
     Osaka = {"Osaka", "大阪府", "오사카부"},
     Saga = {"Saga", "佐賀県", "사가현"},
     Saitama = {"Saitama", "埼玉県", "사이타마현"},
@@ -96,7 +98,6 @@ regions = {
     Yamagata = {"Yamagata", "山形県", "야마가타현"},
     Yamaguchi = {"Yamaguchi", "山口県", "야마구치현"},
     Yamanashi = {"Yamanashi", "山梨県", "야마나시현"},
-    Okinawa = {"Okinawa", "沖縄県", "오키나와현"},
 
     -- Other Regions
     Europe = {"Europe", "ヨーロッパ", "유럽"},
@@ -105,43 +106,47 @@ regions = {
 }
 
 function OptionRowRegion()
-    local regionKeys = {}
-    for key, _ in pairs(regions) do
-        table.insert(regionKeys, key)
-    end
-
     local t = {
         Name = "Region";
         LayoutType = "ShowAllInRow";
         SelectType = "SelectOne";
-        OneChoiceForAllPlayers = false;
+        OneChoiceForAllPlayers = true;
         ExportOnChange = false;
-        Choices = regionKeys; -- Using the keys from the regions table as choices
-        LoadSelections = function(self, list, pn)
-            if ReadPrefFromFile("OptionRowRegion") ~= nil then
-                local savedRegion = GetUserPref("OptionRowRegion")
-                for i, key in ipairs(regionKeys) do
-                    if key == savedRegion then
-                        list[i] = true
-                        return
-                    end
-                end
-                list[1] = true -- Default to the first region if none match
-            else
-                WritePrefToFile("OptionRowRegion", regionKeys[1]);
-                list[1] = true;
-            end;
-        end;
-        SaveSelections = function(self, list, pn)
-            for i, selected in ipairs(list) do
-                if selected then
-                    WritePrefToFile("OptionRowRegion", regionKeys[i]);
+        Choices = {}
+    };
+
+    for key, _ in pairs(regions) do
+        table.insert(t.Choices, key)
+    end
+
+    table.sort(t.Choices)
+
+    t.LoadSelections = function(self, list, pn)
+        if ReadPrefFromFile("OptionRowRegion") ~= nil then
+            local savedRegion = GetUserPref("OptionRowRegion")
+            for i, key in ipairs(self.Choices) do
+                if key == savedRegion then
+                    list[i] = true
                     return
                 end
             end
-            WritePrefToFile("OptionRowRegion", regionKeys[1]); -- Default to the first region
-        end;
-    };
-    setmetatable(t, t);
-    return t;
+            list[1] = true
+        else
+            WritePrefToFile("OptionRowRegion", self.Choices[1])
+            list[1] = true
+        end
+    end
+
+    t.SaveSelections = function(self, list, pn)
+        for i, selected in ipairs(list) do
+            if selected then
+                WritePrefToFile("OptionRowRegion", self.Choices[i])
+                return
+            end
+        end
+        WritePrefToFile("OptionRowRegion", self.Choices[1]) -- Default to the first region
+    end
+
+    setmetatable(t, t)
+    return t
 end

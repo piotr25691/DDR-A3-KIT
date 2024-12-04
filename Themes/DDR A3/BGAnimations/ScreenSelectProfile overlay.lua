@@ -3,6 +3,9 @@ This script was taken from KENp's DDR X2 theme
 and was recoded by FlameyBoy and Inorizushi
 ]]--
 
+local font = Language()
+font = font:sub(1, -2)
+
 local ProfileInfoCache = {}
 setmetatable(ProfileInfoCache, {__index =
 function(table, ind)
@@ -109,6 +112,31 @@ local function LoadCard(cColor,cColor2,Player,IsJoinFrame)
 					else								     s:setstate(0)
 					end
 				end
+			};
+			Def.BitmapText {
+				Font="_noto sans "..font,
+				InitCommand=function(s) s:maxwidth(180):zoomy(0.6):zoom(0.95)
+					s:x(pn == PLAYER_1 and 128 or 128);
+					s:y(-82):strokecolor(Color("Outline")):maxwidth(120) end,
+				OnCommand=function(self)
+					self:sleep(0.2):linear(0.05);
+					self:x(pn == PLAYER_1 and 128 or 128);
+					self:skewx(-0.1);
+		
+					local index
+		
+					if Language() == "en_" then
+						index = 1
+					elseif Language() == "jp_" then
+						index = 2
+					elseif Language() == "kor_" then
+						index = 3
+					else
+						index = 2
+					end
+		
+					self:settext(regions[Region()][index])
+				end;
 			};
 		};
 		Def.ActorFrame{

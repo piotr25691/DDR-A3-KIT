@@ -19,6 +19,7 @@ return Def.ActorFrame {
             if params.TapNoteScore == 'TapNoteScore_AvoidMine' 
                 or params.TapNoteScore == 'TapNoteScore_HitMine'
             then
+                lua.ReportScriptError("TapNoteScore: "..params.TapNoteScore..math.random(1, 10000))
 				self:visible(true)
 
                 -- Prioritize HitMine over AvoidMine

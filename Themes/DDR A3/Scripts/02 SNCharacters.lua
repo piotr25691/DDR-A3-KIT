@@ -237,7 +237,7 @@ function OptionRowCharacters()
         Name="Characters",
         LayoutType = "ShowAllInRow",
         SelectType = "SelectOne",
-        OneChoiceForAllPlayers = false,
+        OneChoiceForAllPlayers = true,
         ExportOnChange = false,
         Choices = choiceList,
         LoadSelections = function(self, list, pn)

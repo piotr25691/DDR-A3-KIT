@@ -120,12 +120,8 @@ function ShockArrows()
 end
 
 function GuideLines()
-	if ReadPrefFromFile("OptionRowGuideLines") ~= nil then
-		if GetUserPref("OptionRowGuideLines") == 'false' then
-			return false
-		else
-			return true
-		end
+	if getenv("OptionRowGuideLines") == 'false' then
+		return false
 	else
 		return true
 	end

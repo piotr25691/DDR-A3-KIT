@@ -211,26 +211,26 @@ function OptionRowGuideLines()
 		ExportOnChange = true;
 		Choices = {"Off", "On", };
 		LoadSelections = function(self, list, pn)
-			if ReadPrefFromFile("OptionRowGuideLines") ~= nil then
-				if GetUserPref("OptionRowGuideLines")=='true' then
+			if ReadPrefFromFile("OptionRowGuideLinesEnabled") ~= nil then
+				if GetUserPref("OptionRowGuideLinesEnabled")=='true' then
 					list[2] = true
-				elseif GetUserPref("OptionRowGuideLines")=='false' then
+				elseif GetUserPref("OptionRowGuideLinesEnabled")=='false' then
 					list[1] = true
 				else
 					list[2] = true
 				end
 			else
-				WritePrefToFile("OptionRowGuideLines",true);
+				WritePrefToFile("OptionRowGuideLinesEnabled",true);
 				list[2] = true;
 			end;
 		end;
 		SaveSelections = function(self, list, pn)
 			if list[2] then
-				WritePrefToFile("OptionRowGuideLines",true);
+				WritePrefToFile("OptionRowGuideLinesEnabled",true);
 			elseif list[1] then
-				WritePrefToFile("OptionRowGuideLines",false);
+				WritePrefToFile("OptionRowGuideLinesEnabled",false);
 			else
-				WritePrefToFile("OptionRowGuideLines",true);
+				WritePrefToFile("OptionRowGuideLinesEnabled",true);
 			end;
 			THEME:ReloadMetrics();
 		end;
@@ -281,7 +281,7 @@ function OptionRowScreenFilter()
 		Name = "ScreenFilter";
 		LayoutType = "ShowAllInRow";
 		SelectType = "SelectOne";
-		OneChoiceForAllPlayers = false;
+		OneChoiceForAllPlayers = true;
 		ExportOnChange = true;
 		Choices = {"Off", "Dark", "Darker", "Darkest", };
 		LoadSelections = function(self, list, pn)
@@ -430,41 +430,12 @@ function OptionRowModel()
 	return t;
 end
 
-function OptionRowLogo()
-	local t = {
-		Name = "Logo";
-		LayoutType = "ShowAllInRow";
-		SelectType = "SelectOne";
-		OneChoiceForAllPlayers = true;
-		ExportOnChange = true,
-		Choices = {"ARCADE", "GRANDPRIX", };
-		LoadSelections = function(self, list, pn)
-			if ReadPrefFromFile("OptionRowLogo") ~= nil then
-				if GetUserPref("OptionRowLogo")=='ARCADE' then list[1] = true
-				elseif GetUserPref("OptionRowLogo")=='GRANDPRIX' then list[2] = true
-				else list[2] = true
-				end
-			else
-				WritePrefToFile("OptionRowLogo",'ARCADE'); list[1] = true;
-			end;
-		end;
-		SaveSelections = function(self, list, pn)
-			if list[1] then WritePrefToFile("OptionRowLogo",'ARCADE');
-			elseif list[2] then WritePrefToFile("OptionRowLogo",'GRANDPRIX');
-			else WritePrefToFile("OptionRowLogo",'ARCADE');
-			end;
-		end;
-	};
-	setmetatable( t, t );
-	return t;
-end
-
 function OptionRowGoldenLeague()
 	local t = {
 		Name = "GoldenLeague";
 		LayoutType = "ShowAllInRow";
 		SelectType = "SelectOne";
-		OneChoiceForAllPlayers = false;
+		OneChoiceForAllPlayers = true;
 		ExportOnChange = false;
 		Choices = {"Off" ,"Bronze", "Silver", "Gold" };
 		LoadSelections = function(self, list, pn)
@@ -582,7 +553,7 @@ function OptionRowDanCourse()
 		Name = "DanCourse";
 		LayoutType = "ShowAllInRow";
 		SelectType = "SelectOne";
-		OneChoiceForAllPlayers = false;
+		OneChoiceForAllPlayers = true;
 		ExportOnChange = false;
 		Choices = {"None" ,"1st", "2nd", "3rd", "4th", "5th", "6th", "7th", "8th", "9th", "10th", "Kaiden", };
 		LoadSelections = function(self, list, pn)

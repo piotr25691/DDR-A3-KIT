@@ -6,6 +6,7 @@ local SpeedModsPattern = "%d(%.%d%d?)?x"
 AllOptions = AllOptions:gsub(SpeedModsPattern, "")
 
 local function GetInput(event)
+    if not PREFSMAN:GetPreference("OnlyDedicatedMenuButtons") then return end
     if event.type == "InputEventType_Release" then return end
 
     if event.GameButton == "MenuLeft" then

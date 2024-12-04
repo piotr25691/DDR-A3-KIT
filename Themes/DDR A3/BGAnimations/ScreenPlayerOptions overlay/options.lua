@@ -331,6 +331,7 @@ local t = Def.ActorFrame{
 			self:y( offsetFromCenter * 40 );
 		end;
 		children = RowList;
+		
         ChangeRowMessageCommand=function(s,param)
             local screen = SCREENMAN:GetTopScreen{};
 			if param.PlayerNumber == pn then

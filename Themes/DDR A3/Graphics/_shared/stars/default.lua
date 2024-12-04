@@ -12,16 +12,35 @@ t[#t+1] = Def.ActorFrame {
 if currentScreen == "ScreenEvaluationNormal" then
 	for i=1,GetExtraStageStars()-GetRecentExtraStageStars() do
 		t[#t+1] = Def.ActorFrame {
+			InitCommand=function(s)
+				s:diffuseblink()
+				s:effectcolor1(color("#000000"))
+				s:effectcolor2(color("#ffffff"))
+				s:effectperiod(0.1)
+				s:sleep(0.7)
+				s:queuecommand("StopBlinking")			
+			end;
+			StopBlinkingCommand=function(s)
+				s:effectcolor1(color("#ffffff"))
+			end;
 			LoadActor("star")..{
 				InitCommand=function(s)
 					s:xy(positions[i], 1)
 				end,
 			};
 			LoadActor("star")..{
-				InitCommand=function(s) 
+				InitCommand=function(s)
 					s:blend(Blend.Add):diffusealpha(0):linear(0.01):smooth(0.3):diffusealpha(1)
 					s:diffuseramp():effectcolor1(color("1,1,1,0")):effectcolor2(color("1,1,1,1")):effectperiod(0.70)
 					s:xy(positions[i], 1)
+					s:sleep(2.5)
+					s:queuecommand("ExtraStage")
+				end,
+
+				ExtraStageCommand=function(s)
+					if GetExtraStageStars() == 9 and STATSMAN:GetCurStageStats():GetStage() == "Stage_Final" then
+						s:rainbow()
+					end
 				end,
 			};
 		}
@@ -77,6 +96,14 @@ if currentScreen == "ScreenEvaluationNormal" then
 					s:blend(Blend.Add):diffusealpha(0):linear(0.01):smooth(0.3):diffusealpha(1)
 					s:diffuseramp():effectcolor1(color("1,1,1,0")):effectcolor2(color("1,1,1,1")):effectperiod(0.70)
 					s:xy(positions[i], 1)
+					s:sleep(2.5)
+					s:queuecommand("ExtraStage")
+				end,
+
+				ExtraStageCommand=function(s)
+					if GetExtraStageStars() == 9 and STATSMAN:GetCurStageStats():GetStage() == "Stage_Final" then
+						s:rainbow()
+					end
 				end,
 			};
 		}

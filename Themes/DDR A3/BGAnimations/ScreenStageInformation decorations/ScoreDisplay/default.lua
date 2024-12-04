@@ -3,6 +3,9 @@ local SleepOffset = 0.3;
 local cx = 640
 local ox = 450
 
+local font = Language()
+font = font:sub(1, -2)
+
 function StageTopRecord(pn) --�^�ǳ̰��������Ӭ���
 	local SongOrCourse, StepsOrTrail;
 	local myScoreSet = {
@@ -334,8 +337,8 @@ t[#t+1]=Def.ActorFrame{
 		end;
 	};
 
-	LoadFont("_helveticaneuelt pro 65 md 24px") .. {
-		InitCommand=function(s) s:maxwidth(180):zoomy(0.6):zoom(0.8)
+	LoadFont("_noto sans "..font) .. {
+		InitCommand=function(s) s:maxwidth(180):zoomy(0.6):zoom(0.95)
 			s:x(pn == PLAYER_1 and cx-307-ox or cx+562+ox)
 			s:y(SCREEN_BOTTOM+110):strokecolor(Color("Outline")):maxwidth(120) end,
 		OnCommand=function(self)
