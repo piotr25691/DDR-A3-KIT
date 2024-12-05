@@ -23,7 +23,7 @@ return Def.ActorFrame{
 				if param.PlayerNumber == PLAYER_2 and not playerFailed then
 					local options = GAMESTATE:GetPlayerState(PLAYER_2):GetPlayerOptionsArray("ModsLevel_Preferred")
 					if table.search(options, '4Lives') or table.search(options, '1Lives') then
-						if param.HealthState == "HealthState_Danger" then
+						if param.HealthState == "HealthState_DangerNoComment" then
 							self:RunCommandsOnChildren(cmd(playcommand,"Show"))
 						else
 							self:RunCommandsOnChildren(cmd(playcommand,"Hide"))

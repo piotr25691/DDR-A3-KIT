@@ -23,7 +23,8 @@ return Def.ActorFrame{
 				if param.PlayerNumber == PLAYER_1 and not playerFailed then
 					local options = GAMESTATE:GetPlayerState(PLAYER_1):GetPlayerOptionsArray("ModsLevel_Preferred")
 					if table.search(options, '4Lives') or table.search(options, '1Lives') then
-						if param.HealthState == "HealthState_Danger" then
+						lua.ReportScriptError(param.HealthState)
+						if param.HealthState == "HealthState_DangerNoComment" then
 							self:RunCommandsOnChildren(cmd(playcommand,"Show"))
 						else
 							self:RunCommandsOnChildren(cmd(playcommand,"Hide"))
