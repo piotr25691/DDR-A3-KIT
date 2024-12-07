@@ -3,6 +3,9 @@ local t = Def.ActorFrame{};
 for _,pn in pairs(GAMESTATE:GetEnabledPlayers()) do
 	local Award = STATSMAN:GetCurStageStats():GetPlayerStageStats(pn):GetStageAward()
 	local Grade = STATSMAN:GetCurStageStats():GetPlayerStageStats(pn):GetGrade()
+
+	t[#t+1] = LoadActor("AnnouncerEngineEvaluation.lua")
+
 	t[#t+1] = Def.Sprite{
 		InitCommand=function(s) s:player(pn):x(pn== PLAYER_1 and _screen.cx-297 or _screen.cx+380):y(_screen.cy-80):zoom(0):queuecommand("Set") end,
 		OnCommand=function(s) s:linear(0.2):zoom(1):spin():effectmagnitude(0,0,170) end,

@@ -83,7 +83,7 @@ t[#t+1] = Def.BitmapText {
 	end;
 
 	UpdateCommand=function(s)
-		s:sleep(0.1)
+		s:sleep(updateTime)
 		s:queuecommand("GetCredits")
 	end;
 
@@ -121,7 +121,7 @@ t[#t+1] = Def.BitmapText {
 	end;
 
 	UpdateCommand=function(s)
-		s:sleep(0.1)
+		s:sleep(updateTime)
 		s:queuecommand("GetCoins")
 	end;
 
@@ -195,9 +195,15 @@ t[#t+1] = Def.BitmapText {
 		elseif GAMESTATE:GetCoinMode() == "CoinMode_Pay" and not GAMESTATE:IsSideJoined(PLAYER_1) then
 			s:settext('EXTRA PASELI: '..extraPaseli)
 		elseif GAMESTATE:GetCoinMode() == "CoinMode_Pay" and GAMESTATE:IsSideJoined(PLAYER_1) and IsInGame() and IsLoggedIn() and not ShouldHideBalance() then
-			s:settext('PASELI: '..paseli)
+			s:settext('PASELI: '..paseli+extraPaseli)
 		elseif GAMESTATE:GetCoinMode() == "CoinMode_Pay" and GAMESTATE:IsSideJoined(PLAYER_1) and IsInGame() and IsLoggedIn() and ShouldHideBalance() then
-			s:settext('PASELI: ******')
+			if extraPaseli > 0 then
+				-- Yes, KONAMI actually did that.
+				-- https://www.youtube.com/watch?v=hnhNcsP2_Ms
+				s:settext('PASELI: ****** + '..extraPaseli)
+			else
+				s:settext('PASELI: ******')
+			end
 		else
 			s:settext('EXTRA PASELI: '..extraPaseli)
 		end
@@ -236,9 +242,15 @@ t[#t+1] = Def.BitmapText {
 		elseif GAMESTATE:GetCoinMode() == "CoinMode_Pay" and not GAMESTATE:IsSideJoined(PLAYER_2) then
 			s:settext('EXTRA PASELI: '..extraPaseli)
 		elseif GAMESTATE:GetCoinMode() == "CoinMode_Pay" and GAMESTATE:IsSideJoined(PLAYER_2) and IsInGame() and IsLoggedIn() and not ShouldHideBalance() then
-			s:settext('PASELI: '..paseli)
+			s:settext('PASELI: '..paseli+extraPaseli)
 		elseif GAMESTATE:GetCoinMode() == "CoinMode_Pay" and GAMESTATE:IsSideJoined(PLAYER_2) and IsInGame() and IsLoggedIn() and ShouldHideBalance() then
-			s:settext('PASELI: ******')
+			if extraPaseli > 0 then
+				-- Yes, KONAMI actually did that.
+				-- https://www.youtube.com/watch?v=hnhNcsP2_Ms
+				s:settext('PASELI: ****** + '..extraPaseli)
+			else
+				s:settext('PASELI: ******')
+			end
 		else
 			s:settext('EXTRA PASELI: '..extraPaseli)
 		end

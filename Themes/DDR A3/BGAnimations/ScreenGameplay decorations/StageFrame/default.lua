@@ -18,7 +18,7 @@ return Def.ActorFrame {
 				local songsPlayed = mpStats:GetSongsPassed() + 1
 					self:settextf("%i / %i", songsPlayed, GAMESTATE:GetCurrentCourse():GetEstimatedNumStages());
 			else
-				if GAMESTATE:GetCurrentSong():GetDisplayFullTitle() == "LET'S CHECK YOUR LEVEL!" then
+				if GAMESTATE:GetCurrentSong():GetDisplayFullTitle() == "LET'S CHECK YOUR LEVEL!" or GAMESTATE:GetCurrentSong():GetDisplayFullTitle() == "Steps to the Star" then
 					self:settextf("CHECKING")
 				elseif GAMESTATE:GetCurrentSong():GetDisplayFullTitle() == "Lesson by DJ" then
 					self:settextf("HOW TO PLAY")
@@ -40,7 +40,7 @@ return Def.ActorFrame {
 					self:settextf(thed_stage)
 				end
 			end;
-			self:zoomx(0.55):zoomy(0.52):maxwidth(135):x(_screen.cx):y(SCREEN_TOP+35):diffuse(color("1,1,1,1"))
+			self:zoomx(0.5):zoomy(0.47):maxwidth(135):x(_screen.cx):y(SCREEN_TOP+35):diffuse(color("1,1,1,1"))
 		end;
 		};
 	};

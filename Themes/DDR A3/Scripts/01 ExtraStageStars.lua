@@ -3,6 +3,7 @@
 
 ExtraStageStars = 0
 StarsAddedRecently = 0
+StarsActuallyAdded = 0
 
 -- How many Extra Stage stars do we have?
 function GetExtraStageStars()
@@ -99,6 +100,8 @@ function AddExtraStageStars(rank, pn)
     if ExtraStageStars < 9 then
         ExtraStageStars = ExtraStageStars + starsToAdd
     end
+
+    StarsActuallyAdded = starsToAdd
 
     -- Make sure the Extra Stage is unlocked if you met the Extra Stage requirements.
     -- The necessary logic uses an impossible rank in the theme metrics.

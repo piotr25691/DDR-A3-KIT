@@ -1,5 +1,20 @@
 InitialOptions = GAMESTATE:GetPlayerState(PLAYER_1):GetPlayerOptionsString("ModsLevel_Preferred")
 
+function calculate_offset(bpm, bpm_min, bpm_max, offset_min, offset_max)
+    -- Clamp the BPM to the valid range
+    if bpm < bpm_min then bpm = bpm_min end
+    if bpm > bpm_max then bpm = bpm_max end
+
+    -- Handle constant BPM
+    if bpm_min == bpm_max then return 200 end
+
+    -- Calculate the slope for linear interpolation
+    local slope = (offset_max - offset_min) / (bpm_max - bpm_min)
+
+    -- Calculate the offset and floor the result
+    return math.floor(offset_min + slope * (bpm - bpm_min))
+end
+
 -- Apply CONSTANT sudden mode like in DDR WORLD
 local function UpdateConstantMod()
     -- 100% SuddenOffset is the default CONSTANT value.
@@ -14,12 +29,6 @@ local function UpdateConstantMod()
 
     -- Retrieve BPM information
     local displayBpms = currentSong:GetDisplayBpms()
-    local baseBPM = displayBpms[1] -- Start with the minimum BPM
-
-    -- Handle cases where maximum BPM is nil (constant BPM songs)
-    if displayBpms[2] then
-        baseBPM = (displayBpms[1] + displayBpms[2]) / 2
-    end
 
     -- Calculate current BPM
     local currentBPM = timingData:GetBPMAtBeat(currentBeat)
@@ -28,48 +37,43 @@ local function UpdateConstantMod()
     if currentBPM == 0 then return end
 
     -- Compute SuddenOffset as a percentage of base BPM
-    local constantOffset
-    if currentBPM*1.5 < baseBPM then
-        constantOffset = -math.floor((currentBPM / baseBPM) * 100)
-    else
-        constantOffset = math.floor((currentBPM / baseBPM) * 100)
-    end
+    local constantOffset = calculate_offset(currentBPM, displayBpms[1], displayBpms[2], -33, 200)
 
     -- Apply the dynamic modifier
     local playerState = GAMESTATE:GetPlayerState(PLAYER_1)
     local currentOptions = playerState:GetPlayerOptionsString("ModsLevel_Song")
 
-    currentOptions = currentOptions:gsub(",Sudden,-?%d+%% SuddenOffset", "")
+    -- Avoid redundant replacements
+    if not string.find(currentOptions, "Sudden," .. constantOffset .. "%% SuddenOffset") then
+        currentOptions = currentOptions:gsub(",Sudden,-?%d+%% SuddenOffset", "")
 
-    -- Fix Flare conflict
-    local OptionsP1P = GAMESTATE:GetPlayerState('PlayerNumber_P1'):GetPlayerOptionsString('ModsLevel_Preferred');
-    local FlareModifier = "";
-    if string.find(OptionsP1P,"Flare1") then
-        FlareModifier = ",bar,flare-1,failimmediate";
-    elseif string.find(OptionsP1P,"Flare2") then
-        FlareModifier = ",bar,flare-2,failimmediate";
-    elseif string.find(OptionsP1P,"Flare3") then
-        FlareModifier = ",bar,flare-3,failimmediate";
-    elseif string.find(OptionsP1P,"Flare4") then
-        FlareModifier = ",bar,flare-4,failimmediate";
-    elseif string.find(OptionsP1P,"Flare5") then
-        FlareModifier = ",bar,flare-5,failimmediate";
-    elseif string.find(OptionsP1P,"Flare6") then
-        FlareModifier = ",bar,flare-6,failimmediate";
-    elseif string.find(OptionsP1P,"Flare7") then
-        FlareModifier = ",bar,flare-7,failimmediate";
-    elseif string.find(OptionsP1P,"Flare8") then
-        FlareModifier = ",bar,flare-8,failimmediate";
-    elseif string.find(OptionsP1P,"Flare9") then
-        FlareModifier = ",bar,flare-9,failimmediate";
-    elseif string.find(OptionsP1P,"FlareEX") then
-        FlareModifier = ",bar,flare-ex,failimmediate";
-    elseif string.find(OptionsP1P,"FloatingFlare") then
-        FlareModifier = ",bar,floating-flare,failimmediate";
+        -- Resolve Flare conflict dynamically
+        local OptionsP1P = GAMESTATE:GetPlayerState(PLAYER_1):GetPlayerOptionsString('ModsLevel_Preferred')
+        local flareModifiers = {
+            Flare1 = ",bar,flare-1,failimmediate",
+            Flare2 = ",bar,flare-2,failimmediate",
+            Flare3 = ",bar,flare-3,failimmediate",
+            Flare4 = ",bar,flare-4,failimmediate",
+            Flare5 = ",bar,flare-5,failimmediate",
+            Flare6 = ",bar,flare-6,failimmediate",
+            Flare7 = ",bar,flare-7,failimmediate",
+            Flare8 = ",bar,flare-8,failimmediate",
+            Flare9 = ",bar,flare-9,failimmediate",
+            FlareEX = ",bar,flare-ex,failimmediate",
+            FloatingFlare = ",bar,floating-flare,failimmediate",
+        }
+
+        local flareModifier = ""
+        for key, value in pairs(flareModifiers) do
+            if string.find(OptionsP1P, key) then
+                flareModifier = value
+                break
+            end
+        end
+
+        -- Apply updated options
+        playerState:SetPlayerOptions("ModsLevel_Song", currentOptions .. ",Sudden," .. constantOffset .. "% SuddenOffset" .. flareModifier)
     end
-
-    -- This only applies to the current song.
-    playerState:SetPlayerOptions("ModsLevel_Song", currentOptions .. ",Sudden," .. constantOffset .. "% SuddenOffset" .. FlareModifier)
 end
 
 return Def.ActorFrame{
@@ -77,7 +81,7 @@ return Def.ActorFrame{
         s:queuecommand("ApplyConstant")
     end,
     ApplyConstantCommand=function(s)
-        s:sleep(0.1)
+        s:sleep(1 / 60)
         UpdateConstantMod()
         s:queuecommand("On")
     end

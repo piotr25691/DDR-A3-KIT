@@ -14,5 +14,4 @@ elseif GAMESTATE:GetCurrentSong():GetDisplayFullTitle() == "Lesson by DJ" then
 	t[#t+1] = LoadActor("Lesson by DJ");
 end;
 
-
 return t;

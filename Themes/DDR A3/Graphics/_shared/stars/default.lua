@@ -9,7 +9,7 @@ t[#t+1] = Def.ActorFrame {
 	LoadActor(Model().."nine");
 }
 
-if currentScreen == "ScreenEvaluationNormal" then
+if currentScreen == "ScreenEvaluationNormal" and StarsActuallyAdded > 0 then
 	for i=1,GetExtraStageStars()-GetRecentExtraStageStars() do
 		t[#t+1] = Def.ActorFrame {
 			InitCommand=function(s)
@@ -65,7 +65,7 @@ else
 end
 
 -- Animate incoming stars
-if currentScreen == "ScreenEvaluationNormal" then
+if currentScreen == "ScreenEvaluationNormal" and StarsActuallyAdded > 0 then
 	for i=(GetExtraStageStars()-GetRecentExtraStageStars())+1,GetExtraStageStars() do
 		t[#t+1] = Def.ActorFrame {
 			InitCommand=function(s)
