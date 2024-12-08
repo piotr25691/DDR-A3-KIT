@@ -103,29 +103,32 @@ local function DrawDiffListItem(diff)
 							assert(scorelist);
 						local scores = scorelist:GetHighScores();
 							assert(scores);
-						local topscore;
 						if scores[1] then
-							topscore = scores[1];
+							for _, topscore in ipairs(scores) do
 								assert(topscore);
-							local misses = topscore:GetTapNoteScore("TapNoteScore_Miss")+topscore:GetTapNoteScore("TapNoteScore_CheckpointMiss")
-							local boos = topscore:GetTapNoteScore("TapNoteScore_W4")
-							local goods = topscore:GetTapNoteScore("TapNoteScore_W4")
-							local greats = topscore:GetTapNoteScore("TapNoteScore_W3")
-							local perfects = topscore:GetTapNoteScore("TapNoteScore_W2")
-							local marvelous = topscore:GetTapNoteScore("TapNoteScore_W1")
-							if (misses+boos) == 0 and scores[1]:GetScore() > 0 and (marvelous+perfects)>0 then
-								if (greats+perfects) == 0 then
-									self:Load(THEME:GetPathG("","ScreenSelectMusic/MarvelousFullCombo_ring"))
-								elseif greats == 0 then
-									self:Load(THEME:GetPathG("","ScreenSelectMusic/PerfectFullCombo_ring"))
-								elseif (misses+boos+goods) == 0 then
-									self:Load(THEME:GetPathG("","ScreenSelectMusic/GreatFullCombo_ring"))
-								elseif (misses+boos) == 0 then
-									self:Load(THEME:GetPathG("","ScreenSelectMusic/GoodFullCombo_ring"))
+								local misses = topscore:GetTapNoteScore("TapNoteScore_Miss") + 
+											          topscore:GetTapNoteScore("TapNoteScore_CheckpointMiss") +
+											          topscore:GetHoldNoteScore("HoldNoteScore_LetGo") +
+											          topscore:GetTapNoteScore("TapNoteScore_HitMine")
+								local goods = topscore:GetTapNoteScore("TapNoteScore_W4");
+								local greats = topscore:GetTapNoteScore("TapNoteScore_W3");
+								local perfects = topscore:GetTapNoteScore("TapNoteScore_W2");
+								local marvelous = topscore:GetTapNoteScore("TapNoteScore_W1");
+								if (misses) == 0 and topscore:GetScore() > 0 and (marvelous+perfects)>0 then
+									if (greats+perfects) == 0 then
+										self:Load(THEME:GetPathG("","ScreenSelectMusic/MarvelousFullCombo_ring"))
+									elseif greats == 0 then
+										self:Load(THEME:GetPathG("","ScreenSelectMusic/PerfectFullCombo_ring"))
+									elseif (misses+goods) == 0 then
+										self:Load(THEME:GetPathG("","ScreenSelectMusic/GreatFullCombo_ring"))
+									elseif (misses) == 0 then
+										self:Load(THEME:GetPathG("","ScreenSelectMusic/GoodFullCombo_ring"))
+									end;
+									self:visible(true):zoom(0.66):spin():effectmagnitude(0,0,170)
+                  break
+								else
+									self:visible(false)
 								end;
-								self:visible(true):zoom(0.66):spin():effectmagnitude(0,0,170)
-							else
-								self:visible(false)
 							end;
 						else
 							self:visible(false)

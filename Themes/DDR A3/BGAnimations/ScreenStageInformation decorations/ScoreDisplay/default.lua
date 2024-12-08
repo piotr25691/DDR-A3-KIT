@@ -16,7 +16,6 @@ function StageTopRecord(pn) --�^�ǳ̰��������Ӭ���
 		["topW2"]=0;
 		["topW3"]=0;
 		["topW4"]=0;
-		["topW4"]=0;
 		["topMiss"]=0;
 		["topOK"]=0;
 		["topEXScore"]=0;
@@ -58,7 +57,6 @@ function StageTopRecord(pn) --�^�ǳ̰��������Ӭ���
 			myScoreSet["topW1"]  = scores[1]:GetTapNoteScore("TapNoteScore_W1");
 			myScoreSet["topW2"]  = scores[1]:GetTapNoteScore("TapNoteScore_W2");
 			myScoreSet["topW3"]  = scores[1]:GetTapNoteScore("TapNoteScore_W3");
-			myScoreSet["topW4"]  = scores[1]:GetTapNoteScore("TapNoteScore_W4");
 			myScoreSet["topW4"]  = scores[1]:GetTapNoteScore("TapNoteScore_W4");
 			myScoreSet["topMiss"]  = scores[1]:GetTapNoteScore("TapNoteScore_W4")+scores[1]:GetTapNoteScore("TapNoteScore_Miss");
 			myScoreSet["topOK"]  = scores[1]:GetHoldNoteScore("HoldNoteScore_Held");
@@ -158,27 +156,31 @@ t[#t+1]=Def.ActorFrame{
 						assert(scores);
 					local topscore=0;
 					if scores[1] then
-						topscore = scores[1];
+						for _, topscore in ipairs(scores) do
 							assert(topscore);
-						local misses = topscore:GetTapNoteScore("TapNoteScore_Miss")+topscore:GetTapNoteScore("TapNoteScore_CheckpointMiss")
-						local boos = topscore:GetTapNoteScore("TapNoteScore_W4")
-						local goods = topscore:GetTapNoteScore("TapNoteScore_W4")
-						local greats = topscore:GetTapNoteScore("TapNoteScore_W3")
-						local perfects = topscore:GetTapNoteScore("TapNoteScore_W2")
-						local marvelous = topscore:GetTapNoteScore("TapNoteScore_W1")
-						if (misses+boos) == 0 and scores[1]:GetScore() > 0 and (marvelous+perfects)>0 then
-							if (greats+perfects) == 0 then
-								self:Load(THEME:GetPathG("","ScreenSelectMusic/MarvelousFullcombo_ring"))
-							elseif greats == 0 then
-								self:Load(THEME:GetPathG("","ScreenSelectMusic/PerfectFullcombo_ring"))
-							elseif (misses+boos+goods) == 0 then
-								self:Load(THEME:GetPathG("","ScreenSelectMusic/GreatFullcombo_ring"))
-							elseif (misses+boos) == 0 then
-								self:Load(THEME:GetPathG("","ScreenSelectMusic/GoodFullcombo_ring"))
+							local misses = topscore:GetTapNoteScore("TapNoteScore_Miss") + 
+											topscore:GetTapNoteScore("TapNoteScore_CheckpointMiss") +
+											topscore:GetHoldNoteScore("HoldNoteScore_LetGo") +
+											topscore:GetTapNoteScore("TapNoteScore_HitMine")
+							local goods = topscore:GetTapNoteScore("TapNoteScore_W4")
+							local greats = topscore:GetTapNoteScore("TapNoteScore_W3")
+							local perfects = topscore:GetTapNoteScore("TapNoteScore_W2")
+							local marvelous = topscore:GetTapNoteScore("TapNoteScore_W1")
+							if (misses) == 0 and topscore:GetScore() > 0 and (marvelous+perfects)>0 then
+								if (greats+perfects) == 0 then
+									self:Load(THEME:GetPathG("","ScreenSelectMusic/MarvelousFullcombo_ring"))
+								elseif greats == 0 then
+									self:Load(THEME:GetPathG("","ScreenSelectMusic/PerfectFullcombo_ring"))
+								elseif (misses+goods) == 0 then
+									self:Load(THEME:GetPathG("","ScreenSelectMusic/GreatFullcombo_ring"))
+								elseif (misses) == 0 then
+									self:Load(THEME:GetPathG("","ScreenSelectMusic/GoodFullcombo_ring"))
+								end;
+								self:visible(true):spin():zoom(1):effectmagnitude(0,0,170)
+								break
+							else
+								self:visible(false)
 							end;
-							self:visible(true):spin():zoom(1):effectmagnitude(0,0,170)
-						else
-							self:visible(false)
 						end;
 					else
 						self:visible(false)

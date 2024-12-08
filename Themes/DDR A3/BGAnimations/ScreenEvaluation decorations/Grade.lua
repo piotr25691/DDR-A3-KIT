@@ -10,6 +10,7 @@ for _,pn in pairs(GAMESTATE:GetEnabledPlayers()) do
 		InitCommand=function(s) s:player(pn):x(pn== PLAYER_1 and _screen.cx-297 or _screen.cx+380):y(_screen.cy-80):zoom(0):queuecommand("Set") end,
 		OnCommand=function(s) s:linear(0.2):zoom(1):spin():effectmagnitude(0,0,170) end,
 		SetCommand=function(s)
+			if STATSMAN:GetCurStageStats():GetPlayerStageStats(pn):GetFailed() then return end
 			if (Award == "StageAward_FullComboW1") then
 				s:Load(THEME:GetPathG("","Grade/MarvelousFullcombo_ring"))
 			elseif ((Award == "StageAward_SingleDigitW2") or (Award == "StageAward_OneW2") or (Award == "StageAward_FullComboW2")) then

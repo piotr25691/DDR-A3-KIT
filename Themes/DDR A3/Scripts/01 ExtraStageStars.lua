@@ -47,6 +47,10 @@ local function IsExtraStage()
     return GAMESTATE:IsExtraStage()
 end
 
+local function DidPassSong(rank)
+    return rank <= "Grade_Tier16"
+end
+
 -- Grant Extra Stage stars.
 -- If we got 9 stars, an extra stage will be unlocked.
 function AddExtraStageStars(rank, pn)
@@ -57,7 +61,7 @@ function AddExtraStageStars(rank, pn)
     if IsExtraStage() then return end
 
     -- Don't grant stars if the player failed
-    if STATSMAN:GetCurStageStats():GetPlayerStageStats(GAMESTATE:GetMasterPlayerNumber()):GetFailed() then return 0 end
+    if not DidPassSong(rank) then return 0 end
 
     local starsToAdd = 0
 

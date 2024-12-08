@@ -38,8 +38,6 @@ function CustomScore_SM5b1(params,scoremode,steps,cur)
 				minus=3;
 			elseif params.TapNoteScore=='TapNoteScore_W4' then
 				minus=2;
-			elseif params.TapNoteScore=='TapNoteScore_W4' then
-				minus=1;
 			end;
 			ret=(math.round((w1 + w2 + w3/2 + hd) *100000/maxsteps-(w2 + w3))*10)-minus;
 			--pss:SetScore(ret);
@@ -66,8 +64,6 @@ function CustomScore_SM5b1(params,scoremode,steps,cur)
 				minus=3;
 			elseif params.TapNoteScore=='TapNoteScore_W4' then
 				minus=2;
-			elseif params.TapNoteScore=='TapNoteScore_W4' then
-				minus=1;
 			end;
 			ret=(math.round((w1 + w2 + w3/2 + hd) *100000/maxsteps-(w2 + w3))*10)-minus;
 			pss:SetScore(ret);
@@ -103,8 +99,6 @@ function CustomScore_SM5b1(params,scoremode,steps,cur)
 				minus=3;
 			elseif params.TapNoteScore=='TapNoteScore_W4' then
 				minus=2;
-			elseif params.TapNoteScore=='TapNoteScore_W4' then
-				minus=1;
 			end;
 			ret=pss:GetScore()+addscore-minus;
 			pss:SetScore(ret);
@@ -152,8 +146,6 @@ function CustomScore_SM5b2(params,scoremode,steps,cur)
 			elseif params.TapNoteScore=='TapNoteScore_W4' then
 				w4=w4+1;
 				minus=2;
-			elseif params.TapNoteScore=='TapNoteScore_W4' then
-				minus=1;
 			end;
 
 
@@ -181,8 +173,6 @@ function CustomScore_SM5b2(params,scoremode,steps,cur)
 				minus=3;
 			elseif params.TapNoteScore=='TapNoteScore_W4' then
 				minus=2;
-			elseif params.TapNoteScore=='TapNoteScore_W4' then
-				minus=1;
 			end;
 			ret=(math.round((w1 + w2 + w3/2 + hd) *100000/maxsteps-(w2 + w3))*10);
 			pss:SetScore(ret);
@@ -218,8 +208,6 @@ function CustomScore_SM5b2(params,scoremode,steps,cur)
 				minus=3;
 			elseif params.TapNoteScore=='TapNoteScore_W4' then
 				minus=2;
-			elseif params.TapNoteScore=='TapNoteScore_W4' then
-				minus=1;
 			end;
 			ret=pss:GetScore()+addscore;
 			pss:SetScore(ret);

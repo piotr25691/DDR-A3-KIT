@@ -1,5 +1,8 @@
-Grades = {}
-Awards = {}
+-- DDR A evaluation announcer engine
+-- Announcer only speaks out the highest rank or award.
+
+local Grades = {}
+local Awards = {}
 local isSoundPlaying = false  -- Flag to track if a sound is currently playing
 
 for _, pn in pairs(GAMESTATE:GetEnabledPlayers()) do

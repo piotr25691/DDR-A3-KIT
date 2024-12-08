@@ -23,11 +23,7 @@ return Def.ActorFrame{
 				if param.PlayerNumber == PLAYER_1 and not playerFailed then
 					local options = GAMESTATE:GetPlayerState(PLAYER_1):GetPlayerOptionsArray("ModsLevel_Preferred")
 					if table.search(options, '4Lives') or table.search(options, '1Lives') then
-						if param.HealthState == "HealthState_DangerNoComment" then
-							self:RunCommandsOnChildren(cmd(playcommand,"Show"))
-						else
-							self:RunCommandsOnChildren(cmd(playcommand,"Hide"))
-						end
+						-- dont do anything here, don't know why NoComment isn't working
 					else
 						if param.HealthState == "HealthState_Danger" or param.HealthState == "HealthState_Danger_NoComment" then
 							self:RunCommandsOnChildren(cmd(playcommand,"Show"))
@@ -39,9 +35,16 @@ return Def.ActorFrame{
 			end;
 			LifeChangedMessageCommand=function(self, param)
 				if param.Player ~= PLAYER_1 then return end
+				local options = GAMESTATE:GetPlayerState(PLAYER_1):GetPlayerOptionsArray("ModsLevel_Preferred")
 				if param.LifeMeter:GetLife() == 0 then
 					self:RunCommandsOnChildren(cmd(playcommand,"Hide"))
 					playerFailed = true
+				elseif table.search(options, '4Lives') then
+					if param.LifeMeter:GetLivesLeft() == 1 then
+						self:RunCommandsOnChildren(cmd(playcommand,"Show"))
+					else
+						self:RunCommandsOnChildren(cmd(playcommand,"Hide"))
+					end
 				end
 			end;
 			--BG

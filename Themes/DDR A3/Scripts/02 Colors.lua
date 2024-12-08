@@ -85,7 +85,6 @@ GameColor = {
 		JudgmentLine_W2		= color("#fff568"),
 		JudgmentLine_W3		= color("#48ff1d"),
 		JudgmentLine_W4		= color("#34bfff"),
-		JudgmentLine_W5		= color("#e44dff"),
 		JudgmentLine_Held	= color("#FFFFFF"),
 		JudgmentLine_Miss	= color("#ff3c3c"),
 		JudgmentLine_MaxCombo	= color("#ffc600")

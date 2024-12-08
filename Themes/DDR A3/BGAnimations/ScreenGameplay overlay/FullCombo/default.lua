@@ -49,7 +49,7 @@ local function TextZoom()
 end
 
 local function IsFullCombo()
-	if pss:FullCombo() or pss:FullComboOfScore('TapNoteScore_W4') then
+	if pss:FullCombo() or pss:FullComboOfScore('TapNoteScore_W4') and not pss:GetFailed() then
 		return true
 	else
 		return false

@@ -36,17 +36,6 @@ t[#t+1] = Def.Actor{
 };
 
 if not GAMESTATE:IsDemonstration() then
-	t[#t+1] = Def.ActorFrame {
-		Def.Actor {
-			InitCommand=function(s) 
-				s:sleep(BeginReadyDelay()):queuecommand('Play') 
-			end,
-			PlayCommand=function(s) 
-				SOUND:PlayAnnouncer('gameplay ready')
-			end,
-		},
-	};
-	
 	if ShowCutIns() then
 		if GetUserPref("OptionRowGameplayBackground")=='DanceStages' then
 			t[#t+1] = LoadActor("Cut-In/DanceStages")
@@ -98,17 +87,17 @@ t[#t+1] = Def.ActorFrame {
 };
 
 if GAMESTATE:IsSideJoined(PLAYER_1) then
-	t[#t+1] = LoadActor("TargetScore/P1");
+	t[#t+1] = LoadActor("TargetScore/P1")..{ InitCommand=function(s) s:draworder(OptionRowComboUnderField() and 1 or 0) end, };
 	t[#t+1] = LoadActor("SpeedChange/P1");
 	t[#t+1] = LoadActor("Constant/P1");
-	t[#t+1] = LoadActor(THEME:GetPathG("", "Player ShockArrow judgment/P1"));
+	t[#t+1] = LoadActor(THEME:GetPathG("", "Player ShockArrow judgment/P1"))..{ InitCommand=function(s) s:draworder(OptionRowComboUnderField() and 1 or 0) end, };
 end
 
 if GAMESTATE:IsSideJoined(PLAYER_2) then
-	t[#t+1] = LoadActor("TargetScore/P2");
+	t[#t+1] = LoadActor("TargetScore/P2")..{ InitCommand=function(s) s:draworder(OptionRowComboUnderField() and 1 or 0) end, };
 	t[#t+1] = LoadActor("SpeedChange/P2");
 	t[#t+1] = LoadActor("Constant/P2");
-	t[#t+1] = LoadActor(THEME:GetPathG("", "Player ShockArrow judgment/P2"));
+	t[#t+1] = LoadActor(THEME:GetPathG("", "Player ShockArrow judgment/P2"))..{ InitCommand=function(s) s:draworder(OptionRowComboUnderField() and 1 or 0) end, };
 end
 
 return t

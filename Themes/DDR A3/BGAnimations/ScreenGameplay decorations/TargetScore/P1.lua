@@ -1,9 +1,8 @@
 -- TargetScore (A3)
 -- Sourced from https://josevarela.net/SMArchive/Themes/ThemePreview.php?Category=StepMania%205&ID=DDR2013
 -- Modified for DDR A3 theme with realistic behavior
--- Needs judgments in the background
 
-local player = "PlayerNumber_P1";
+local player = PLAYER_1;
 local st = GAMESTATE:GetCurrentStyle():GetStepsType();
 local pname = ToEnumShortString(player);
 local ts = {0,0};
@@ -69,7 +68,7 @@ end;
 
 local bTargetScore = TargetScore(player);
 
-if not GAMESTATE:IsDemonstration() and not GAMESTATE:IsCourseMode() and GAMESTATE:GetPlayMode() == 'PlayMode_Regular' and bTargetScore ~= "off" then
+if not GAMESTATE:IsDemonstration() and not GAMESTATE:IsCourseMode() and GAMESTATE:GetPlayMode() == 'PlayMode_Regular' then
 	local bEXScore = EXScore(player);
 	
 	local function GetMachinePersonalHighScores()
@@ -115,8 +114,6 @@ if not GAMESTATE:IsDemonstration() and not GAMESTATE:IsCourseMode() and GAMESTAT
 		end;
 	end;
 	assert(topscore);
-
-	if topscore == 0 then return end
 			
 	local moto = topscore/maxsteps;
 	
@@ -137,6 +134,10 @@ if not GAMESTATE:IsDemonstration() and not GAMESTATE:IsCourseMode() and GAMESTAT
 				self:y(SCREEN_CENTER_Y-60);
 				self:zoom(0.5);
 				(cmd(horizalign,right;strokecolor,color("#000000")))(self)
+
+				if topscore == 0 or topscore == 1000000 then
+					self:visible(false)
+				end
 			end;
 			OnCommand=function(self)
 				if GAMESTATE:GetCurrentStyle():GetName() == "double" then
