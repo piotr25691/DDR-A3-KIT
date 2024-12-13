@@ -88,12 +88,12 @@ t[#t+1] = Def.BitmapText {
 	end;
 
 	GetCreditsCommand=function(s)
-		if GAMESTATE:IsEventMode() then
+		if GAMESTATE:GetCoinMode() == "CoinMode_Home" then
+			s:settext("HOME MODE")
+		elseif GAMESTATE:IsEventMode() then
 			s:settext("EVENT MODE")
 		elseif GAMESTATE:GetCoinMode() == "CoinMode_Free" then
 			s:settext("FREE PLAY")
-		elseif GAMESTATE:GetCoinMode() == "CoinMode_Home" then
-			s:settext("HOME MODE")
 		else
 			local credits = math.floor(GAMESTATE:GetCoins() / GAMESTATE:GetCoinsNeededToJoin())
 			

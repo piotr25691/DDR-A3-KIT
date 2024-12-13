@@ -46,7 +46,7 @@ local function RivalScore(pn,rival)
         Def.RollingNumbers {
             File = THEME:GetPathF("_geo 95","20px");
             InitCommand=function(self)
-                self:x(pn==PLAYER_1 and 140 or 117);
+                self:xy(pn==PLAYER_1 and 140 or 117,9);
                 self:halign(0.85)
                 self:diffuse(Color("Black"));
                 if (rival ~= 1) then

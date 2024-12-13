@@ -7,7 +7,7 @@ local Perfect = pss:GetTapNoteScores("TapNoteScore_W2");
 local Great = pss:GetTapNoteScores("TapNoteScore_W3");
 local Good = pss:GetTapNoteScores("TapNoteScore_W4");
 local Ok = pss:GetHoldNoteScores("HoldNoteScore_Held");
-local Miss = pss:GetTapNoteScores("TapNoteScore_Miss") + pss:GetTapNoteScores("TapNoteScore_W4");
+local Miss = pss:GetTapNoteScores("TapNoteScore_Miss") + pss:GetTapNoteScores("TapNoteScore_HitMine") + pss:GetHoldNoteScores("HoldNoteScore_LetGo")
 
 local Fast=getenv("numFast"..ToEnumShortString(pn));
 local Slow=getenv("numSlow"..ToEnumShortString(pn));

@@ -827,8 +827,15 @@ if GAMESTATE:GetPlayMode()=="PlayMode_Oni" then
 
 --ApplyOptions
 
-GAMESTATE:GetPlayerState('PlayerNumber_P1'):SetPlayerOptions('ModsLevel_Preferred',OptionsP1P);
-GAMESTATE:GetPlayerState('PlayerNumber_P2'):SetPlayerOptions('ModsLevel_Preferred',OptionsP2P);
+-- LET'S CHECK YOUR LEVEL! has its own "lifebar" that doesn't decrease.
+if GAMESTATE:GetCurrentSong():GetDisplayMainTitle() == "LET'S CHECK YOUR LEVEL!" or
+GAMESTATE:GetCurrentSong():GetDisplayMainTitle() == "Steps to the Star" then
+    GAMESTATE:GetPlayerState('PlayerNumber_P1'):SetPlayerOptions('ModsLevel_Preferred',OptionsP1P..",bar,lets-check-your-level,failoff");
+    GAMESTATE:GetPlayerState('PlayerNumber_P2'):SetPlayerOptions('ModsLevel_Preferred',OptionsP2P..",bar,lets-check-your-level,failoff");
+else
+	GAMESTATE:GetPlayerState('PlayerNumber_P1'):SetPlayerOptions('ModsLevel_Preferred',OptionsP1P);
+	GAMESTATE:GetPlayerState('PlayerNumber_P2'):SetPlayerOptions('ModsLevel_Preferred',OptionsP2P);
+end
 
 
 return t;

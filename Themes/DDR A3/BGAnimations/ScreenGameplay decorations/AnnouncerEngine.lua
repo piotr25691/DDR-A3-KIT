@@ -10,6 +10,8 @@ local lastCheeringComboPlayed = 0
 local lastTimeMilestonePlayed = 0
 local lastFixedComboMilestonePlayed = 0 -- Track the last fixed 50 combo milestone played
 
+local judgedNotes = 0 -- Count judged notes instead of combos
+
 local comboCooldown = 5 -- Cooldown period for combo milestones
 local cheeringCooldown = 5 -- Cooldown period for cheering
 
@@ -132,6 +134,7 @@ t[#t+1] = Def.ActorFrame{
 	ComboChangedMessageCommand=function(self, params)
 		local combo = params.PlayerStageStats:GetCurrentCombo()
 		local missCombo = params.PlayerStageStats:GetCurrentMissCombo()
+		
 		local maxCombo = params.PlayerStageStats.GetMaxCombo and params.PlayerStageStats:GetMaxCombo() or 0
 		local songPosition = GAMESTATE:GetSongPosition()
 		local currentTime = songPosition:GetMusicSeconds()
