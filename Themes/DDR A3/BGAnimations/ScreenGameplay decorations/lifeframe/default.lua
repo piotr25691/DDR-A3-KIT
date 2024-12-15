@@ -194,6 +194,23 @@ return Def.ActorFrame{
 			end;
 		end;
     };
+
+	-- Slow white pulse effect in LET'S CHECK YOUR LEVEL
+	Def.Quad{
+		InitCommand=function(s) s:x(pn==PLAYER_1 and -8 or 10):diffusealpha(0) end,
+		OnCommand=function(s)
+			if GAMESTATE:GetCurrentSong():GetDisplayFullTitle() == "LET'S CHECK YOUR LEVEL!" or
+			GAMESTATE:GetCurrentSong():GetDisplayFullTitle() == "Steps to the Star" then
+				s:scaletoclipped(296,20)
+				:diffusealpha(1)
+				:diffuseshift()
+				:blend('BlendMode_Add')
+				:effectcolor1(color("#000000"))
+				:effectcolor2(color("#ffffff"))
+				:effectperiod(5)
+			end
+		end
+	};
 	Def.Sprite{
 		InitCommand=function(s) s:x(pn==PLAYER_1 and -8 or 10) end,
         OnCommand=function(s) s:scaletoclipped(296,20)

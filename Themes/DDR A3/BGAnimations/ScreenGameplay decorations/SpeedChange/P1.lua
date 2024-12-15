@@ -8,6 +8,8 @@ AllOptions = AllOptions:gsub(SpeedModsPattern, "")
 local function GetInput(event)
     if not PREFSMAN:GetPreference("OnlyDedicatedMenuButtons") then return end
     if event.type == "InputEventType_Release" then return end
+    if GAMESTATE:GetCurrentSong():GetDisplayFullTitle() == "LET'S CHECK YOUR LEVEL!" or
+    GAMESTATE:GetCurrentSong():GetDisplayFullTitle() == "Steps to the Star" then return end
 
     local OptionsP1P = GAMESTATE:GetPlayerState(PLAYER_1):GetPlayerOptionsString('ModsLevel_Preferred')
     local flareModifiers = {

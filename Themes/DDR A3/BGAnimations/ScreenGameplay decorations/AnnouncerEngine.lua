@@ -228,44 +228,47 @@ t[#t+1] = Def.ActorFrame{
 					return end
 				end
 			end
-		end	
-		
 
-		-- Handle combo break and ensure fixed 50 combo milestone still goes off
-		if combo == 0 and not soundPlaying then
-			if maxCombo > 0 and maxCombo < 50 then
-				if everyoneIsInDanger() then
-					SOUND:PlayAnnouncer("combo 50 danger ac")
-				else
-					SOUND:PlayAnnouncer("combo 50 ac")
-				end
-				soundPlaying = true
-				self:sleep(comboCooldown):queuecommand("ResetSoundFlag")
-			return end
-
-			lastComboMilestonePlayed = 0
-			lastCheeringComboPlayed = 0
-			lastFixedComboMilestonePlayed = 0
-
-			-- Adjust for song length if combo is broken before 50 combos
-			if maxCombo < 50 then
-				local elapsedTimeRatio = maxCombo / 50
-				local expectedMilestoneTime = songLength * elapsedTimeRatio
-				if currentTime >= expectedMilestoneTime then
+			-- Handle combo break and ensure fixed 50 combo milestone still goes off
+			if combo == 0 and not soundPlaying then
+				if maxCombo > 0 and maxCombo < 50 then
 					if everyoneIsInDanger() then
 						SOUND:PlayAnnouncer("combo 50 danger ac")
 					else
 						SOUND:PlayAnnouncer("combo 50 ac")
 					end
-				soundPlaying = true
-				self:sleep(comboCooldown):queuecommand("ResetSoundFlag")
-			return end
+					soundPlaying = true
+					self:sleep(comboCooldown):queuecommand("ResetSoundFlag")
+				return end
+
+				lastComboMilestonePlayed = 0
+				lastCheeringComboPlayed = 0
+				lastFixedComboMilestonePlayed = 0
+
+				-- Adjust for song length if combo is broken before 50 combos
+				if maxCombo < 50 then
+					local elapsedTimeRatio = maxCombo / 50
+					local expectedMilestoneTime = songLength * elapsedTimeRatio
+					if currentTime >= expectedMilestoneTime then
+						if everyoneIsInDanger() then
+							SOUND:PlayAnnouncer("combo 50 danger ac")
+						else
+							SOUND:PlayAnnouncer("combo 50 ac")
+						end
+					soundPlaying = true
+					self:sleep(comboCooldown):queuecommand("ResetSoundFlag")
+				return end
+			end	
 		end
 
 		-- Make the announcer catch up based on song timing
 		for _, milestone in ipairs(timeThresholds) do
-			if math.floor(currentTime) == milestone and lastTimeMilestonePlayed ~= milestone then
-				SOUND:PlayAnnouncer("interval " .. milestone .. " ac")
+			if math.floor(currentTime) == milestone and lastTimeMilestonePlayed ~= milestone and not soundPlaying then
+				if everyoneIsInDanger() then
+					SOUND:PlayAnnouncer("combo 50 danger ac")
+				else
+					SOUND:PlayAnnouncer("combo 50 ac")
+				end
 				lastTimeMilestonePlayed = milestone
 				soundPlaying = true
 				self:sleep(comboCooldown):queuecommand("ResetSoundFlag")
@@ -277,31 +280,6 @@ t[#t+1] = Def.ActorFrame{
 	ResetSoundFlagCommand=function(self)
 		soundPlaying = false
 	end,
-
-	UpdateCommand=function(self)
-		local songPosition = GAMESTATE:GetSongPosition()
-		local currentTime = songPosition:GetMusicSeconds()
-
-		-- Check for 3 seconds before or after fixed 50 or 100 combo milestones
-		local milestones = {}
-		for i = 50, 1000, 50 do
-			table.insert(milestones, i)
-		end
-
-		for _, milestone in ipairs(milestones) do
-			local milestoneTime = milestone / bpm * 60 -- Convert combo to time
-			if math.abs(currentTime - milestoneTime) <= 3 and not soundPlaying and lastCheeringComboPlayed ~= milestone then
-				if everyoneIsInDanger() then
-					SOUND:PlayAnnouncer("combo booing ac")
-				else
-					SOUND:PlayAnnouncer("combo cheering ac")
-				end
-				lastCheeringComboPlayed = milestone
-				soundPlaying = true
-				self:sleep(cheeringCooldown):queuecommand("ResetSoundFlag")
-			return end
-		end
-	end
 }
 
 return t
