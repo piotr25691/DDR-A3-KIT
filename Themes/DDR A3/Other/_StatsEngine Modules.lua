@@ -28,7 +28,7 @@ return {
 			local function rvMaxRawScore(rv)
 				return 5*(rv:GetValue'RadarCategory_TapsAndHolds'
 				+rv:GetValue'RadarCategory_Holds'+rv:GetValue'RadarCategory_Rolls'
-				+rv:GetValue'RadarCategory_Mines')
+				+math.floor(rv:GetValue'RadarCategory_Mines')/4)
     		end
 			local maxRawScore = 0
     		if trail then
@@ -49,6 +49,8 @@ return {
 			local cur_maxRawScore = 0; local rawScore = 0; local deductions = 0;
     		local failOn = 
     		GAMESTATE:GetPlayerState(pn):GetCurrentPlayerOptions():FailSetting() ~= 'FailType_Off'
+			local judgedMines = 0
+			local currentStyle = GAMESTATE:GetCurrentStyle():GetName()
 
 			while true do
 				local params, data = yield(varTable)
@@ -63,18 +65,24 @@ return {
 						rawScore = rawScore + 5
 					end
 				elseif tns then
-					if tns == 'W1' or tns == "AvoidMine" then
+					if tns == 'W1' then
 						rawScore = rawScore + 5
-    					elseif tns ~= 'Miss' and tns ~= "HitMine" then
-    						deductions = deductions + 1
+					elseif tns == 'AvoidMine' then
+						judgedMines = judgedMines + 1
+						if judgedMines == 4 then
+							rawScore = rawScore + 5
+							judgedMines = 0
+						end
+					elseif tns ~= 'Miss' and tns ~= "HitMine" then
+						deductions = deductions + 1
 						if tns == 'W2' then
 							rawScore = rawScore + 5
 						elseif tns == 'W3' then
 							rawScore = rawScore + 3
-    						else
-    							rawScore = rawScore + 1
-    						end
-    					end
+						else
+							rawScore = rawScore + 1
+						end
+					end
 				end
 				varTable.Score = math.floor(rawScore/maxRawScore*100000-deductions+0.5)*10
 			end

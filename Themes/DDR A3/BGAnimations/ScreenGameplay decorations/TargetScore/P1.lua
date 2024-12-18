@@ -5,117 +5,51 @@
 local player = PLAYER_1;
 local st = GAMESTATE:GetCurrentStyle():GetStepsType();
 local pname = ToEnumShortString(player);
-local ts = {0,0};
+local ts = 0;
+local minesJudged = 0;
 
 local playerFailed = false;
-
-local TargetScore_JudgeCmdsPlayer = {
-	TapNoteScore_W1 = THEME:GetMetric( "Judgment", "TargetScore_2013_JudgmentW1Command" );
-	TapNoteScore_W2 = THEME:GetMetric( "Judgment",  "TargetScore_2013_JudgmentW2Command" );
-	TapNoteScore_W3 = THEME:GetMetric( "Judgment",  "TargetScore_2013_JudgmentW3Command" );
-	TapNoteScore_W4 = THEME:GetMetric( "Judgment",  "TargetScore_2013_JudgmentW4Command" );
-	TapNoteScore_W4 = THEME:GetMetric( "Judgment",  "TargetScore_2013_JudgmentW4Command" );
-	TapNoteScore_Miss = THEME:GetMetric( "Judgment",  "TargetScore_2013_JudgmentMissCommand" )
-};
+local isMine = false;
 
 local t = Def.ActorFrame {};
 
-function profile_or_player(pn)
-	if PROFILEMAN:IsPersistentProfile(pn) then
-		return PROFILEMAN:GetProfile(pn):GetGUID();
-	else
-		return ToEnumShortString(pn);
-	end;
-end;
+local rn_type = "RollingNumbers"
+local data_source = "AScoring"
 
-function FirstReMIX_TargetScore(pn)
-	local pname = ToEnumShortString(pn);
-	local profileGUID = PROFILEMAN:GetProfile(pn):GetGUID();
-	if PROFILEMAN:IsPersistentProfile(pn) then
-		WritePrefToFile("FirstReMIX_TargetScore_"..profileGUID, 'personal');
-	else
-		WritePrefToFile("FirstReMIX_TargetScore_" .. pname, 'personal')
-	end;
+if IsEXScore() then
+	rn_type = "RollingNumbersEXScore"
+    data_source = "EXScore"
 end
-
-FirstReMIX_TargetScore(player)
-
-function TargetScore(pn)
-	return "personal"
-end;
-
-function EXScore(pn)
-	return "personal"
-end
-
-function GetNormalScore(maxsteps,score,player)
-	local s;
-	local w1 = score:GetTapNoteScore('TapNoteScore_W1');
-	local w2 = score:GetTapNoteScore('TapNoteScore_W2');
-	local w3 = score:GetTapNoteScore('TapNoteScore_W3');
-	local hd = score:GetHoldNoteScore('HoldNoteScore_Held');
-	if EXScore(player) == "On" then
-		s = w1*3 + w2*2 + w3 + hd*3;
-	else
-		if PREFSMAN:GetPreference("AllowW1")~="AllowW1_Everywhere" then
-			w1 = w1+w2;
-			w2 = 0;
-		end;
-		s = (math.round( (w1 + w2 + w3/2+hd)*100000/maxsteps-(w2 + w3))*10);
-	end;
-	return s;
-end;
-
-local bTargetScore = TargetScore(player);
 
 if not GAMESTATE:IsDemonstration() and not GAMESTATE:IsCourseMode() and GAMESTATE:GetPlayMode() == 'PlayMode_Regular' then
-	local bEXScore = EXScore(player);
-	
-	local function GetMachinePersonalHighScores()
-		local profile;
-		if bTargetScore == "personal" then
-			if PROFILEMAN:IsPersistentProfile(player) then
-				profile = PROFILEMAN:GetProfile(player);
-			else
-				profile = PROFILEMAN:GetMachineProfile();
-			end;
-		else
-			profile = PROFILEMAN:GetMachineProfile();
-		end;
-		local song = GAMESTATE:GetCurrentSong()
-		local diff = GAMESTATE:GetCurrentSteps(player):GetDifficulty()
-		local steps = song:GetOneSteps( st, diff );
-		scorelist = profile:GetHighScoreList(song,steps);
-		assert(scorelist);
-		return scorelist:GetHighScores();
-	end;
-
 	local p=((player == PLAYER_1) and 1 or 2);
 
 	local steps = GAMESTATE:GetCurrentSteps(player);
 	local rv = steps:GetRadarValues(player);
 	local pss = STATSMAN:GetCurStageStats():GetPlayerStageStats(player);
+	local song = GAMESTATE:GetCurrentSong()
 	local maxsteps = math.max(rv:GetValue('RadarCategory_TapsAndHolds')
-	+rv:GetValue('RadarCategory_Holds')+rv:GetValue('RadarCategory_Rolls'),1);
+	+rv:GetValue('RadarCategory_Holds')
+	+rv:GetValue('RadarCategory_Rolls')
+	+math.floor(rv:GetValue('RadarCategory_Mines')/4),1);
 
-	local scores = GetMachinePersonalHighScores(player);
-	assert(scores);
-	local topscore=0;
+	if PROFILEMAN:IsPersistentProfile(player) then
+		profile = PROFILEMAN:GetProfile(player)
+	else
+		profile = PROFILEMAN:GetMachineProfile()
+	end
+
+	scorelist = profile:GetHighScoreList(song,steps)
+	local scores = scorelist:GetHighScores()
+	local topscore = 0
+
 	if scores[1] then
-		for i = 1, #scores do
-			if scores[i] then
-				local topscore2 = GetNormalScore(maxsteps,scores[i],player);
-				if topscore2 > topscore then
-					topscore = topscore2;
-				end;
-			else
-				break;
-			end;
-		end;
+		topscore = scores[1]:GetScore()
 	end;
+
 	assert(topscore);
 			
-	local moto = topscore/maxsteps;
+	local moto=topscore/maxsteps;
 	
 	setenv("TopScoreSave"..pname,topscore);
 	
@@ -152,68 +86,44 @@ if not GAMESTATE:IsDemonstration() and not GAMESTATE:IsCourseMode() and GAMESTAT
 				end
 			end;
 			JudgmentMessageCommand=function(self,params)
+				if params.TapNoteScore == "TapNoteScore_AvoidMine" then
+					isMine = true
+					minesJudged = minesJudged + 1;
+				else
+					isMine = false
+					minesJudged = 0
+				end
+			end;
+			AfterStatsEngineMessageCommand=function(self,params)
 				if GAMESTATE:GetPlayerState(PLAYER_1):GetHealthState() == "HealthState_Dead" then return end
 				if params.Player ~= player then return end;
+				if (GAMESTATE:GetSongBeat() >= GAMESTATE:GetCurrentSong():GetLastBeat()) then return end
 				self:finishtweening();
-				if params.TapNoteScore and
-				   params.TapNoteScore ~= 'TapNoteScore_AvoidMine' and
-				   params.TapNoteScore ~= 'TapNoteScore_HitMine' and
-				   params.TapNoteScore ~= 'TapNoteScore_CheckpointMiss' and
-				   params.TapNoteScore ~= 'TapNoteScore_CheckpointHit' and
-				   params.TapNoteScore ~= 'TapNoteScore_None'
-				then
-					local ret=0;
-					local w1=pss:GetTapNoteScores('TapNoteScore_W1');
-					local w2=pss:GetTapNoteScores('TapNoteScore_W2');
-					local w3=pss:GetTapNoteScores('TapNoteScore_W3');
-					local hd=pss:GetHoldNoteScores('HoldNoteScore_Held');
-					if params.HoldNoteScore=='HoldNoteScore_Held' then
-						hd=hd+1;
-					elseif params.TapNoteScore=='TapNoteScore_W1' then
-						w1=w1+1;
-					elseif params.TapNoteScore=='TapNoteScore_W2' then
-						w2=w2+1;
-					elseif params.TapNoteScore=='TapNoteScore_W3' then
-						w3=w3+1;
-					end;
-					
-					if bEXScore == "On" then
-						ret = w1*3 + w2*2 + w3;
-						ts[p] = ts[p] + moto
-						local last = math.round((ret-ts[p]));
-						if last > 0 then
-							self:diffuse(color("#766fbd"));
-							self:settext("+"..last);
-						elseif last < 0 then
-							self:diffuse(color("#bd727f"));
-							self:settext(last);
-						else
-							self:diffuse(color("#ffffff"));
-							self:settext("0");
-						end;
-					else
-						ret=(math.round((w1 + w2 + w3/2 + hd) *100000/maxsteps-(w2 + w3))*10);
-						ts[p] = ts[p] + moto
-						local last = math.round((ret-ts[p])*0.1);
-						if last > 0 then
-							self:diffuse(color("#766fbd"));
-							self:settext("+"..last*10);
-						elseif last < 0 then
-							self:diffuse(color("#bd727f"));
-							self:settext(last*10);
-						else
-							self:diffuse(color("#ffffff"));
-							self:settext("±0");
-						end;
-					end;
-					
-					TargetScore_JudgeCmdsPlayer[params.TapNoteScore](self)
+
+				ret=params.Data[data_source].Score
+
+				if isMine and minesJudged == 4 then
+					ts = ts + moto
+					minesJudged = 0
+				elseif not isMine then
+					ts = ts + moto
+				end
+
+				local last = math.round((ret-ts)*0.1);
+
+				if last > 0 then
+					self:diffuse(color("#766fbd"));
+					self:settext("+"..last*10);
+				elseif last < 0 then
+					self:diffuse(color("#bd727f"));
+					self:settext(last*10);
+				else
+					self:diffuse(color("#ffffff"));
+					self:settext("±0");
 				end;
 			end;
 		};
 	};
-else
-	setenv("TopScoreSave"..pname,0);
 end;
 
 return t;
