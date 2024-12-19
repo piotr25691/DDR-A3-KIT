@@ -1,6 +1,34 @@
 local pn = ...
 local player = ToEnumShortString(pn)
 
+local gauge = GAMESTATE:GetPlayerState(pn):GetPlayerOptions('ModsLevel_Current'):DrainSetting()
+
+local gaugeP1 = GAMESTATE:GetPlayerState(PLAYER_1):GetPlayerOptions('ModsLevel_Current'):DrainSetting()
+local gaugeP2 = GAMESTATE:GetPlayerState(PLAYER_2):GetPlayerOptions('ModsLevel_Current'):DrainSetting()
+
+local flareData = {
+    PlayerNumber_P1 = {
+        isFlare = false,
+        currentFlare = 10,
+        previousFlareLife = 1,
+    },
+    PlayerNumber_P2 = {
+        isFlare = false,
+        currentFlare = 10,
+        previousFlareLife = 1,
+    }
+}
+
+
+if gaugeP1 == "DrainType_FloatingFlare" then
+	flareData["PlayerNumber_P1"].isFlare = true;
+end
+
+if gaugeP2 == "DrainType_FloatingFlare" then
+	flareData["PlayerNumber_P2"].isFlare = true;
+end
+
+
 return Def.ActorFrame {
 	-- Speed
 	Def.Sprite{
@@ -197,8 +225,8 @@ return Def.ActorFrame {
 				self:Load(THEME:GetPathG("","OptionIcon/"..player.."/Gauge/Flare9.png"));
 			elseif table.search(GAMESTATE:GetPlayerState(pn):GetPlayerOptionsArray("ModsLevel_Preferred"), 'FlareEX') then	
 				self:Load(THEME:GetPathG("","OptionIcon/"..player.."/Gauge/FlareEX.png"));
-			elseif table.search(GAMESTATE:GetPlayerState(pn):GetPlayerOptionsArray("ModsLevel_Preferred"), 'FloatingFlare') then	
-				self:Load(THEME:GetPathG("","OptionIcon/"..player.."/Gauge/Hard.png"));
+			elseif table.search(GAMESTATE:GetPlayerState(pn):GetPlayerOptionsArray("ModsLevel_Preferred"), 'FloatingFlare') then
+				self:Load(THEME:GetPathG("","OptionIcon/"..player.."/Gauge/FlareEX.png"));
 			elseif table.search(GAMESTATE:GetPlayerState(pn):GetPlayerOptionsArray("ModsLevel_Preferred"), '4Lives') then			
 				self:Load(THEME:GetPathG("","OptionIcon/"..player.."/Gauge/Life4.png"));
 			elseif table.search(GAMESTATE:GetPlayerState(pn):GetPlayerOptionsArray("ModsLevel_Preferred"), '1Lives') then			
@@ -210,5 +238,17 @@ return Def.ActorFrame {
 				self:playcommand("Init");
 			end;
 		end;
+		LifeChangedMessageCommand=function(self, param)
+			if not flareData[pn].isFlare then return end
+			if gauge == "DrainType_FloatingFlare" then
+				if param.LifeMeter:GetLife() > flareData[pn].previousFlareLife and param.Player == pn then
+					flareData[pn].currentFlare = flareData[pn].currentFlare - 1
+					self:Load(THEME:GetPathG("","OptionIcon/"..player.."/Gauge/Flare"..flareData[pn].currentFlare..".png"));
+					flareData[pn].previousFlareLife = param.LifeMeter:GetLife()
+				elseif param.LifeMeter:GetLife() < 0.3 and param.Player == pn then
+					flareData[pn].previousFlareLife = param.LifeMeter:GetLife()
+				end
+			end
+		end,
 	};
 };

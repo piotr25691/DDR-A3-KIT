@@ -20,25 +20,25 @@ local screen = SCREENMAN:GetTopScreen();
 
 local rownames;
 if GAMESTATE:IsExtraStage() or GAMESTATE:IsExtraStage2() then
-	rownames = { "Speed", "Accel", "Appearance", "Turn", "Hide", "Scroll", "NoteSkins", "Remove", "Freeze", "Jump" }
+	rownames = { "Speed", "Accel", "Appearance", "Turn", "Hide", "Scroll", "NoteSkins", "Remove", "Freeze", "Jump", "TargetScore",  }
 else
 	if GetUserPref("OptionRowGameplayBackground")=='DanceStages' then
 		if GetUserPref("NTOption")=='On' then
-			rownames = { "Speed", "Accel", "Appearance", "Turn", "Hide", "Scroll", "NoteSkins", "Remove", "Freeze", "Jump", "Gauge", "DanceStage", "Arrow" }
+			rownames = { "Speed", "Accel", "Appearance", "Turn", "Hide", "Scroll", "NoteSkins", "Remove", "Freeze", "Jump", "TargetScore", "Gauge", "DanceStage", "Arrow" }
 		else
-			rownames = { "Speed", "Accel", "Appearance", "Turn", "Hide", "Scroll", "NoteSkins", "Remove", "Freeze", "Jump", "Gauge", "DanceStage" }
+			rownames = { "Speed", "Accel", "Appearance", "Turn", "Hide", "Scroll", "NoteSkins", "Remove", "Freeze", "Jump", "TargetScore", "Gauge", "DanceStage" }
 		end
 	elseif GetUserPref("OptionRowGameplayBackground")=='SNCharacters' then
 		if GetUserPref("NTOption")=='On' then
-			rownames = { "Speed", "Accel", "Appearance", "Turn", "Hide", "Scroll", "NoteSkins", "Remove", "Freeze", "Jump", "Gauge", "Characters", "Arrow" }
+			rownames = { "Speed", "Accel", "Appearance", "Turn", "Hide", "Scroll", "NoteSkins", "Remove", "Freeze", "Jump", "TargetScore", "Gauge", "Characters", "Arrow" }
 		else
-			rownames = { "Speed", "Accel", "Appearance", "Turn", "Hide", "Scroll", "NoteSkins", "Remove", "Freeze", "Jump", "Gauge", "Characters" }
+			rownames = { "Speed", "Accel", "Appearance", "Turn", "Hide", "Scroll", "NoteSkins", "Remove", "Freeze", "Jump", "TargetScore", "Gauge", "Characters" }
 		end
 	else
 		if GetUserPref("NTOption")=='On' then
-			rownames = { "Speed", "Accel", "Appearance", "Turn", "Hide", "Scroll", "NoteSkins", "Remove", "Freeze", "Jump", "Gauge", "Arrow" }
+			rownames = { "Speed", "Accel", "Appearance", "Turn", "Hide", "Scroll", "NoteSkins", "Remove", "Freeze", "Jump", "TargetScore", "Gauge", "Arrow" }
 		else
-			rownames = { "Speed", "Accel", "Appearance", "Turn", "Hide", "Scroll", "NoteSkins", "Remove", "Freeze", "Jump", "Gauge", }
+			rownames = { "Speed", "Accel", "Appearance", "Turn", "Hide", "Scroll", "NoteSkins", "Remove", "Freeze", "Jump", "TargetScore", "Gauge", }
 		end
 	end
 end

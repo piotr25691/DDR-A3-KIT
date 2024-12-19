@@ -6,7 +6,7 @@ local gauge = GAMESTATE:GetPlayerState(pn):GetPlayerOptions('ModsLevel_Current')
 local gaugeP1 = GAMESTATE:GetPlayerState(PLAYER_1):GetPlayerOptions('ModsLevel_Current'):DrainSetting()
 local gaugeP2 = GAMESTATE:GetPlayerState(PLAYER_2):GetPlayerOptions('ModsLevel_Current'):DrainSetting()
 
-flareData = {
+local flareData = {
     PlayerNumber_P1 = {
         isFlare = false,
         currentFlare = 9,

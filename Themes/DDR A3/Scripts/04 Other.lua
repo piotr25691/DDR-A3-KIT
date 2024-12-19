@@ -358,21 +358,21 @@ end
 function OptionNumber()
 	if GetUserPref("OptionRowGameplayBackground")=='DanceStages' then
 		if GetUserPref("NTOption")=='On' then
-			return "Speed,Accel,Appearance,Turn,Hide,Scroll,NoteSkins,Cut,Freeze,Jump,ArrowType,SelectStage,Risky"
+			return "Speed,Accel,Appearance,Turn,Hide,Scroll,NoteSkins,Cut,Freeze,Jump,ArrowType,SelectStage,TargetScore,Risky"
 		else
-			return "Speed,Accel,Appearance,Turn,Hide,Scroll,NoteSkins,Cut,Freeze,Jump,SelectStage,Risky"
+			return "Speed,Accel,Appearance,Turn,Hide,Scroll,NoteSkins,Cut,Freeze,Jump,SelectStage,TargetScore,Risky"
 		end
 	elseif GetUserPref("OptionRowGameplayBackground")=='SNCharacters' then
 		if GetUserPref("NTOption")=='On' then
-			return "Speed,Accel,Appearance,Turn,Hide,Scroll,NoteSkins,Cut,Freeze,Jump,ArrowType,Characters,Risky"
+			return "Speed,Accel,Appearance,Turn,Hide,Scroll,NoteSkins,Cut,Freeze,Jump,ArrowType,Characters,TargetScore,Risky"
 		else
-			return "Speed,Accel,Appearance,Turn,Hide,Scroll,NoteSkins,Cut,Freeze,Jump,Characters,Risky"
+			return "Speed,Accel,Appearance,Turn,Hide,Scroll,NoteSkins,Cut,Freeze,Jump,Characters,TargetScore,Risky"
 		end
 	else
 		if GetUserPref("NTOption")=='On' then
-			return "Speed,Accel,Appearance,Turn,Hide,Scroll,NoteSkins,Cut,Freeze,Jump,ArrowType,Risky"
+			return "Speed,Accel,Appearance,Turn,Hide,Scroll,NoteSkins,Cut,Freeze,Jump,ArrowType,TargetScore,Risky"
 		else
-			return "Speed,Accel,Appearance,Turn,Hide,Scroll,NoteSkins,Cut,Freeze,Jump,Risky"
+			return "Speed,Accel,Appearance,Turn,Hide,Scroll,NoteSkins,Cut,Freeze,Jump,TargetScore,Risky"
 		end
 	end
 end

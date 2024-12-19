@@ -980,3 +980,33 @@ end
 
 --Code by Midflight Digital
 
+function OptionRowTargetScore()
+    local t = {
+        Name = "TargetScore",
+        LayoutType = "ShowAllInRow",
+        SelectType = "SelectOne",
+        OneChoiceForAllPlayers = false,
+        ExportOnChange = true,
+        Choices = {"Off", "On"},
+        LoadSelections = function(self, list, pn)
+			if GetUserPref("OptionRowTargetScore")=='Off' then
+            	list[1] = true
+			elseif GetUserPref("OptionRowTargetScore")=='On' then
+				list[2] = true
+			end
+        end,
+        SaveSelections = function(self, list, pn)
+            local value
+            if list[2] then
+                value = "On"
+            else
+                value = "Off"
+            end
+
+            WritePrefToFile("OptionRowTargetScore", value)
+        end,
+    };
+    setmetatable(t, t);
+    return t;
+end
+

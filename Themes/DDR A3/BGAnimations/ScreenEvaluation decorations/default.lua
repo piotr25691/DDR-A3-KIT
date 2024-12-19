@@ -60,7 +60,13 @@ for _,pn in pairs(GAMESTATE:GetEnabledPlayers()) do
             SetCommand=function(s)
             local score
 				if IsEXScore() then
-					score = (pss:GetPossibleDancePoints())*(pss:GetPercentDancePoints());
+					local rv = GAMESTATE:GetCurrentSteps(pn):GetRadarValues(pn)
+					
+					local maxex = rv:GetValue("RadarCategory_TapsAndHolds")*3 +
+						rv:GetValue("RadarCategory_Holds")*3 +
+						math.floor(rv:GetValue("RadarCategory_Mines")/4)*3
+
+					score = math.floor(maxex*(pss:GetScore() / 1000000)+0.5)
 				else 
 					score = pss:GetScore();
 				end;

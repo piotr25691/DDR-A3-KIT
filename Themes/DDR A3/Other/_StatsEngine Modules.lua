@@ -195,13 +195,20 @@ return {
     		local values = {W1=3, W2=2, W3=1, AvoidMine=3}
 			local failOn =
     		GAMESTATE:GetPlayerState(pn):GetCurrentPlayerOptions():FailSetting() ~= 'FailType_Off'
+			local judgedMines = 0
     		while true do
     			local params, data = yield(varTable)
     			if params.Finalize then return varTable end
     			varTable.MaxScore = varTable.MaxScore + 3
 				if params.PSS:GetFailed() or (failOn and data.LifeTracker.Worst <= 0) then
 				--do nothing
-    			elseif not params.HNS then
+				elseif params.TNS == 'AvoidMine' then
+					judgedMines = judgedMines + 1
+					if judgedMines == 4 then
+						varTable.Score = varTable.Score + 3
+						judgedMines = 0
+					end
+    			elseif not params.HNS and params.TNS ~= 'AvoidMine'then
 					local points = values[params.TNS] or 0
     				varTable.Score = varTable.Score + points
     			elseif params.HNS == 'Held' then

@@ -13,7 +13,13 @@ local Fast=getenv("numFast"..ToEnumShortString(pn));
 local Slow=getenv("numSlow"..ToEnumShortString(pn));
 
 local Score = pss:GetScore();
-local EXScore = math.floor(pss:GetPossibleDancePoints())*(pss:GetPercentDancePoints())+0.5
+local Radar = GAMESTATE:GetCurrentSteps(pn):GetRadarValues(pn)
+					
+local MaxEXScore = Radar:GetValue("RadarCategory_TapsAndHolds")*3 +
+	Radar:GetValue("RadarCategory_Holds")*3 +
+	math.floor(Radar:GetValue("RadarCategory_Mines")/4)*3
+
+local EXScore = math.floor(MaxEXScore*(Score / 1000000)+0.5);
 
 
 local Large = Def.BitmapText{
