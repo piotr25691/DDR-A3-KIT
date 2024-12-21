@@ -1,6 +1,6 @@
 local pn = ...
 local difficulties = {}
-if GAMESTATE:GetCurrentStyle():GetName() == "single" then
+if GAMESTATE:GetCurrentStyle():GetName() == "single" or GAMESTATE:GetCurrentStyle():GetName() == "versus" then
   difficulties = {"Difficulty_Beginner", "Difficulty_Easy", "Difficulty_Medium", "Difficulty_Hard", "Difficulty_Challenge"}
 elseif GAMESTATE:GetCurrentStyle():GetName() == "double" then
   difficulties = {"Difficulty_Easy", "Difficulty_Medium", "Difficulty_Hard", "Difficulty_Challenge"}
@@ -318,10 +318,11 @@ return Def.ActorFrame{
                 end
             end
     
+
             -- Calculate the position if current_diff_index is found
             if current_diff_index and GAMESTATE:GetCurrentStyle():GetName() == "double" then
                 s:y(((current_diff_index - 1) * 38) - 80)
-            elseif current_diff_index and GAMESTATE:GetCurrentStyle():GetName() == "single" then
+            elseif current_diff_index and GAMESTATE:GetCurrentStyle():GetName() == "single" or current_diff_index and GAMESTATE:GetCurrentStyle():GetName() == "versus" then
                 s:y(((current_diff_index - 1) * 38) - 80)
             end
         else
