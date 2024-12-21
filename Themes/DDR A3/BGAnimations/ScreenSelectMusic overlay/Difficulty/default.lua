@@ -59,16 +59,6 @@ for i, difficulty in ipairs(difficulties) do
       diff = difficulty;
       local st=GAMESTATE:GetCurrentStyle():GetStepsType()
       local song=GAMESTATE:GetCurrentSong()
-      if song then
-        if song:HasStepsTypeAndDifficulty( st, diff ) then
-          local steps = song:GetOneSteps( st, diff )
-          self:visible(true)
-        else
-            self:visible(false)
-        end
-      else
-        -- self:visible(false)
-      end;
       local steps = GAMESTATE:GetCurrentSteps(pn)
 
       local total_diffs
