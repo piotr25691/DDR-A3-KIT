@@ -34,7 +34,7 @@ local function RivalScore(pn,rival)
                     assert(scorelist)
                     local scores = scorelist:GetHighScores();
                     
-                    if scores[rival] then
+                    if scores[rival] and scores[rival]:GetScore() ~= 0 then
 						self:settext(string.upper(PROFILEMAN:GetPlayerName(pn)))
 						self:maxwidth(120)
                     else
@@ -80,12 +80,12 @@ local function RivalScore(pn,rival)
                             topscore = scores[rival]:GetScore();
                             self:visible(true)
                         else
-                            topscore = 0
                             self:visible(false)
+                            topscore = 0
                         end
                     else
-                        topscore = 0
                         self:visible(false)
+                        topscore = 0
                     end;
                     assert(topscore);
                     
@@ -127,6 +127,15 @@ return Def.ActorFrame{
 		InitCommand=function(s) s:xy(pn==PLAYER_1 and -25 or 20, 23):zoom(0.9) end,
 		RivalScore(pn,1)..{
 			InitCommand=function(s) s:y(53) end,
+		};
+        RivalScore(pn,2)..{
+			InitCommand=function(s) s:y(78) end,
+		};
+        RivalScore(pn,3)..{
+			InitCommand=function(s) s:y(103) end,
+		};
+        RivalScore(pn,4)..{
+			InitCommand=function(s) s:y(128) end,
 		};
 	};
 }

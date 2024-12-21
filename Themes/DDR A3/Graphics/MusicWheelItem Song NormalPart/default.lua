@@ -81,7 +81,7 @@ return Def.ActorFrame{
 	end;
 	SetMessageCommand=function(self,params)
 		local index = params.Index
-		
+			
 		if index ~= nil then
 			SetXYPosition(self, params)
 			self:zoom(params.HasFocus and 2 or 1.7);
@@ -97,6 +97,7 @@ return Def.ActorFrame{
 		InitCommand=function(s) s:zoom(0.94) end,
 		SetCommand=function(s,p)
 			local song = p.Song;
+
 			if song then
 				local songtit = song:GetDisplayMainTitle();
 				if GoldenLeagueSong[songtit] ~= nil then

@@ -1,5 +1,4 @@
 -- Base from CyberiaStyle 7 by gl_yukt
-local st = GAMESTATE:GetCurrentStyle():GetStepsType();
 local mStages = STATSMAN:GetStagesPlayed();
 local i = 0;
 
@@ -68,12 +67,15 @@ for i = 1, mStages do
 				InitCommand=function(s) s:horizalign(right):x(pn==PLAYER_1 and -212 or 332):zoom(1):y(-31):pause():queuecommand("Set") end,
 				OnCommand=function(s) s:zoomy(0):sleep(0.45+(i-mStages)*-0.1):linear(0.4):zoomy(1) end,
 				SetCommand=function(s)
-					local style = GAMESTATE:GetCurrentStyle()
-						if style:GetStyleType() == "StyleType_OnePlayerOneSide" then
+					local pss = sStats:GetPlayerStageStats(pn)
+					local st = pss:GetPlayedSteps()[1]
+					local style = st:GetStepsType()
+
+						if style == "StepsType_Dance_Single" then
 							s:setstate(0);
-						elseif style:GetStyleType() == "StyleType_TwoPlayersTwoSides" then
+						elseif style == "StepsType_Dance_Couple" then
 							s:setstate(1);
-						elseif style:GetStyleType() == "StyleType_OnePlayerTwoSides" then
+						elseif style == "StepsType_Dance_Double" then
 							s:setstate(2);
 						end;
 					end;
@@ -172,6 +174,7 @@ for i = 1, mStages do
 						local pss = sStats:GetPlayerStageStats(pn);-------------------------------
 						local song = sStats:GetPlayedSongs()[1];
 						local diff = pss:GetPlayedSteps()[1]:GetDifficulty();
+						local st = pss:GetPlayedSteps()[1]:GetStepsType()
 						local steps = song:GetOneSteps( st, diff );
 						local radar = steps:GetRadarValues(pn);
 						local maxsteps = math.max(radar:GetValue('RadarCategory_TapsAndHolds')+radar:GetValue('RadarCategory_Holds')+radar:GetValue('RadarCategory_Rolls'),1);

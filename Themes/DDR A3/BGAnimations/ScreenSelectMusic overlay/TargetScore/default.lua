@@ -121,6 +121,23 @@ for _,pn in pairs(GAMESTATE:GetEnabledPlayers()) do
 				elseif params.Name=="OpenPanes3" or params.Name=="OpenPanes1" then
 					self:linear(0.15);
 					self:diffusealpha(0);
+				elseif params.Name=="ChangeStyle" then
+					style = GAMESTATE:GetCurrentStyle():GetName()
+					song = GAMESTATE:GetCurrentSong()
+
+					if style == "single" and song:GetStepsByStepsType("StepsType_Dance_Double")[1] ~= nil then
+						SOUND:PlayOnce(THEME:GetPathS("ScreenSelectMusic", "difficulty harder"))
+						GAMESTATE:SetCurrentStyle("double")
+						GAMESTATE:SetCurrentSteps(pn, song:GetStepsByStepsType("StepsType_Dance_Double")[1])
+						SOUND:PlayAnnouncer("style double")
+					elseif style == "double" and song:GetStepsByStepsType("StepsType_Dance_Single")[1] ~= nil then
+						SOUND:PlayOnce(THEME:GetPathS("ScreenSelectMusic", "difficulty harder"))
+						GAMESTATE:SetCurrentStyle("single")
+						GAMESTATE:SetCurrentSteps(pn, song:GetStepsByStepsType("StepsType_Dance_Single")[1])
+						SOUND:PlayAnnouncer("style single")
+					else
+						SCREENMAN:PlayInvalidSound()
+					end
 				end;
 			end
 			local style = GAMESTATE:GetCurrentStyle():GetStyleType()
@@ -134,65 +151,6 @@ for _,pn in pairs(GAMESTATE:GetEnabledPlayers()) do
 					SavePaneControl( PlayerUID, params.Name, "PlayerSide");
 				end;
 			end;
-		end,
-	};
-	detail[#detail+1] = loadfile(THEME:GetPathB("ScreenSelectMusic","overlay/TargetScore/detail/default.lua"))(pn)..{
-		InitCommand=function(s)
-			s:xy(pn==PLAYER_1 and SCREEN_LEFT+107 or SCREEN_RIGHT-107,_screen.cy+153):zoom(0.667)
-		end,
-		OnCommand=function(s)
-			if GAMESTATE:IsPlayerEnabled(pn) then
-				local PlayerUID = PROFILEMAN:GetProfile(pn):GetGUID();
-				if ReadOrCreatePaneControlForPlayerSide(PlayerUID)=="OpenPanes1" then
-					s:addx(pn==PLAYER_1 and -500 or 500):sleep(0.5):decelerate(0.5):addx(pn==PLAYER_1 and 500 or -500)
-					s:linear(0.5);
-					s:diffusealpha(1);
-				elseif ReadOrCreatePaneControlForPlayerSide(PlayerUID)=="OpenPanes3" or ReadOrCreatePaneControlForPlayerSide(PlayerUID)=="ClosePanes" then
-					s:diffusealpha(0);
-				elseif ReadOrCreatePaneControlForPlayerSide(PlayerUID)=="OpenPanes2" then
-					if GAMESTATE:IsCourseMode() == false then
-						s:diffusealpha(0);
-					end
-				end;
-			end;
-		end,
-		CodeMessageCommand=function(self,params)
-			local player = params.PlayerNumber
-			if player == pn then
-				if params.Name=="OpenPanes1"then
-					self:linear(0.15);
-					self:diffusealpha(1);
-				elseif params.Name=="ClosePanes" or params.Name=="OpenPanes3" or params.Name=="OpenPanes2" then
-					self:linear(0.15);
-					self:diffusealpha(0);
-				elseif  params.Name=="OpenPanes2" then
-					if GAMESTATE:IsCourseMode() == false then
-						self:linear(0.15);
-						self:diffusealpha(0);
-					end
-				end;
-			end
-			local style = GAMESTATE:GetCurrentStyle():GetStyleType()
-			local PlayerUID = PROFILEMAN:GetProfile(player):GetGUID();
-			if player==pn then
-				if params.Name=="OpenPanes1" then
-					SavePaneControl( PlayerUID, params.Name, "PlayerSide");
-				elseif params.Name=="OpenPanes2"then
-					SavePaneControl( PlayerUID, params.Name, "PlayerSide");
-				elseif params.Name=="OpenPanes3"then
-					SavePaneControl( PlayerUID, params.Name, "PlayerSide");
-				elseif params.Name=="ClosePanes" 
-				then
-					SavePaneControl( PlayerUID, params.Name, "PlayerSide");
-				end;
-			end;
-		end,
-		CurrentSongChangedMessageCommand=function(s)
-			if GAMESTATE:GetCurrentSong() then
-				s:visible(true)
-			else
-				s:visible(false)
-			end
 		end,
 	};
 end

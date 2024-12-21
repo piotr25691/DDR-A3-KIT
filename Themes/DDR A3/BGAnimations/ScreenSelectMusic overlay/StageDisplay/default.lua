@@ -21,7 +21,11 @@ return Def.ActorFrame {
 	};
 	Def.Sprite{
 		Texture=THEME:GetPathG("", "_shared/Style"),
-		InitCommand=function(s) s:xy(146,66):pause():queuecommand("Set") end,
+		InitCommand=function(s) s:xy(146,66):pause():queuecommand("Update") end,
+		UpdateCommand=function(s)
+			s:sleep(0.1)
+			s:queuecommand("Set")
+		end,
 		SetCommand=function(s)
 			local style = GAMESTATE:GetCurrentStyle()
 			if style:GetStyleType() == "StyleType_OnePlayerOneSide" then
@@ -31,6 +35,7 @@ return Def.ActorFrame {
 			elseif style:GetStyleType() == "StyleType_OnePlayerTwoSides" then
 				s:setstate(2);
 			end;
+			s:queuecommand("Update")
 		end,
 	};
 	Def.Sprite{

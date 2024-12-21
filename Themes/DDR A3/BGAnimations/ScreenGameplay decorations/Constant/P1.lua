@@ -5,8 +5,9 @@ function calculate_offset(bpm, bpm_min, bpm_max, offset_min, offset_max)
     if bpm < bpm_min then bpm = bpm_min end
     if bpm > bpm_max then bpm = bpm_max end
 
-    -- Handle constant BPM
-    if bpm_min == bpm_max then return 200 end
+    -- Imagine playing CURUS on CONSTANT without this. You would have a hard time. (184-188)
+    local bpm_threshold = bpm_max / 2
+    if math.abs(bpm_max - bpm_min) <= bpm_threshold then return 200 end
 
     -- Calculate the slope for linear interpolation
     local slope = (offset_max - offset_min) / (bpm_max - bpm_min)
